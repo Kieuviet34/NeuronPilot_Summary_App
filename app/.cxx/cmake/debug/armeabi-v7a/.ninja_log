@@ -1,0 +1,6 @@
+# ninja log v5
+9	329	793602092	CMakeFiles/nn_sample.dir/simple_model.cpp.o	df894fa90fe08d92
+0	653	793602093	CMakeFiles/nn_sample.dir/nn_sample.cpp.o	76e3399388142eff
+654	753	793602093	D:/FU/Android/G520_AI_SDK_MEDIATEK_TOOLS/NeuroPilotJniDemo_V/app/build/intermediates/cmake/debug/obj/armeabi-v7a/libnn_sample.so	45c1ae8c3fa17f2c
+3	468	793602643	CMakeFiles/nn_sample.dir/simple_model.cpp.o	df894fa90fe08d92
+469	696	793602643	D:/FU/Android/G520_AI_SDK_MEDIATEK_TOOLS/NeuroPilotJniDemo_V/app/build/intermediates/cmake/debug/obj/armeabi-v7a/libnn_sample.so	45c1ae8c3fa17f2c

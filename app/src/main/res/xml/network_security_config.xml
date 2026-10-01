@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!-- Cho phép HTTP thường (không mã hoá) khi gọi tới server PhoWhisper
+         chạy ngay trên chính thiết bị (127.0.0.1 / localhost).
+         Không áp dụng cho domain khác - các kết nối internet thật
+         (nếu có) vẫn bắt buộc HTTPS như mặc định. -->
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="false">127.0.0.1</domain>
+        <domain includeSubdomains="false">localhost</domain>
+    </domain-config>
+</network-security-config>

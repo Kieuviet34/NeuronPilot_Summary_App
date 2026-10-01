@@ -1,0 +1,1 @@
+ninja: error: 'D:/FU/Android/G520_AI_SDK_MEDIATEK_TOOLS/NeuroPilotJniDemo_V/app/src/main/jniLibs/armeabi-v7a/libmtk_llm.so', needed by 'D:/FU/Android/G520_AI_SDK_MEDIATEK_TOOLS/NeuroPilotJniDemo_V/app/build/intermediates/cmake/debug/obj/armeabi-v7a/libnn_sample.so', missing and no known rule to make it

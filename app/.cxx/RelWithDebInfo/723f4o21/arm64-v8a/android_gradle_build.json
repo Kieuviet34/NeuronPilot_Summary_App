@@ -1,0 +1,38 @@
+{
+  "buildFiles": [
+    "C:\\Users\\longt\\Documents\\Zalo Received Files\\NeuroPilotJniDemo_V _NoModel_V1\\app\\src\\main\\cpp\\CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "D:\\SDK\\cmake\\3.18.1\\bin\\ninja.exe",
+      "-C",
+      "C:\\Users\\longt\\Documents\\Zalo Received Files\\NeuroPilotJniDemo_V _NoModel_V1\\app\\.cxx\\RelWithDebInfo\\723f4o21\\arm64-v8a",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "D:\\SDK\\cmake\\3.18.1\\bin\\ninja.exe",
+    "-C",
+    "C:\\Users\\longt\\Documents\\Zalo Received Files\\NeuroPilotJniDemo_V _NoModel_V1\\app\\.cxx\\RelWithDebInfo\\723f4o21\\arm64-v8a",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {
+    "nn_sample::@6890427a1f51a3e7e1df": {
+      "toolchain": "toolchain",
+      "abi": "arm64-v8a",
+      "artifactName": "nn_sample",
+      "output": "C:\\Users\\longt\\Documents\\Zalo Received Files\\NeuroPilotJniDemo_V _NoModel_V1\\app\\build\\intermediates\\cxx\\RelWithDebInfo\\723f4o21\\obj\\arm64-v8a\\libnn_sample.so",
+      "runtimeFiles": []
+    }
+  },
+  "toolchains": {
+    "toolchain": {
+      "cCompilerExecutable": "D:\\SDK\\ndk\\25.1.8937393\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang.exe",
+      "cppCompilerExecutable": "D:\\SDK\\ndk\\25.1.8937393\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe"
+    }
+  },
+  "cFileExtensions": [],
+  "cppFileExtensions": [
+    "cpp"
+  ]
+}

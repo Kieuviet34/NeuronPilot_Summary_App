@@ -1,0 +1,1 @@
+ninja: Entering directory `D:\FU\Android\G520_AI_SDK_MEDIATEK_TOOLS\NeuroPilotJniDemo_V\app\.cxx\cmake\debug\armeabi-v7a'

@@ -1,0 +1,7 @@
+Executable : D:\SDK\cmake\3.18.1\bin\ninja.exe
+arguments : 
+-C
+C:\Users\longt\Documents\Zalo Received Files\NeuroPilotJniDemo_V _NoModel_V1\app\.cxx\Debug\5h1q1573\arm64-v8a
+nn_sample
+jvmArgs : 
+

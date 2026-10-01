@@ -1,0 +1,3 @@
+D:/task/clean_aar/U_newest/NeuroPilotJniDemo_U/app/.externalNativeBuild/cmake/debug/armeabi-v7a/CMakeFiles/nn_sample.dir
+D:/task/clean_aar/U_newest/NeuroPilotJniDemo_U/app/.externalNativeBuild/cmake/debug/armeabi-v7a/CMakeFiles/edit_cache.dir
+D:/task/clean_aar/U_newest/NeuroPilotJniDemo_U/app/.externalNativeBuild/cmake/debug/armeabi-v7a/CMakeFiles/rebuild_cache.dir

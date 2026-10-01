@@ -1,0 +1,16 @@
+{
+  "buildFiles": [
+    "D:\\Files\\NeuroPilotJniDemo_R\\app\\src\\main\\cpp\\CMakeLists.txt"
+  ],
+  "cleanCommands": [
+    "C:\\Users\\mtk09942\\AppData\\Local\\Android\\Sdk\\cmake\\3.6.4111459\\bin\\cmake.exe --build D:\\Files\\NeuroPilotJniDemo_R\\app\\.externalNativeBuild\\cmake\\release\\armeabi-v7a --target clean"
+  ],
+  "libraries": {
+    "nn_sample-Release-armeabi-v7a": {
+      "artifactName": "nn_sample",
+      "buildCommand": "C:\\Users\\mtk09942\\AppData\\Local\\Android\\Sdk\\cmake\\3.6.4111459\\bin\\cmake.exe --build D:\\Files\\NeuroPilotJniDemo_R\\app\\.externalNativeBuild\\cmake\\release\\armeabi-v7a --target nn_sample",
+      "abi": "armeabi-v7a",
+      "output": "D:\\Files\\NeuroPilotJniDemo_R\\app\\build\\intermediates\\cmake\\release\\obj\\armeabi-v7a\\libnn_sample.so"
+    }
+  }
+}

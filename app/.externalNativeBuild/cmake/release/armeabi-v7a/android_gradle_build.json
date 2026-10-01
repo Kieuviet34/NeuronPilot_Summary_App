@@ -1,0 +1,44 @@
+
+{
+	"buildFiles" : [ "D:/Files/NeuroPilotJniDemo_R/app/src/main/cpp/CMakeLists.txt" ],
+	"cleanCommands" : 
+	[
+		"C:\\Users\\mtk09942\\AppData\\Local\\Android\\Sdk\\cmake\\3.6.4111459\\bin\\cmake.exe --build D:\\Files\\NeuroPilotJniDemo_R\\app\\.externalNativeBuild\\cmake\\release\\armeabi-v7a --target clean"
+	],
+	"cppFileExtensions" : [ "cpp" ],
+	"libraries" : 
+	{
+		"nn_sample-Release-armeabi-v7a" : 
+		{
+			"abi" : "armeabi-v7a",
+			"artifactName" : "nn_sample",
+			"buildCommand" : "C:\\Users\\mtk09942\\AppData\\Local\\Android\\Sdk\\cmake\\3.6.4111459\\bin\\cmake.exe --build D:\\Files\\NeuroPilotJniDemo_R\\app\\.externalNativeBuild\\cmake\\release\\armeabi-v7a --target nn_sample",
+			"buildType" : "release",
+			"files" : 
+			[
+				
+				{
+					"flags" : "  --target=armv7-none-linux-androideabi28 --gcc-toolchain=C:/Users/mtk09942/AppData/Local/Android/Sdk/ndk-bundle/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=C:/Users/mtk09942/AppData/Local/Android/Sdk/ndk-bundle/toolchains/llvm/prebuilt/windows-x86_64/sysroot  -Dnn_sample_EXPORTS  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -fno-addrsig -march=armv7-a -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -std=c++11 -Oz -DNDEBUG  -fPIC    -c ",
+					"src" : "D:/Files/NeuroPilotJniDemo_R/app/src/main/cpp/nn_sample.cpp",
+					"workingDirectory" : "D:/Files/NeuroPilotJniDemo_R/app/.externalNativeBuild/cmake/release/armeabi-v7a"
+				},
+				
+				{
+					"flags" : "  --target=armv7-none-linux-androideabi28 --gcc-toolchain=C:/Users/mtk09942/AppData/Local/Android/Sdk/ndk-bundle/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=C:/Users/mtk09942/AppData/Local/Android/Sdk/ndk-bundle/toolchains/llvm/prebuilt/windows-x86_64/sysroot  -Dnn_sample_EXPORTS  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -fno-addrsig -march=armv7-a -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -std=c++11 -Oz -DNDEBUG  -fPIC    -c ",
+					"src" : "D:/Files/NeuroPilotJniDemo_R/app/src/main/cpp/simple_model.cpp",
+					"workingDirectory" : "D:/Files/NeuroPilotJniDemo_R/app/.externalNativeBuild/cmake/release/armeabi-v7a"
+				}
+			],
+			"output" : "D:/Files/NeuroPilotJniDemo_R/app/build/intermediates/cmake/release/obj/armeabi-v7a/libnn_sample.so",
+			"toolchain" : "3061418585"
+		}
+	},
+	"toolchains" : 
+	{
+		"3061418585" : 
+		{
+			"cCompilerExecutable" : "C:/Users/mtk09942/AppData/Local/Android/Sdk/ndk-bundle/toolchains/llvm/prebuilt/windows-x86_64/bin/clang.exe",
+			"cppCompilerExecutable" : "C:/Users/mtk09942/AppData/Local/Android/Sdk/ndk-bundle/toolchains/llvm/prebuilt/windows-x86_64/bin/clang++.exe"
+		}
+	}
+}

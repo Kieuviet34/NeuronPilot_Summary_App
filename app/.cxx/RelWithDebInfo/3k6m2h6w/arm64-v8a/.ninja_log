@@ -1,0 +1,13 @@
+# ninja log v5
+0	12	0	clean	783ee98371267ada
+1	1531	8056371497878864	CMakeFiles/nn_sample.dir/simple_model.cpp.o	ffa7a933f9b09bb6
+28	1257	8056371495138841	CMakeFiles/nn_sample.dir/NPUWareUtilsLib.cpp.o	c5b9f90956319db
+15	1859	8056371501076328	CMakeFiles/nn_sample.dir/nn_sample.cpp.o	c1420092b8ed5645
+41	13484	8056371617206363	CMakeFiles/nn_sample.dir/utils.cpp.o	e402dffe0c5eff3f
+13485	13665	8056371619109196	C:/Users/Admin/Downloads/NeuroPilotJniDemo_V _NoModel_V1/NeuroPilotJniDemo_V _NoModel_V1/app/build/intermediates/cxx/RelWithDebInfo/3k6m2h6w/obj/arm64-v8a/libnn_sample.so	15fd1ac5e24ac69
+23	546	8086567712872632	build.ninja	f9880b0a0c612488
+0	9	0	clean	783ee98371267ada
+1	15	0	clean	783ee98371267ada
+0	14	0	clean	783ee98371267ada
+0	9	0	clean	783ee98371267ada
+0	9	0	clean	783ee98371267ada

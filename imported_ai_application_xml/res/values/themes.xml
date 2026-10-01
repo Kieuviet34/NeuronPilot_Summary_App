@@ -1,0 +1,43 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="RoundedAppearance" parent="">
+        <item name="cornerSize">12dp</item>
+        <item name="cornerFamily">rounded</item>
+    </style>
+
+    <style name="Theme.AI_Application" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Làm trong suốt thanh trạng thái và thanh điều hướng -->
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+
+        <!-- Cho phép vẽ vào cả phần vùng khuyết (tai thỏ/nốt ruồi) -->
+        <item name="android:windowLayoutInDisplayCutoutMode" tools:targetApi="o_mr1">shortEdges</item>
+
+        <!-- Loại bỏ độ tương phản ép buộc của hệ thống trên thanh điều hướng -->
+        <item name="android:enforceNavigationBarContrast" tools:targetApi="q">false</item>
+    </style>
+    <style name="RoundedAppearance8dp" parent="">
+        <item name="cornerSize">8dp</item>
+    </style>
+
+    <style name="CircleImage">
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="RoundedTopCorners">
+        <item name="cornerSizeTopLeft">12dp</item>
+        <item name="cornerSizeTopRight">12dp</item>
+        <item name="cornerSizeBottomLeft">2dp</item>
+        <item name="cornerSizeBottomRight">2dp</item>
+    </style>
+
+    <style name="RoundedTopCornersAI">
+        <item name="cornerSizeTopLeft">4dp</item>
+        <item name="cornerSizeTopRight">12dp</item>
+        <item name="cornerSizeBottomLeft">2dp</item>
+        <item name="cornerSizeBottomRight">2dp</item>
+    </style>
+    <style name="RoundedMediaSmall">
+        <item name="cornerSize">6dp</item> </style>
+</resources>

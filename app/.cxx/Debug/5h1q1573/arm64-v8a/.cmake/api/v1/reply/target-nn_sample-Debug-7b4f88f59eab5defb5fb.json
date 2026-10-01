@@ -1,0 +1,225 @@
+{
+	"artifacts" : 
+	[
+		{
+			"path" : "C:/Users/longt/Documents/Zalo Received Files/NeuroPilotJniDemo_V _NoModel_V1/app/build/intermediates/cxx/Debug/5h1q1573/obj/arm64-v8a/libnn_sample.so"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"target_link_libraries",
+			"include_directories"
+		],
+		"files" : 
+		[
+			"CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 40,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 47,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 3,
+				"parent" : 0
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "-g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -std=c++17 -fno-limit-debug-info  -fPIC"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"define" : "nn_sample_EXPORTS"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 3,
+					"path" : "C:/Users/longt/Documents/Zalo Received Files/NeuroPilotJniDemo_V _NoModel_V1/app/src/main/cpp"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "C:/Users/longt/Documents/Zalo Received Files/NeuroPilotJniDemo_V _NoModel_V1/app/src/main/cpp/include"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "C:/Users/longt/Documents/Zalo Received Files/NeuroPilotJniDemo_V _NoModel_V1/app/src/main/cpp/include/utils"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "C:/Users/longt/Documents/Zalo Received Files/NeuroPilotJniDemo_V _NoModel_V1/app/src/main/cpp/include/common"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "C:/Users/longt/Documents/Zalo Received Files/NeuroPilotJniDemo_V _NoModel_V1/app/src/main/cpp/include/tokenizer"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "C:/Users/longt/Documents/Zalo Received Files/NeuroPilotJniDemo_V _NoModel_V1/app/src/main/cpp/third_party/include"
+				}
+			],
+			"language" : "CXX",
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3
+			],
+			"sysroot" : 
+			{
+				"path" : "D:/SDK/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot"
+			}
+		}
+	],
+	"id" : "nn_sample::@6890427a1f51a3e7e1df",
+	"link" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "-Wl,--build-id=sha1 -Wl,--no-rosegment -Wl,--fatal-warnings -Wl,--gc-sections -Wl,--no-undefined -Qunused-arguments",
+				"role" : "flags"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "-landroid",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "-llog",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "\"C:\\Users\\longt\\Documents\\Zalo Received Files\\NeuroPilotJniDemo_V _NoModel_V1\\app\\src\\main\\cpp\\..\\jniLibs\\arm64-v8a\\libmtk_llm.so\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "\"C:\\Users\\longt\\Documents\\Zalo Received Files\\NeuroPilotJniDemo_V _NoModel_V1\\app\\src\\main\\cpp\\..\\jniLibs\\arm64-v8a\\libcommon.so\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "\"C:\\Users\\longt\\Documents\\Zalo Received Files\\NeuroPilotJniDemo_V _NoModel_V1\\app\\src\\main\\cpp\\..\\jniLibs\\arm64-v8a\\libtokenizer.so\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "\"C:\\Users\\longt\\Documents\\Zalo Received Files\\NeuroPilotJniDemo_V _NoModel_V1\\app\\src\\main\\cpp\\..\\jniLibs\\arm64-v8a\\libyaml-cpp.so\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "\"C:\\Users\\longt\\Documents\\Zalo Received Files\\NeuroPilotJniDemo_V _NoModel_V1\\app\\src\\main\\cpp\\..\\jniLibs\\arm64-v8a\\libsentencepiece.so\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "\"C:\\Users\\longt\\Documents\\Zalo Received Files\\NeuroPilotJniDemo_V _NoModel_V1\\app\\src\\main\\cpp\\..\\jniLibs\\arm64-v8a\\libhf-tokenizer.so\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "\"C:\\Users\\longt\\Documents\\Zalo Received Files\\NeuroPilotJniDemo_V _NoModel_V1\\app\\src\\main\\cpp\\..\\jniLibs\\arm64-v8a\\libre2.so\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "\"C:\\Users\\longt\\Documents\\Zalo Received Files\\NeuroPilotJniDemo_V _NoModel_V1\\app\\src\\main\\cpp\\..\\jniLibs\\arm64-v8a\\libneuron_runtime.so\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "\"C:\\Users\\longt\\Documents\\Zalo Received Files\\NeuroPilotJniDemo_V _NoModel_V1\\app\\src\\main\\cpp\\..\\jniLibs\\arm64-v8a\\libneuron_adapter.so\"",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-latomic -lm",
+				"role" : "libraries"
+			}
+		],
+		"language" : "CXX",
+		"sysroot" : 
+		{
+			"path" : "D:/SDK/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot"
+		}
+	},
+	"name" : "nn_sample",
+	"nameOnDisk" : "libnn_sample.so",
+	"paths" : 
+	{
+		"build" : ".",
+		"source" : "."
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "nn_sample.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "simple_model.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "utils.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "NPUWareUtilsLib.cpp",
+			"sourceGroupIndex" : 0
+		}
+	],
+	"type" : "SHARED_LIBRARY"
+}

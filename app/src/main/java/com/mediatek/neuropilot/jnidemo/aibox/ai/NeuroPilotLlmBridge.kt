@@ -1,0 +1,209 @@
+package com.mediatek.neuropilot.jnidemo.aibox.ai
+
+import android.util.Log
+import androidx.annotation.Keep
+import java.io.File
+
+class NeuroPilotLlmBridge {
+    private var modelHandle: Long = 0L
+
+    fun initDefaultModel(): Boolean {
+        if (!nativeLibrariesLoaded) {
+            Log.w(TAG, "Native LLM libraries are not loaded")
+            return false
+        }
+
+        val candidate = selectModelConfig()
+        if (candidate == null) {
+            Log.w(TAG, "No complete NeuroPilot Qwen 2.5 file set found")
+            return false
+        }
+
+        return try {
+            modelHandle = nativeInitModel(candidate.path)
+            if (modelHandle == 0L) {
+                Log.e(TAG, "nativeInitModel returned 0 for ${candidate.path}")
+                false
+            } else {
+                Log.i(TAG, "Loaded NeuroPilot LLM model from ${candidate.path}")
+                true
+            }
+        } catch (t: Throwable) {
+            Log.e(TAG, "initDefaultModel failed", t)
+            modelHandle = 0L
+            false
+        }
+    }
+
+    fun computeStreamingBlocking(userPrompt: String): String {
+        val handle = modelHandle
+        if (handle == 0L) return ""
+
+        val formattedPrompt = buildChatPrompt(userPrompt)
+        val tokens = StringBuilder()
+        nativeResetModel(handle)
+        nativeComputeStreaming(handle, formattedPrompt, object : TokenCallback {
+            override fun onTokenReceived(token: String): Boolean {
+                tokens.append(token)
+                return true
+            }
+        })
+        return stripStopMarkers(tokens.toString())
+    }
+
+    fun summarizeBlocking(transcriptText: String): String {
+        val handle = modelHandle
+        if (handle == 0L) return ""
+
+        val truncated = truncateForContext(transcriptText)
+        val formattedPrompt = buildSummaryPrompt(truncated)
+        val tokens = StringBuilder()
+        nativeResetModel(handle)
+        nativeComputeStreaming(handle, formattedPrompt, object : TokenCallback {
+            override fun onTokenReceived(token: String): Boolean {
+                tokens.append(token)
+                return true
+            }
+        })
+        return stripStopMarkers(tokens.toString())
+    }
+
+    private fun buildSummaryPrompt(transcriptText: String): String {
+        val systemPrompt = "Bạn là trợ lý tóm tắt cuộc họp. Dựa vào đoạn hội thoại " +
+                "được cung cấp, hãy tóm tắt lại nội dung chính bằng tiếng Việt, viết đúng " +
+                "5 câu. Không thêm lời dẫn, không đánh số, không dùng markdown hay ký hiệu đặc biệt."
+
+        return buildString {
+            append(QWEN_SYS_OPEN)
+            append(systemPrompt)
+            append('\n')
+            append(QWEN_EOT)
+            append('\n')
+            append(QWEN_USR_OPEN)
+            append(transcriptText)
+            append('\n')
+            append(QWEN_EOT)
+            append('\n')
+            append(QWEN_AST_OPEN)
+        }
+    }
+
+    private fun truncateForContext(text: String): String {
+        val maxChars = 3500 // ước lượng ~1500 token cho tiếng Việt, chừa margin an toàn
+        if (text.length <= maxChars) return text
+        // Giữ phần cuối (gần kết luận cuộc họp), cắt bớt phần đầu
+        return "...(đã lược bớt phần đầu)...\n" + text.takeLast(maxChars)
+    }
+
+    fun close() {
+        val handle = modelHandle
+        modelHandle = 0L
+        if (handle != 0L && nativeLibrariesLoaded) {
+            try {
+                nativeDestroyModel(handle)
+            } catch (t: Throwable) {
+                Log.w(TAG, "destroyModel failed", t)
+            }
+        }
+    }
+
+    private fun selectModelConfig(): ModelConfig? {
+        if (File(QWEN_YAML_PATH).exists()) {
+             return ModelConfig(QWEN_YAML_PATH)
+        }
+        return null
+    }
+
+    private fun buildChatPrompt(userPrompt: String): String {
+        val systemPrompt =
+            "You are a professional meeting interpreter. Translate faithfully and return only the translated text."
+
+        return buildString {
+            append(QWEN_SYS_OPEN)
+            append(systemPrompt)
+            append('\n')
+            append(QWEN_EOT)
+            append('\n')
+            append(QWEN_USR_OPEN)
+            append(userPrompt)
+            append('\n')
+            append(QWEN_EOT)
+            append('\n')
+            append(QWEN_AST_OPEN)
+        }
+    }
+
+    private fun stripStopMarkers(raw: String): String {
+        var text = raw
+        for (marker in QWEN_STOP_MARKERS) {
+            val index = text.indexOf(marker)
+            if (index >= 0) {
+                text = text.substring(0, index)
+            }
+        }
+        return text.trim()
+    }
+
+    private external fun nativeInitModel(yamlConfigPath: String): Long
+    private external fun nativeComputeStreaming(
+        modelHandle: Long,
+        inputText: String,
+        callback: TokenCallback
+    )
+
+    private external fun nativeResetModel(modelHandle: Long)
+    private external fun nativeDestroyModel(modelHandle: Long)
+
+    @Keep
+    interface TokenCallback {
+        @Keep
+        fun onTokenReceived(token: String): Boolean
+    }
+
+    private data class ModelConfig(val path: String)
+
+    companion object {
+        private const val TAG = "NeuroPilotLlmBridge"
+
+        private const val QWEN_YAML_PATH = "/system_ext/llm_sdk/config_qwen2.5_1.5b_instruct.yaml"
+
+        private const val QWEN_EOT = "<|im_end|>"
+        private const val QWEN_SYS_OPEN = "<|im_start|>system\n"
+        private const val QWEN_USR_OPEN = "<|im_start|>user\n"
+        private const val QWEN_AST_OPEN = "<|im_start|>assistant\n"
+
+        private val QWEN_STOP_MARKERS = listOf(
+            "<|im_start|",
+            "<|im_end|",
+            "<|endoftext|"
+        )
+
+        private val nativeLibrariesLoaded: Boolean = loadNativeLibraries()
+
+        private fun loadNativeLibraries(): Boolean {
+            val libs = listOf(
+                "c++",
+                "base",
+                "dmabufheap",
+                "cutils",
+                "apu_mdw",
+                "apu_mdw_batch",
+                "neuron_adapter",
+                "neuron_runtime",
+                "common",
+                "mtk_llm"
+            )
+
+            for (lib in libs) {
+                try {
+                    System.loadLibrary(lib)
+                    Log.d(TAG, "Loaded native library: $lib")
+                } catch (t: Throwable) {
+                    Log.e(TAG, "Failed to load native library: $lib", t)
+                    // We don't return false immediately because some might be optional or already loaded
+                }
+            }
+            return true
+        }
+    }
+}

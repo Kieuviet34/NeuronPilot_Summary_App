@@ -1,0 +1,16 @@
+{
+  "buildFiles": [
+    "D:\\task\\clean_aar\\V_newest\\NeuroPilotJniDemo_V\\app\\src\\main\\cpp\\CMakeLists.txt"
+  ],
+  "cleanCommands": [
+    "C:\\Users\\mtk25629\\AppData\\Local\\Android\\Sdk\\cmake\\3.6.4111459\\bin\\cmake.exe --build D:\\task\\clean_aar\\V_newest\\NeuroPilotJniDemo_V\\app\\.externalNativeBuild\\cmake\\debug\\arm64-v8a --target clean"
+  ],
+  "libraries": {
+    "nn_sample-Debug-arm64-v8a": {
+      "artifactName": "nn_sample",
+      "buildCommand": "C:\\Users\\mtk25629\\AppData\\Local\\Android\\Sdk\\cmake\\3.6.4111459\\bin\\cmake.exe --build D:\\task\\clean_aar\\V_newest\\NeuroPilotJniDemo_V\\app\\.externalNativeBuild\\cmake\\debug\\arm64-v8a --target nn_sample",
+      "abi": "arm64-v8a",
+      "output": "D:\\task\\clean_aar\\V_newest\\NeuroPilotJniDemo_V\\app\\build\\intermediates\\cmake\\debug\\obj\\arm64-v8a\\libnn_sample.so"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+# ninja log v5
+14	512	803977252	CMakeFiles/nn_sample.dir/NPUWareUtilsLib.cpp.o	690d01cb875f79a3
+6	707	803977299	CMakeFiles/nn_sample.dir/simple_model.cpp.o	27dae2bd1b4f2216
+2	818	803977299	CMakeFiles/nn_sample.dir/nn_sample.cpp.o	28e7c0674d474ef7
+11	2989	803977301	CMakeFiles/nn_sample.dir/utils.cpp.o	e5c51492673d1610
+2	110	803977366	C:/Users/longt/Documents/Zalo Received Files/NeuroPilotJniDemo_V _NoModel_V1/app/build/intermediates/cxx/Debug/5h1q1573/obj/arm64-v8a/libnn_sample.so	d63cd9e1c896fee8
+2	106	803977867	C:/Users/longt/Documents/Zalo Received Files/NeuroPilotJniDemo_V _NoModel_V1/app/build/intermediates/cxx/Debug/5h1q1573/obj/arm64-v8a/libnn_sample.so	e031537b0cbba336
+2	123	803978842	C:/Users/longt/Documents/Zalo Received Files/NeuroPilotJniDemo_V _NoModel_V1/app/build/intermediates/cxx/Debug/5h1q1573/obj/arm64-v8a/libnn_sample.so	ee8df9da3bcbaee7
+4	172	803989406	C:/Users/longt/Documents/Zalo Received Files/NeuroPilotJniDemo_V _NoModel_V1/app/build/intermediates/cxx/Debug/5h1q1573/obj/arm64-v8a/libnn_sample.so	ef4a4b4edfdd39ae
+3	120	803989651	C:/Users/longt/Documents/Zalo Received Files/NeuroPilotJniDemo_V _NoModel_V1/app/build/intermediates/cxx/Debug/5h1q1573/obj/arm64-v8a/libnn_sample.so	417bff8fbfc70599
+2	125	803997317	C:/Users/longt/Documents/Zalo Received Files/NeuroPilotJniDemo_V _NoModel_V1/app/build/intermediates/cxx/Debug/5h1q1573/obj/arm64-v8a/libnn_sample.so	31fe41a7f117c1d3
+2	1028	804058343	CMakeFiles/nn_sample.dir/nn_sample.cpp.o	28e7c0674d474ef7
+1028	1176	804058343	C:/Users/longt/Documents/Zalo Received Files/NeuroPilotJniDemo_V _NoModel_V1/app/build/intermediates/cxx/Debug/5h1q1573/obj/arm64-v8a/libnn_sample.so	31fe41a7f117c1d3
+8	1124	804064123	CMakeFiles/nn_sample.dir/nn_sample.cpp.o	28e7c0674d474ef7
+1125	1272	804064123	C:/Users/longt/Documents/Zalo Received Files/NeuroPilotJniDemo_V _NoModel_V1/app/build/intermediates/cxx/Debug/5h1q1573/obj/arm64-v8a/libnn_sample.so	31fe41a7f117c1d3
+1	10	0	clean	786f388a82f2ad75
+19	601	804064713	CMakeFiles/nn_sample.dir/NPUWareUtilsLib.cpp.o	690d01cb875f79a3
+7	821	804064713	CMakeFiles/nn_sample.dir/simple_model.cpp.o	27dae2bd1b4f2216
+2	952	804064713	CMakeFiles/nn_sample.dir/nn_sample.cpp.o	28e7c0674d474ef7
+13	3422	804064715	CMakeFiles/nn_sample.dir/utils.cpp.o	e5c51492673d1610
+3422	3527	804064716	C:/Users/longt/Documents/Zalo Received Files/NeuroPilotJniDemo_V _NoModel_V1/app/build/intermediates/cxx/Debug/5h1q1573/obj/arm64-v8a/libnn_sample.so	31fe41a7f117c1d3
+0	11	0	clean	786f388a82f2ad75
+0	7	0	clean	786f388a82f2ad75
+19	618	804066252	CMakeFiles/nn_sample.dir/NPUWareUtilsLib.cpp.o	690d01cb875f79a3
+8	815	804066252	CMakeFiles/nn_sample.dir/simple_model.cpp.o	27dae2bd1b4f2216
+2	980	804066252	CMakeFiles/nn_sample.dir/nn_sample.cpp.o	28e7c0674d474ef7
+13	3245	804066254	CMakeFiles/nn_sample.dir/utils.cpp.o	e5c51492673d1610
+3246	3367	804066254	C:/Users/longt/Documents/Zalo Received Files/NeuroPilotJniDemo_V _NoModel_V1/app/build/intermediates/cxx/Debug/5h1q1573/obj/arm64-v8a/libnn_sample.so	31fe41a7f117c1d3

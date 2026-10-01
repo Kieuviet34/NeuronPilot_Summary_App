@@ -1,0 +1,6 @@
+# ninja log v5
+4	3826	0	CMakeFiles/nn_sample.dir/simple_model.cpp.o	f43e436cdec0ff9b
+1050	4827	0	CMakeFiles/nn_sample.dir/nn_sample.cpp.o	40c3f36e0b52ff54
+1149	2871	0	CMakeFiles/nn_sample.dir/simple_model.cpp.o	f43e436cdec0ff9b
+17	3390	0	CMakeFiles/nn_sample.dir/nn_sample.cpp.o	40c3f36e0b52ff54
+3390	4323	0	D:/task/clean_aar/V_newest/NeuroPilotJniDemo_V/app/build/intermediates/cmake/debug/obj/arm64-v8a/libnn_sample.so	c88804b56cd3a88f

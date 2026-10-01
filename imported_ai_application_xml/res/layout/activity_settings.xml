@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F6FA"
+    android:orientation="vertical"
+    android:id="@+id/settings_screen"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="16dp"
+        android:elevation="4dp">
+
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_arrow_left"
+            app:tint="#000000"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cài đặt"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toEndOf="@id/btn_back"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="40dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_card_settings"
+                android:orientation="vertical"
+                android:paddingBottom="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="16dp">
+                    <ImageView android:layout_width="20dp" android:layout_height="20dp" android:src="@drawable/ic_folder" app:tint="#6F59FF"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Model LLM (Text)" android:textColor="#6F59FF" android:textSize="16sp" android:textStyle="bold" android:layout_marginStart="12dp"/>
+                </LinearLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/item_qwen_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#F8F9FE" android:paddingHorizontal="16dp"
+                    android:paddingVertical="12dp">
+
+                    <ImageView
+                        android:id="@+id/radio_qwen_text"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_radio_checked"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginStart="16dp"
+                        app:layout_constraintStart_toEndOf="@id/radio_qwen_text"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/badge_active_text">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Qwen2.5 3B (Q4_K_M)" android:textColor="#333333" android:textSize="15sp"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="1.8 GB — Tiếng Việt tốt" android:textColor="#9E9E9E" android:textSize="13sp" android:layout_marginTop="2dp"/>
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/badge_active_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Active"
+                        android:textSize="11sp"
+                        android:textColor="#4CAF50"
+                        android:background="@drawable/bg_badge_active"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="4dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_card_settings"
+                android:orientation="vertical"
+                android:paddingBottom="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="16dp">
+                    <ImageView android:layout_width="20dp" android:layout_height="20dp" android:src="@drawable/ic_eye" app:tint="#00C853"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Model Vision" android:textColor="#00C853" android:textSize="16sp" android:textStyle="bold" android:layout_marginStart="12dp"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_card_settings"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="16dp">
+                    <ImageView android:layout_width="20dp" android:layout_height="20dp" android:src="@drawable/ic_info" app:tint="#FF9800"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Inference" android:textColor="#FF9800" android:textSize="16sp" android:textStyle="bold" android:layout_marginStart="12dp"/>
+                </LinearLayout>
+
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#F0F0F0" android:layout_marginHorizontal="16dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="12dp">
+                    <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="CPU Threads" android:textColor="#666666" android:textSize="14sp"/>
+                        <TextView android:id="@+id/tv_val_threads" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="4" android:textColor="#333333" android:textStyle="bold" android:layout_alignParentEnd="true"/>
+                    </RelativeLayout>
+                    <SeekBar
+                        android:id="@+id/seek_threads"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:max="8"
+                        android:progress="4"
+                        android:progressTint="#FF9800"
+                        android:thumbTint="#FF9800"/>
+                </LinearLayout>
+
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#F0F0F0" android:layout_marginHorizontal="16dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="16dp"
+                    android:gravity="center_vertical">
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="GPU Acceleration" android:textColor="#666666" android:textSize="14sp"/>
+                    <Switch
+                        android:id="@+id/switch_gpu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:thumbTint="#FFFFFF"
+                        android:trackTint="#00C853"
+                        android:splitTrack="false"
+                        />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_card_settings"
+                android:orientation="vertical"
+                android:paddingBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="16dp">
+                    <ImageView android:layout_width="20dp" android:layout_height="20dp" android:src="@drawable/ic_speaker" app:tint="#E64A19"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Giọng nói" android:textColor="#E64A19" android:textSize="16sp" android:textStyle="bold" android:layout_marginStart="12dp"/>
+                </LinearLayout>
+
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#F0F0F0" android:layout_marginHorizontal="16dp"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="16dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Giọng TTS" android:textColor="#666666" android:textSize="14sp" android:layout_centerVertical="true"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Nữ miền Bắc" android:textColor="#333333" android:textSize="14sp" android:background="@drawable/bg_spinner" android:paddingHorizontal="12dp" android:paddingVertical="6dp" android:layout_alignParentEnd="true"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="12dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="STT Model (Whisper)" android:textColor="#666666" android:textSize="14sp" android:layout_centerVertical="true"/>
+                    <TextView android:id="@+id/tv_whisper_model" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Base (150MB)" android:textColor="#333333" android:textSize="14sp" android:background="@drawable/bg_spinner" android:paddingHorizontal="12dp" android:paddingVertical="6dp" android:layout_alignParentEnd="true"/>
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

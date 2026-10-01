@@ -1,0 +1,8 @@
+# ninja log v5
+24	632	802087839	CMakeFiles/nn_sample.dir/NPUWareUtilsLib.cpp.o	1f920936944d5e8e
+8	868	802087840	CMakeFiles/nn_sample.dir/simple_model.cpp.o	5a697ce126b4c815
+1	1050	802087840	CMakeFiles/nn_sample.dir/nn_sample.cpp.o	c571c7dca1301b49
+16	6510	802087845	CMakeFiles/nn_sample.dir/utils.cpp.o	d622a076450f3e4f
+6510	6624	802087845	C:/Users/longt/Documents/Zalo Received Files/NeuroPilotJniDemo_V _NoModel_V1/app/build/intermediates/cxx/RelWithDebInfo/723f4o21/obj/arm64-v8a/libnn_sample.so	28f0e4bf9b44a9fd
+0	9	0	clean	786f388a82f2ad75
+0	8	0	clean	786f388a82f2ad75

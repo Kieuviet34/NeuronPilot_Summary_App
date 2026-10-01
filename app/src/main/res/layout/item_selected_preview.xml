@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="8dp">
+
+    <!-- Ảnh xem trước -->
+    <ImageView
+        android:id="@+id/img_preview_small"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="6dp"
+        android:scaleType="centerCrop"
+        android:background="#E0E0E0" />
+
+    <!-- Nút xóa (Dấu X) -->
+    <ImageView
+        android:id="@+id/btn_remove_small"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_gravity="top|end"
+        android:background="@drawable/bg_circle_remove"
+        android:padding="4dp"
+        android:src="@android:drawable/ic_menu_close_clear_cancel"
+        android:tint="#FFFFFF" />
+
+</FrameLayout>
+

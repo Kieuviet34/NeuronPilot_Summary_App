@@ -1,0 +1,3 @@
+D:/FU/Android/G520_AI_SDK_MEDIATEK_TOOLS/NeuroPilotJniDemo_V/app/.cxx/cmake/debug/armeabi-v7a/CMakeFiles/nn_sample.dir
+D:/FU/Android/G520_AI_SDK_MEDIATEK_TOOLS/NeuroPilotJniDemo_V/app/.cxx/cmake/debug/armeabi-v7a/CMakeFiles/edit_cache.dir
+D:/FU/Android/G520_AI_SDK_MEDIATEK_TOOLS/NeuroPilotJniDemo_V/app/.cxx/cmake/debug/armeabi-v7a/CMakeFiles/rebuild_cache.dir

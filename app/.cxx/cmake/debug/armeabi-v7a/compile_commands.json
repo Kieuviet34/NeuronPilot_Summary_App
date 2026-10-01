@@ -1,0 +1,13 @@
+[
+{
+  "directory": "D:/FU/Android/G520_AI_SDK_MEDIATEK_TOOLS/NeuroPilotJniDemo_V/app/.cxx/cmake/debug/armeabi-v7a",
+  "command": "C:\\Users\\FPT\\AppData\\Local\\Android\\Sdk\\ndk\\21.0.6113669\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe --target=armv7-none-linux-androideabi28 --gcc-toolchain=C:/Users/FPT/AppData/Local/Android/Sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=C:/Users/FPT/AppData/Local/Android/Sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/windows-x86_64/sysroot  -Dnn_sample_EXPORTS -ID:/FU/Android/G520_AI_SDK_MEDIATEK_TOOLS/NeuroPilotJniDemo_V/app/src/main/cpp/include  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security  -std=c++11 -O0 -fno-limit-debug-info  -fPIC   -o CMakeFiles\\nn_sample.dir\\nn_sample.cpp.o -c D:\\FU\\Android\\G520_AI_SDK_MEDIATEK_TOOLS\\NeuroPilotJniDemo_V\\app\\src\\main\\cpp\\nn_sample.cpp",
+  "file": "D:\\FU\\Android\\G520_AI_SDK_MEDIATEK_TOOLS\\NeuroPilotJniDemo_V\\app\\src\\main\\cpp\\nn_sample.cpp"
+},
+
+{
+  "directory": "D:/FU/Android/G520_AI_SDK_MEDIATEK_TOOLS/NeuroPilotJniDemo_V/app/.cxx/cmake/debug/armeabi-v7a",
+  "command": "C:\\Users\\FPT\\AppData\\Local\\Android\\Sdk\\ndk\\21.0.6113669\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe --target=armv7-none-linux-androideabi28 --gcc-toolchain=C:/Users/FPT/AppData/Local/Android/Sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=C:/Users/FPT/AppData/Local/Android/Sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/windows-x86_64/sysroot  -Dnn_sample_EXPORTS -ID:/FU/Android/G520_AI_SDK_MEDIATEK_TOOLS/NeuroPilotJniDemo_V/app/src/main/cpp/include  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security  -std=c++11 -O0 -fno-limit-debug-info  -fPIC   -o CMakeFiles\\nn_sample.dir\\simple_model.cpp.o -c D:\\FU\\Android\\G520_AI_SDK_MEDIATEK_TOOLS\\NeuroPilotJniDemo_V\\app\\src\\main\\cpp\\simple_model.cpp",
+  "file": "D:\\FU\\Android\\G520_AI_SDK_MEDIATEK_TOOLS\\NeuroPilotJniDemo_V\\app\\src\\main\\cpp\\simple_model.cpp"
+}
+]
