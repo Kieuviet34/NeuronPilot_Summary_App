@@ -28,4 +28,16 @@ interface MeetingDao {
 
     @Query("DELETE FROM meetings WHERE id = :id")
     suspend fun deleteMeetingById(id: Long)
+
+    @Transaction
+    @Query("SELECT * FROM meetings WHERE id = :id")
+    suspend fun getMeetingWithSegments(id: Long): MeetingWithSegments?
+
+    @Transaction
+    @Query("SELECT * FROM meetings WHERE id = :id")
+    fun getMeetingWithSegmentsFlow(id: Long): Flow<MeetingWithSegments?>
+
+    @Transaction
+    @Query("SELECT * FROM meetings ORDER BY timestamp DESC")
+    fun getAllMeetingsWithSegmentsFlow(): Flow<List<MeetingWithSegments>>
 }
