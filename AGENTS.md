@@ -5,24 +5,32 @@
 
 ---
 
-## 🎯 Project Overview
+## 🎯 Project Overview & Single Source of Truth
 - **Application**: Meeting Notes App (Ứng Dụng Ghi Chú Cuộc Họp Thông Minh)
 - **Target Device**: G720 AI Box (MediaTek Genio 720, Android 15, 10-inch Landscape 1024x600, I2S MIC)
-- **Core Pipeline**:
-  1. Speech-to-Text (ASR): PhoWhisper (VI, ~245MB) / Whisper (EN, AI Hub MediaTek)
-  2. Sửa lỗi văn bản (Clean Text): Qwen2.5 3B (Q4_K_M ~1.8GB) via llama.cpp / NeuroPilot
-  3. Tóm tắt cuộc họp (Summary): Qwen2.5 3B
-  4. Trích xuất hành động (Action Items): Qwen2.5 3B
+- **Documentation Hub**: [`docs/README.md`](file:///d:/DMHoang/Project_GitHub/NeuronPilot_Summary_App/docs/README.md) & [`docs/PROJECT_CONTEXT.md`](file:///d:/DMHoang/Project_GitHub/NeuronPilot_Summary_App/docs/PROJECT_CONTEXT.md) (v2.0)
+- **Core Pipeline (v2.0)**:
+  1. Ghi âm đa phân đoạn (Multi-Segment WAV 16kHz/16-bit Mono, Foreground Service `microphone`)
+  2. Lọc đoạn âm thanh thông minh ([`MeetingSelectSegmentsActivity`](file:///d:/DMHoang/Project_GitHub/NeuronPilot_Summary_App/app/src/main/java/com/bhs/meetingnotes/MeetingSelectSegmentsActivity.kt))
+  3. ASR: PhoWhisper (VI, ~245MB) / Whisper (EN)
+  4. Sửa lỗi chính tả & thuật ngữ: Luật xác định + Từ điển Alias (không sinh lại toàn văn bằng LLM)
+  5. Tóm tắt & Trích xuất hành động: Qwen2.5 3B (Map-Reduce JSON via llama.cpp hoặc NeuroPilot DLA)
+- **3 Execution Plans**:
+  - **Plan B (Baseline)**: 100% CPU open-source (whisper.cpp + llama.cpp) - **BẮT BUỘC LUÔN CHẠY ĐƯỢC** (C13)
+  - **Plan C (Hybrid)**: PhoWhisper CPU + Qwen2.5 3B NPU (Prebuilt DLA)
+  - **Plan A (Full NPU)**: PhoWhisper NPU DLA + Qwen2.5 3B NPU DLA
 
 ---
 
 ## 🛡️ Critical Architecture Invariants (Zero Regression)
 1. **NEVER modify or corrupt Native JNI & NeuroPilot Core Engine**:
    - `src/main/cpp/*`, `CMakeLists.txt`, `jniLibs/*`, and `com.mediatek.neuropilot.jnidemo.aibox.*` contain low-level NPU/Genio hardware drivers, I2S WAV streaming, and llama.cpp JNI wrappers.
-   - All refactoring and enhancements in this phase are STRICTLY confined to UI/UX Presentation (`com.bhs.meetingnotes.ui`) and cleanly mapped Data Models.
+   - All refactoring and enhancements in this phase are STRICTLY confined to UI/UX Presentation (`com.bhs.meetingnotes.*`) and cleanly mapped Data Models.
 2. **Resolution & Orientation Lock**:
    - Screen: 10-inch Landscape (1024x600 density/proportions).
    - Ensure all layouts fit without accidental clipping on 1024x600 resolution.
+3. **Strictly 100% Offline (C1)**:
+   - No external network calls, no cloud telemetry, air-gapped on-device.
 
 ---
 
@@ -41,6 +49,7 @@
 | `app/src/main/java/**/db/*.kt` | `database`, `room`, `entity`, `dao` | `.agents/skills/database-design/SKILL.md` |
 | `app/src/main/res/values/styles.xml`, `window` | `insets`, `edge-to-edge`, `fullscreen` | `.agents/skills/edge-to-edge/SKILL.md` |
 | `app/src/main/cpp/*`, audio, thread | `perf`, `profiler`, `memory`, `leak` | `.agents/skills/android-profiler/SKILL.md` |
+| `*`, `.kt`, `.java`, `.cpp`, `.xml` | `codegraph`, `symbol`, `callers`, `callees`, `impact`, `trace` | `.agents/skills/codegraph/SKILL.md` |
 | `*` | `git`, `clone`, `remote`, `branch` | `.agents/skills/git-collaboration-master/SKILL.md` |
 
 <!-- SKILLS_INDEX_END -->
