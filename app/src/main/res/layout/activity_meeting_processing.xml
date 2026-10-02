@@ -11,348 +11,522 @@
     <!-- Header -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="72dp"
+        android:layout_height="64dp"
         android:background="@color/bg_card"
-        android:elevation="4dp"
-        android:paddingHorizontal="24dp">
+        android:elevation="3dp"
+        android:paddingHorizontal="20dp">
 
         <ImageView
             android:id="@+id/btn_back"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:padding="12dp"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="10dp"
             android:src="@drawable/ic_arrow_left"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:tint="@color/text_primary" />
 
-        <TextView
-            android:id="@+id/tv_header_title"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="Đang xử lý AI"
-            android:textColor="@color/text_primary"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/tv_header_subtitle"
-            app:layout_constraintStart_toEndOf="@id/btn_back"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed" />
-
-        <TextView
-            android:id="@+id/tv_header_subtitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="Họp kỹ thuật BSP • 12 phút 34 giây • Tiếng Việt"
-            android:textColor="@color/text_secondary"
-            android:textSize="12sp"
+            android:layout_marginStart="12dp"
+            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/btn_back"
-            app:layout_constraintTop_toBottomOf="@id/tv_header_title" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tv_header_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Đang xử lý AI"
+                android:textColor="@color/text_primary"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_header_subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_secondary"
+                android:textSize="12sp"
+                tools:text="Họp kỹ thuật BSP • 12 phút 34 giây • Tiếng Việt" />
+        </LinearLayout>
+
+        <!-- Model Chip Badge -->
+        <TextView
+            android:id="@+id/tv_header_pipeline_badge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_badge_active_local"
+            android:paddingHorizontal="14dp"
+            android:paddingVertical="6dp"
+            android:text="PhoWhisper + Qwen2.5 3B"
+            android:textColor="@color/blue_primary"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <!-- Main Content Split (Left: 4-Step Vertical Timeline, Right: Dual Text Preview) -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:baselineAligned="false"
         android:orientation="horizontal"
-        android:padding="24dp">
+        android:padding="16dp">
 
-        <!-- Left: Timeline -->
+        <!-- ==================== LEFT: TIMELINE 4 BƯỚC ==================== -->
         <ScrollView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginEnd="12dp"
-            android:layout_weight="1">
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_card_settings_local"
+            android:elevation="2dp"
+            android:fillViewport="true"
+            android:padding="16dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <!-- Step 1 -->
+                <!-- STEP 1: SPEECH TO TEXT -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/ic_checked_circle" />
+                        android:id="@+id/iv_step1_icon"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/ic_step_check" />
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
                         android:orientation="vertical">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
+
                             <TextView
+                                android:id="@+id/tv_step1_title"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Bước 1: Giọng nói -> Text"
+                                android:text="Bước 1: Giọng nói ➔ Text"
                                 android:textColor="@color/text_primary"
-                                android:textSize="16sp"
+                                android:textSize="14sp"
                                 android:textStyle="bold" />
+
                             <TextView
+                                android:id="@+id/tv_step1_model_tag"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
                                 android:text="PhoWhisper"
                                 android:textColor="@color/green_success"
-                                android:textSize="12sp" />
+                                android:textSize="11sp"
+                                android:textStyle="bold" />
                         </RelativeLayout>
 
                         <TextView
-                            android:layout_width="match_parent"
+                            android:id="@+id/tv_step1_desc"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
+                            android:layout_marginTop="2dp"
                             android:text="Nhận dạng giọng nói từ file âm thanh"
                             android:textColor="@color/text_secondary"
-                            android:textSize="14sp" />
+                            android:textSize="12sp" />
 
                         <ProgressBar
                             android:id="@+id/pb_step1"
                             style="?android:attr/progressBarStyleHorizontal"
                             android:layout_width="match_parent"
                             android:layout_height="4dp"
-                            android:layout_marginTop="12dp"
+                            android:layout_marginTop="6dp"
                             android:progress="100"
                             android:progressTint="@color/green_success" />
 
-                        <RelativeLayout
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:id="@+id/tv_step1_status_bottom"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Hoàn tất — 2,847 từ"
-                                android:textColor="@color/green_success"
-                                android:textSize="12sp" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentEnd="true"
-                                android:text="2m 15s"
-                                android:textColor="@color/text_secondary"
-                                android:textSize="12sp" />
-                        </RelativeLayout>
+                            android:layout_marginTop="2dp"
+                            android:text="Hoàn tất"
+                            android:textColor="@color/green_success"
+                            android:textSize="11sp" />
                     </LinearLayout>
                 </LinearLayout>
 
-                <!-- Vertical Line -->
+                <!-- Connecting Line 1 -> 2 -->
                 <View
+                    android:id="@+id/line_step1_2"
                     android:layout_width="2dp"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="15dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="13dp"
                     android:background="@color/blue_primary" />
 
-                <!-- Step 2 -->
+                <!-- STEP 2: SỬA LỖI VĂN BẢN -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:background="@drawable/bg_circle_blue_ring"
-                        android:padding="6dp"
-                        android:src="@android:drawable/ic_popup_sync"
-                        app:tint="@color/blue_primary" />
+                        android:id="@+id/iv_step2_icon"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/bg_circle_blue_ring" />
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
                         android:orientation="vertical">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
+
                             <TextView
+                                android:id="@+id/tv_step2_title"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Bước 2: Sửa lỗi văn bản"
                                 android:textColor="@color/text_primary"
-                                android:textSize="16sp"
+                                android:textSize="14sp"
                                 android:textStyle="bold" />
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
-                                android:text="Qwen2.5"
+                                android:text="Qwen2.5 3B"
                                 android:textColor="@color/blue_primary"
-                                android:textSize="12sp" />
+                                android:textSize="11sp"
+                                android:textStyle="bold" />
                         </RelativeLayout>
 
                         <TextView
-                            android:layout_width="match_parent"
+                            android:id="@+id/tv_step2_desc"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="Sửa chính tả, ngữ pháp, dấu câu"
+                            android:layout_marginTop="2dp"
+                            android:text="Sửa chính tả, ngữ pháp, thuật ngữ"
                             android:textColor="@color/text_secondary"
-                            android:textSize="14sp" />
+                            android:textSize="12sp" />
 
                         <ProgressBar
                             android:id="@+id/pb_step2"
                             style="?android:attr/progressBarStyleHorizontal"
                             android:layout_width="match_parent"
                             android:layout_height="4dp"
-                            android:layout_marginTop="12dp"
-                            android:progress="65"
+                            android:layout_marginTop="6dp"
+                            android:progress="0"
                             android:progressTint="@color/blue_primary" />
+
+                        <TextView
+                            android:id="@+id/tv_step2_status_bottom"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="Đang xử lý..."
+                            android:textColor="@color/blue_primary"
+                            android:textSize="11sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Connecting Line 2 -> 3 -->
+                <View
+                    android:id="@+id/line_step2_3"
+                    android:layout_width="2dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="13dp"
+                    android:background="@color/border_light" />
+
+                <!-- STEP 3: TÓM TẮT NỘI DUNG -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/iv_step3_icon"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/ic_step_pending" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp">
+                            android:layout_height="wrap_content">
+
                             <TextView
+                                android:id="@+id/tv_step3_title"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="65% - Đang xử lý..."
-                                android:textColor="@color/blue_primary"
-                                android:textSize="12sp" />
+                                android:text="Bước 3: Tóm tắt nội dung"
+                                android:textColor="@color/text_muted"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
-                                android:text="~1m còn lại"
-                                android:textColor="@color/text_secondary"
-                                android:textSize="12sp" />
+                                android:text="Qwen2.5 3B"
+                                android:textColor="@color/text_muted"
+                                android:textSize="11sp" />
                         </RelativeLayout>
+
+                        <TextView
+                            android:id="@+id/tv_step3_desc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="Tóm tắt điểm chính, quyết định, vấn đề"
+                            android:textColor="@color/text_muted"
+                            android:textSize="12sp" />
+
+                        <ProgressBar
+                            android:id="@+id/pb_step3"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="4dp"
+                            android:layout_marginTop="6dp"
+                            android:progress="0"
+                            android:progressTint="@color/blue_primary" />
+
+                        <TextView
+                            android:id="@+id/tv_step3_status_bottom"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="Đang chờ bước 2 hoàn tất"
+                            android:textColor="@color/text_muted"
+                            android:textSize="11sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Connecting Line 3 -> 4 -->
+                <View
+                    android:id="@+id/line_step3_4"
+                    android:layout_width="2dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="13dp"
+                    android:background="@color/border_light" />
+
+                <!-- STEP 4: ĐỀ XUẤT HÀNH ĐỘNG -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/iv_step4_icon"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/ic_step_pending" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/tv_step4_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Bước 4: Đề xuất hành động"
+                                android:textColor="@color/text_muted"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:text="Qwen2.5 3B"
+                                android:textColor="@color/text_muted"
+                                android:textSize="11sp" />
+                        </RelativeLayout>
+
+                        <TextView
+                            android:id="@+id/tv_step4_desc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="Trích xuất việc cần làm, deadline"
+                            android:textColor="@color/text_muted"
+                            android:textSize="12sp" />
+
+                        <ProgressBar
+                            android:id="@+id/pb_step4"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="4dp"
+                            android:layout_marginTop="6dp"
+                            android:progress="0"
+                            android:progressTint="@color/blue_primary" />
+
+                        <TextView
+                            android:id="@+id/tv_step4_status_bottom"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="Đang chờ bước 3 hoàn tất"
+                            android:textColor="@color/text_muted"
+                            android:textSize="11sp" />
                     </LinearLayout>
                 </LinearLayout>
 
                 <View
-                    android:layout_width="2dp"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="15dp"
-                    android:background="@color/border_light" />
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
 
-                <!-- Step 3 & 4 Omitted for brevity but structure is similar -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="48dp"
-                    android:text="Bước 3: Tóm tắt nội dung..."
-                    android:textColor="@color/text_muted"
-                    android:textSize="16sp" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="48dp"
-                    android:layout_marginTop="24dp"
-                    android:text="Bước 4: Đề xuất hành động..."
-                    android:textColor="@color/text_muted"
-                    android:textSize="16sp" />
-
+                <!-- Bottom Status Bar: Tổng thời gian ước tính -->
                 <TextView
                     android:id="@+id/tv_total_time_estimate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/bg_app"
                     android:gravity="center"
-                    android:text="Tổng thời gian ước tính: ~5 phút - Bước 2/4"
+                    android:padding="8dp"
+                    android:text="Tổng thời gian ước tính: ~5 phút • Bước 1/4"
                     android:textColor="@color/text_secondary"
-                    android:textSize="14sp" />
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
             </LinearLayout>
         </ScrollView>
 
-        <!-- Right: Previews -->
+        <!-- ==================== RIGHT: DUAL TEXT PREVIEW ==================== -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginStart="12dp"
-            android:layout_weight="1.5"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1.3"
             android:orientation="vertical">
 
+            <!-- Box 1: Text Gốc (Bước 1) -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:background="@drawable/bg_card_settings_local"
+                android:elevation="2dp"
                 android:orientation="vertical"
-                android:padding="20dp">
+                android:padding="16dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="TEXT GỐC (BƯỚC 1)"
                         android:textColor="@color/text_muted"
-                        android:textSize="12sp"
+                        android:textSize="11sp"
                         android:textStyle="bold" />
+
                     <TextView
+                        android:id="@+id/tv_step1_badge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:background="@drawable/bg_badge_saved"
+                        android:paddingHorizontal="8dp"
+                        android:paddingVertical="2dp"
+                        android:text="HOÀN TẤT"
+                        android:textColor="@color/green_text"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="8dp">
+
+                    <TextView
+                        android:id="@+id/tv_step1_preview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:lineSpacingExtra="4dp"
+                        android:textColor="@color/text_primary"
+                        android:textSize="13sp"
+                        tools:text="...chao moi nguoi hom nay chung ta se ri-viu tien do sprint..." />
+                </ScrollView>
+            </LinearLayout>
+
+            <!-- Box 2: Text Đã Sửa (Bước 2) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="12dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_card_settings_local"
+                android:elevation="2dp"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TEXT ĐÃ SỬA (BƯỚC 2)"
+                        android:textColor="@color/blue_primary"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_step2_badge"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:background="@drawable/bg_badge_active_local"
                         android:paddingHorizontal="8dp"
                         android:paddingVertical="2dp"
-                        android:text="HOÀN TẤT"
-                        android:textColor="@color/green_success"
-                        android:textSize="10sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <ScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="12dp">
-                    <TextView
-                        android:id="@+id/tv_step1_preview"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="...chao moi nguoi hom nay chung ta se ri-viu tien do sprint co-hai em vinh cap nhat giup anh phan bee-es-pee..."
-                        android:textColor="@color/text_primary"
-                        android:textSize="14sp"
-                        android:lineSpacingExtra="4dp" />
-                </ScrollView>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginTop="16dp"
-                android:layout_weight="1"
-                android:background="@drawable/bg_card_settings_local"
-                android:backgroundTint="@color/blue_light"
-                android:orientation="vertical"
-                android:padding="20dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="TEXT ĐÃ SỬA (BƯỚC 2)"
+                        android:text="ĐANG XỬ LÝ"
                         android:textColor="@color/blue_primary"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:background="@color/blue_primary"
-                        android:paddingHorizontal="8dp"
-                        android:paddingVertical="2dp"
-                        android:text="ĐANG XỬ LÝ 65%"
-                        android:textColor="@color/bg_card"
                         android:textSize="10sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -360,15 +534,16 @@
                 <ScrollView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="12dp">
+                    android:layout_marginTop="8dp">
+
                     <TextView
                         android:id="@+id/tv_step2_preview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="...Chào mọi người, hôm nay chúng ta sẽ review tiến độ Sprint Q2. Em Vinh cập nhật giúp anh phần BSP..."
+                        android:lineSpacingExtra="4dp"
                         android:textColor="@color/text_primary"
-                        android:textSize="14sp"
-                        android:lineSpacingExtra="4dp" />
+                        android:textSize="13sp"
+                        tools:text="...Chào mọi người, hôm nay chúng ta sẽ review tiến độ Sprint..." />
                 </ScrollView>
             </LinearLayout>
 

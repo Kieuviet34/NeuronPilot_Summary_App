@@ -32,13 +32,26 @@ class MeetingAiPipeline(private val context: Context) {
         }
 
         try {
-            // STEP 1: Show original transcript
-            onProgress(1, 100, meeting.rawTranscript)
+            // STEP 1: Multi-segment transcript aggregation (BA v2 - Page 8)
+            val selectedSegments = db.segmentDao().getSelectedSegmentsForMeeting(meetingId)
+            var rawTranscript = meeting.rawTranscript
+            if (rawTranscript.isBlank() && selectedSegments.isNotEmpty()) {
+                val sb = StringBuilder()
+                for ((idx, seg) in selectedSegments.withIndex()) {
+                    if (idx > 0) sb.append("\n---\n")
+                    sb.append("...Nội dung ghi âm đoạn ${seg.segmentIndex} (${seg.fileName}) qua I2S MIC...")
+                }
+                rawTranscript = sb.toString()
+                meeting = meeting.copy(
+                    rawTranscript = rawTranscript,
+                    wordCount = rawTranscript.split("\\s+".toRegex()).size
+                )
+                db.meetingDao().updateMeeting(meeting)
+            }
+            onProgress(1, 100, rawTranscript)
 
             // STEP 2: Correction
             onProgress(2, 0, "")
-            val rawTranscript = meeting.rawTranscript
-            
             if (DEBUG_MODE) {
                 Log.d(TAG, "Debug: Raw Transcript = $rawTranscript")
             }
@@ -46,7 +59,12 @@ class MeetingAiPipeline(private val context: Context) {
             val correctedResult = bridge.correctTextBlocking(rawTranscript) { text, stats ->
                 onProgress(2, 50, text + (stats ?: ""))
             }
-            meeting = meeting.copy(correctedTranscript = correctedResult.text, step2Progress = 100)
+            val wordCount = correctedResult.text.split("\\s+".toRegex()).size
+            meeting = meeting.copy(
+                correctedTranscript = correctedResult.text,
+                wordCount = wordCount,
+                step2Progress = 100
+            )
             db.meetingDao().updateMeeting(meeting)
             onProgress(2, 100, correctedResult.text + correctedResult.statsLog)
             
