@@ -11,7 +11,7 @@
     <!-- Header -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="72dp"
+        android:layout_height="64dp"
         android:background="@color/bg_card"
         android:elevation="4dp"
         android:paddingHorizontal="24dp">
@@ -32,43 +32,61 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="Cài đặt"
+            android:text="Cài đặt hệ thống"
             android:textColor="@color/text_primary"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/btn_back"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_badge_active_local"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="4dp"
+            android:text="G720 AI Box • Genio 720 NPU"
+            android:textColor="@color/blue_primary"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- Content -->
+    <!-- Main Content Container -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:padding="24dp">
+        android:padding="20dp">
 
-        <!-- Left Tabs -->
+        <!-- Left Tabs Sidebar -->
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_width="220dp"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <!-- Tab 1 -->
             <LinearLayout
+                android:id="@+id/tab_menu_asr"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:background="@drawable/bg_badge_active_local"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingHorizontal="16dp">
+
                 <ImageView
+                    android:id="@+id/iv_icon_tab_asr"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:src="@android:drawable/ic_menu_sort_by_size"
                     app:tint="@color/blue_primary" />
+
                 <TextView
+                    android:id="@+id/tv_title_tab_asr"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
@@ -80,18 +98,23 @@
 
             <!-- Tab 2 -->
             <LinearLayout
+                android:id="@+id/tab_menu_llm"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginTop="8dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingHorizontal="16dp">
+
                 <ImageView
+                    android:id="@+id/iv_icon_tab_llm"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:src="@android:drawable/ic_menu_slideshow"
                     app:tint="@color/text_secondary" />
+
                 <TextView
+                    android:id="@+id/tv_title_tab_llm"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
@@ -100,129 +123,216 @@
                     android:textSize="14sp" />
             </LinearLayout>
 
+            <!-- Tab 3 -->
+            <LinearLayout
+                android:id="@+id/tab_menu_hardware"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="16dp">
+
+                <ImageView
+                    android:id="@+id/iv_icon_tab_hw"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@android:drawable/ic_menu_preferences"
+                    app:tint="@color/text_secondary" />
+
+                <TextView
+                    android:id="@+id/tv_title_tab_hw"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:text="I2S &amp; Lưu trữ"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <!-- Device Specs Info Box -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_card_settings_local"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="THÔNG TIN PHẦN CỨNG"
+                    android:textColor="@color/text_muted"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="• MediaTek Genio 720\n• NPU NeuroPilot AI Hub\n• Android 15 (API 35)\n• 10-inch 1024x600 I2S"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
         </LinearLayout>
 
+        <!-- Divider Line -->
         <View
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:layout_marginHorizontal="24dp"
+            android:layout_marginHorizontal="16dp"
             android:background="@color/border_light" />
 
-        <!-- Right Content Area -->
+        <!-- Right Content Area (Scrollable) -->
         <ScrollView
+            android:id="@+id/scroll_settings_content"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="2">
+            android:layout_weight="1">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingBottom="32dp">
 
-                <!-- ASR Settings Block -->
+                <!-- 1. ASR & Language Settings Block -->
                 <LinearLayout
+                    android:id="@+id/section_asr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_card_settings_local"
                     android:orientation="vertical"
-                    android:padding="20dp">
+                    android:padding="16dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Ngôn ngữ &amp; Model ASR"
+                        android:text="1. Ngôn ngữ &amp; Model ASR (Speech-to-Text)"
                         android:textColor="@color/blue_primary"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="Chạm để chọn ngôn ngữ và mô hình nhận dạng giọng nói mặc định cho cuộc họp"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="12sp" />
+
+                    <!-- 2 Cards Horizontal -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:orientation="horizontal">
 
+                        <!-- Card Tieng Viet -->
                         <LinearLayout
+                            android:id="@+id/card_asr_vi"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="@drawable/bg_circle_blue_ring"
+                            android:background="@drawable/bg_card_setting_active"
+                            android:clickable="true"
+                            android:focusable="true"
                             android:gravity="center"
                             android:orientation="vertical"
                             android:padding="16dp">
+
                             <TextView
+                                android:id="@+id/tv_asr_vi_code"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="VI"
-                                android:textColor="@color/text_primary"
-                                android:textSize="24sp"
+                                android:text="🇻🇳 VI"
+                                android:textColor="@color/blue_primary"
+                                android:textSize="22sp"
                                 android:textStyle="bold" />
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
-                                android:text="Tiếng Việt\nPhoWhisper (custom trained)"
+                                android:text="Tiếng Việt\nPhoWhisper (~245 MB)"
                                 android:textAlignment="center"
-                                android:textColor="@color/blue_primary"
-                                android:textSize="12sp" />
+                                android:textColor="@color/text_primary"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="Tối ưu tiếng Việt chuyên sâu"
+                                android:textColor="@color/text_secondary"
+                                android:textSize="11sp" />
                         </LinearLayout>
 
+                        <!-- Card English -->
                         <LinearLayout
+                            android:id="@+id/card_asr_en"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
                             android:layout_weight="1"
-                            android:background="@drawable/bg_input_local"
+                            android:background="@drawable/bg_card_setting_inactive"
+                            android:clickable="true"
+                            android:focusable="true"
                             android:gravity="center"
                             android:orientation="vertical"
                             android:padding="16dp">
+
                             <TextView
+                                android:id="@+id/tv_asr_en_code"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="EN"
-                                android:textColor="@color/text_primary"
-                                android:textSize="24sp"
+                                android:text="🇺🇸 EN"
+                                android:textColor="@color/text_secondary"
+                                android:textSize="22sp"
                                 android:textStyle="bold" />
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
-                                android:text="English\nWhisper (AI Hub MediaTek)"
+                                android:text="English\nWhisper (~150 MB)"
                                 android:textAlignment="center"
+                                android:textColor="@color/text_primary"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="MediaTek AI Hub Official"
                                 android:textColor="@color/text_secondary"
-                                android:textSize="12sp" />
+                                android:textSize="11sp" />
                         </LinearLayout>
                     </LinearLayout>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="24dp">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Kích thước"
-                            android:textColor="@color/text_secondary" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:text="245 MB"
-                            android:textColor="@color/text_primary" />
-                    </RelativeLayout>
                 </LinearLayout>
 
+                <!-- 2. LLM Model Settings Block -->
                 <LinearLayout
+                    android:id="@+id/section_llm"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:background="@drawable/bg_card_settings_local"
                     android:orientation="vertical"
-                    android:padding="20dp">
+                    android:padding="16dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Model LLM (Xử lý văn bản)"
+                        android:text="2. Model LLM (Qwen2.5 3B - Sửa lỗi &amp; Tóm tắt)"
                         android:textColor="#673AB7"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -230,69 +340,89 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp">
+                        android:layout_marginTop="12dp">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Model\nSửa lỗi, tóm tắt, trích xuất actions"
-                            android:textColor="@color/text_secondary" />
+                            android:text="Model LLM On-Device"
+                            android:textColor="@color/text_primary"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
-                            android:text="Qwen2.5 3B (Q4)"
-                            android:textColor="@color/blue_primary" />
+                            android:text="Qwen2.5 3B (Q4_K_M ~1.8GB)"
+                            android:textColor="#673AB7"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
                     </RelativeLayout>
 
+                    <!-- CPU Threads Slider -->
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="24dp">
+                        android:layout_marginTop="16dp">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="CPU Threads"
-                            android:textColor="@color/text_secondary" />
+                            android:text="CPU Threads (Luồng xử lý)"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="13sp" />
+
                         <TextView
                             android:id="@+id/tv_cpu_threads_val"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
-                            android:text="4"
-                            android:textColor="@color/text_primary" />
+                            android:text="4 luồng (Tối ưu Genio 720)"
+                            android:textColor="@color/text_primary"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
                     </RelativeLayout>
+
                     <SeekBar
                         android:id="@+id/sb_cpu_threads"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="6dp"
                         android:max="8"
                         android:progress="4"
                         android:progressTint="#673AB7"
                         android:thumbTint="#673AB7" />
 
+                    <!-- Temperature Slider -->
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="24dp">
+                        android:layout_marginTop="16dp">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Temperature"
-                            android:textColor="@color/text_secondary" />
+                            android:text="Temperature (Độ chính xác)"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="13sp" />
+
                         <TextView
                             android:id="@+id/tv_temperature_val"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
-                            android:text="0.3"
-                            android:textColor="@color/text_primary" />
+                            android:text="0.3 (Chống ảo giác)"
+                            android:textColor="@color/text_primary"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
                     </RelativeLayout>
+
                     <SeekBar
                         android:id="@+id/sb_temperature"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="6dp"
                         android:max="10"
                         android:progress="3"
                         android:progressTint="#673AB7"
@@ -300,7 +430,300 @@
 
                 </LinearLayout>
 
+                <!-- 3. I2S Audio Hardware MIC Block -->
+                <LinearLayout
+                    android:id="@+id/section_hardware"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/bg_card_settings_local"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="3. Cấu hình Âm thanh I2S MIC Phần cứng"
+                        android:textColor="@color/blue_primary"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <!-- Grid Specs -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Tần số lấy mẫu:"
+                                android:textColor="@color/text_secondary"
+                                android:textSize="12sp" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="16,000 Hz (16kHz)"
+                                android:textColor="@color/text_primary"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Độ sâu bit:"
+                                android:textColor="@color/text_secondary"
+                                android:textSize="12sp" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="16-bit PCM"
+                                android:textColor="@color/text_primary"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Kênh âm thanh:"
+                                android:textColor="@color/text_secondary"
+                                android:textSize="12sp" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Mono (1 kênh)"
+                                android:textColor="@color/text_primary"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Định dạng tệp:"
+                                android:textColor="@color/text_secondary"
+                                android:textSize="12sp" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="WAV Không nén"
+                                android:textColor="@color/text_primary"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <!-- Silence Detection Switch -->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_toStartOf="@+id/sw_silence_detection"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Tự động phát hiện khoảng im lặng (VAD)"
+                                android:textColor="@color/text_primary"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Tự động nhận diện và cảnh báo người dùng khi cuộc họp tạm dừng/nghỉ giải lao"
+                                android:textColor="@color/text_secondary"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                        <androidx.appcompat.widget.SwitchCompat
+                            android:id="@+id/sw_silence_detection"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:checked="true" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <!-- 4. Storage Breakdown Bar Chart Block -->
+                <LinearLayout
+                    android:id="@+id/section_storage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/bg_card_settings_local"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="4. Phân Bổ Dung Lượng Bộ Nhớ Thiết Bị"
+                        android:textColor="@color/text_primary"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <!-- Segmented Bar -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="14dp"
+                        android:layout_marginTop="12dp"
+                        android:clipToOutline="true"
+                        android:orientation="horizontal">
+
+                        <!-- Models (2.1 GB) -->
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="21"
+                            android:background="#2196F3" />
+
+                        <!-- Audio WAV (520 MB) -->
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="5"
+                            android:background="#FF9800" />
+
+                        <!-- Text/DB (85 MB) -->
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="#4CAF50" />
+
+                        <!-- Free Space (7.3 GB) -->
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="73"
+                            android:background="#CFD8DC" />
+                    </LinearLayout>
+
+                    <!-- Legend Grid -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="🔵 Models AI: 2.1 GB"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="🟠 Tệp WAV: 520 MB"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="🟢 Dữ liệu Text: 85 MB"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="⚪ Trống: 7.3 GB / 10 GB"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- 5. Default Export Format Block -->
+                <LinearLayout
+                    android:id="@+id/section_export"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/bg_card_settings_local"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="5. Tùy Chọn Xuất Báo Cáo Mặc Định"
+                        android:textColor="@color/text_primary"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <RadioGroup
+                        android:id="@+id/rg_export_format"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rb_pdf"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="Báo cáo PDF đầy đủ (Khuyên dùng)"
+                            android:textSize="13sp" />
+
+                        <RadioButton
+                            android:id="@+id/rb_docx"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="24dp"
+                            android:text="Tài liệu DOCX (Word)"
+                            android:textSize="13sp" />
+
+                        <RadioButton
+                            android:id="@+id/rb_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="24dp"
+                            android:text="Văn bản TXT thô"
+                            android:textSize="13sp" />
+                    </RadioGroup>
+                </LinearLayout>
+
             </LinearLayout>
         </ScrollView>
+
     </LinearLayout>
 </LinearLayout>
