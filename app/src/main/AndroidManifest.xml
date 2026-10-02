@@ -57,6 +57,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.bhs.meetingnotes.MeetingRecordActivity" android:screenOrientation="landscape" />
+        <activity android:name="com.bhs.meetingnotes.MeetingSelectSegmentsActivity" android:screenOrientation="landscape" />
         <activity android:name="com.bhs.meetingnotes.MeetingProcessingActivity" android:screenOrientation="landscape" />
         <activity android:name="com.bhs.meetingnotes.MeetingResultActivity" android:screenOrientation="landscape" />
         <activity android:name="com.bhs.meetingnotes.MeetingSettingsActivity" android:screenOrientation="landscape" />

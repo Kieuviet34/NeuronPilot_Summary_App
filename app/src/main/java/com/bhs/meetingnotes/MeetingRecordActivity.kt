@@ -353,18 +353,9 @@ class MeetingRecordActivity : AppCompatActivity() {
                 }
             }
 
-            // Chuyển sang Màn hình Chọn đoạn xử lý (Screen 3 theo BA v2)
-            // Nếu chưa có MeetingSelectSegmentsActivity thì fallback sang MeetingProcessingActivity
-            try {
-                val selectClass = Class.forName("com.bhs.meetingnotes.MeetingSelectSegmentsActivity")
-                val intent = Intent(this@MeetingRecordActivity, selectClass)
-                intent.putExtra("MEETING_ID", meetingId)
-                startActivity(intent)
-            } catch (e: ClassNotFoundException) {
-                val intent = Intent(this@MeetingRecordActivity, MeetingProcessingActivity::class.java)
-                intent.putExtra("MEETING_ID", meetingId)
-                startActivity(intent)
-            }
+            val intent = Intent(this@MeetingRecordActivity, MeetingSelectSegmentsActivity::class.java)
+            intent.putExtra("MEETING_ID", meetingId)
+            startActivity(intent)
             finish()
         }
     }
