@@ -1,0 +1,52 @@
+{
+  "mcpServers": {
+    "pencil": {
+      "command": "C:\\Users\\Duong Hoang\\.pencil\\mcp\\antigravity\\out\\mcp-server-windows-x64.exe",
+      "args": [
+        "--app",
+        "antigravity"
+      ],
+      "env": {}
+    },
+    "supabase-mcp-server": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@supabase/mcp-server-supabase@latest"
+      ],
+      "env": {
+        "SUPABASE_ACCESS_TOKEN": ""
+      }
+    },
+    "google-developer-knowledge": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-remote",
+        "https://developerknowledge.googleapis.com/mcp"
+      ]
+    },
+    "StitchMCP": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-remote",
+        "https://stitch.googleapis.com/mcp"
+      ]
+    },
+    "sequential-thinking": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ]
+    },
+    "codegraph": {
+      "command": "codegraph.cmd",
+      "args": [
+        "serve",
+        "--mcp"
+      ]
+    }
+  }
+}
