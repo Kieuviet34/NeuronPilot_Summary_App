@@ -1,1 +1,1 @@
-C:\Users\Admin\Downloads\NeuroPilotJniDemo_V _NoModel_V1\NeuroPilotJniDemo_V _NoModel_V1\app\build\intermediates\cxx\Debug\4v1v3u3m\obj\arm64-v8a
+/home/kieuviet/AndroidStudioProjects/NeuroPilotJniDemo_V _NoModel_V1/NeuroPilotJniDemo_V _NoModel_V1/app/build/intermediates/cxx/Debug/4v1v3u3m/obj/arm64-v8a

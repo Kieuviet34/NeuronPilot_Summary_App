@@ -4,6 +4,8 @@ import android.util.Log
 import androidx.annotation.Keep
 import java.io.File
 
+import java.util.Locale
+
 class NeuroPilotLlmBridge {
     private var modelHandle: Long = 0L
 
@@ -35,6 +37,8 @@ class NeuroPilotLlmBridge {
         }
     }
 
+    data class LlmResult(val text: String, val statsLog: String)
+
     fun computeStreamingBlocking(userPrompt: String): String {
         val handle = modelHandle
         if (handle == 0L) return ""
@@ -51,21 +55,125 @@ class NeuroPilotLlmBridge {
         return stripStopMarkers(tokens.toString())
     }
 
-    fun summarizeBlocking(transcriptText: String): String {
+    fun correctTextBlocking(rawText: String, onToken: ((String, String?) -> Unit)? = null): LlmResult {
         val handle = modelHandle
-        if (handle == 0L) return ""
+        if (handle == 0L) return LlmResult("", "")
 
-        val truncated = truncateForContext(transcriptText)
-        val formattedPrompt = buildSummaryPrompt(truncated)
+        val systemPrompt = "Sửa lỗi chính tả và dấu câu cho đoạn hội thoại sau. Chỉ trả về văn bản đã sửa, không giải thích."
+        val formattedPrompt = buildString {
+            append(QWEN_SYS_OPEN)
+            append(systemPrompt)
+            append('\n')
+            append(QWEN_EOT)
+            append('\n')
+            append(QWEN_USR_OPEN)
+            append(rawText)
+            append('\n')
+            append(QWEN_EOT)
+            append('\n')
+            append(QWEN_AST_OPEN)
+        }
+        
+        val inputTokens = nativeCountTokens(formattedPrompt)
+        
         val tokens = StringBuilder()
+        var outputTokens = 0
+        val startTime = System.currentTimeMillis()
+        
         nativeResetModel(handle)
         nativeComputeStreaming(handle, formattedPrompt, object : TokenCallback {
             override fun onTokenReceived(token: String): Boolean {
+                outputTokens++
                 tokens.append(token)
+                onToken?.invoke(stripStopMarkers(tokens.toString()), null)
                 return true
             }
         })
-        return stripStopMarkers(tokens.toString())
+        val endTime = System.currentTimeMillis()
+        val elapsed = (endTime - startTime) / 1000f
+        val speed = if (elapsed > 0) outputTokens / elapsed else 0f
+        val cleanText = stripStopMarkers(tokens.toString())
+        val statsLog = "\n\n[Debug] Input tokens: $inputTokens | Generate speed: ${String.format(Locale.US, "%.2f", speed)} token/s"
+        onToken?.invoke(cleanText, statsLog)
+        
+        return LlmResult(cleanText, statsLog)
+    }
+
+    fun extractActionsBlocking(text: String, onToken: ((String, String?) -> Unit)? = null): LlmResult {
+        val handle = modelHandle
+        if (handle == 0L) return LlmResult("", "")
+
+        val systemPrompt = "Trích xuất danh sách các hành động (action items) cần làm sau cuộc họp. Định dạng kết quả thành JSON array chứa các object có key: 'task', 'assignee', 'deadline'."
+        val formattedPrompt = buildString {
+            append(QWEN_SYS_OPEN)
+            append(systemPrompt)
+            append('\n')
+            append(QWEN_EOT)
+            append('\n')
+            append(QWEN_USR_OPEN)
+            append(text)
+            append('\n')
+            append(QWEN_EOT)
+            append('\n')
+            append(QWEN_AST_OPEN)
+        }
+        
+        val inputTokens = nativeCountTokens(formattedPrompt)
+        
+        val tokens = StringBuilder()
+        var outputTokens = 0
+        val startTime = System.currentTimeMillis()
+        
+        nativeResetModel(handle)
+        nativeComputeStreaming(handle, formattedPrompt, object : TokenCallback {
+            override fun onTokenReceived(token: String): Boolean {
+                outputTokens++
+                tokens.append(token)
+                onToken?.invoke(stripStopMarkers(tokens.toString()), null)
+                return true
+            }
+        })
+        
+        val endTime = System.currentTimeMillis()
+        val elapsed = (endTime - startTime) / 1000f
+        val speed = if (elapsed > 0) outputTokens / elapsed else 0f
+        val cleanText = stripStopMarkers(tokens.toString())
+        val statsLog = "\n\n[Debug] Input tokens: $inputTokens | Generate speed: ${String.format(Locale.US, "%.2f", speed)} token/s"
+        onToken?.invoke(cleanText, statsLog)
+
+        return LlmResult(cleanText, statsLog)
+    }
+
+    fun summarizeBlocking(transcriptText: String, onToken: ((String, String?) -> Unit)? = null): LlmResult {
+        val handle = modelHandle
+        if (handle == 0L) return LlmResult("", "")
+
+        val truncated = truncateForContext(transcriptText)
+        val formattedPrompt = buildSummaryPrompt(truncated)
+        
+        val inputTokens = nativeCountTokens(formattedPrompt)
+        val tokens = StringBuilder()
+        var outputTokens = 0
+        val startTime = System.currentTimeMillis()
+        
+        nativeResetModel(handle)
+        nativeComputeStreaming(handle, formattedPrompt, object : TokenCallback {
+            override fun onTokenReceived(token: String): Boolean {
+                outputTokens++
+                tokens.append(token)
+                onToken?.invoke(stripStopMarkers(tokens.toString()), null)
+                return true
+            }
+        })
+        
+        val endTime = System.currentTimeMillis()
+        val elapsed = (endTime - startTime) / 1000f
+        val speed = if (elapsed > 0) outputTokens / elapsed else 0f
+        val cleanText = stripStopMarkers(tokens.toString())
+        val statsLog = "\n\n[Debug] Input tokens: $inputTokens | Generate speed: ${String.format(Locale.US, "%.2f", speed)} token/s"
+        onToken?.invoke(cleanText, statsLog)
+        
+        return LlmResult(cleanText, statsLog)
     }
 
     private fun buildSummaryPrompt(transcriptText: String): String {
@@ -150,6 +258,7 @@ class NeuroPilotLlmBridge {
         inputText: String,
         callback: TokenCallback
     )
+    private external fun nativeCountTokens(text: String): Int
 
     private external fun nativeResetModel(modelHandle: Long)
     private external fun nativeDestroyModel(modelHandle: Long)
@@ -191,7 +300,8 @@ class NeuroPilotLlmBridge {
                 "neuron_adapter",
                 "neuron_runtime",
                 "common",
-                "mtk_llm"
+                "mtk_llm",
+                "nn_sample"
             )
 
             for (lib in libs) {

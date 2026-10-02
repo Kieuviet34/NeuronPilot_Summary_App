@@ -5,13 +5,11 @@ import android.media.AudioFormat
 import android.media.AudioRecord
 import android.media.MediaRecorder
 import android.util.Log
-import android.webkit.WebView
 import java.util.concurrent.atomic.AtomicBoolean
 import kotlin.math.log10
 import kotlin.math.sqrt
 
 class AudioCapture(
-    private val webView: WebView,
     private val onAudioFrameReady: (audioData: ShortArray, side: String, isFinal: Boolean) -> Unit
 ) {
     private val TAG = "AudioCapture"
@@ -21,12 +19,12 @@ class AudioCapture(
     private val AUDIO_FORMAT = AudioFormat.ENCODING_PCM_16BIT
     private val BUFFET_SIZE = AudioRecord.getMinBufferSize(SAMPLE_RATE, CHANNEL_CONFIG, AUDIO_FORMAT) * 2
 
-    private val VAD_START_MS = 250L      // 100 -> 250: cần giọng liên tục dài hơn mới coi là bắt đầu nói thật
-    private val VAD_END_MS = 1000L       // giữ nguyên, ổn
-    private val MIN_SPEECH_MS = 1200L    // 800 -> 1200: loại các câu quá ngắn (thường là nhiễu/từ đơn lẻ dễ sai)
+    private val VAD_START_MS = 250L
+    private val VAD_END_MS = 1000L
+    private val MIN_SPEECH_MS = 1200L
     private val HARD_CAP_MS = 15000L
-    private val FRAME_VOICE_DBFS = -42.0 // -45 -> -42: nâng ngưỡng "có giọng" lên, bớt nhạy với tạp âm nền
-    private val MIN_FINAL_DBFS = -50.0   // -58 -> -50: siết ngưỡng chấp nhận segment, giọng phải rõ hơn mới gửi STT
+    private val FRAME_VOICE_DBFS = -42.0
+    private val MIN_FINAL_DBFS = -50.0
     private var audioRecord: AudioRecord? = null
     private var recordingThread: Thread? = null
     private val isRecording = AtomicBoolean(false)
@@ -39,45 +37,13 @@ class AudioCapture(
     private val pendingStartBuffer = ArrayList<Short>()
     private val currentSegmentBuffer = ArrayList<Short>()
 
-    init {
-        val msg = "[INIT] AudioCapture initialized (SampleRate: $SAMPLE_RATE Hz, BufferSize: $BUFFET_SIZE)"
-        Log.d(TAG, msg)
-        logToChromeConsole("info", msg)
-    }
-
-    private fun logToChromeConsole(level: String, message: String) {
-        val escapedMessage = message.replace("'", "\\'")
-        val jsCommand = when (level) {
-            "error" -> "console.error('%c[Android Native - AudioCapture]%c $escapedMessage', 'color: white; background: #dc3545; padding: 2px 5px; border-radius: 3px;', '');"
-            "warn" -> "console.warn('%c[Android Native - AudioCapture]%c $escapedMessage', 'color: black; background: #ffc107; padding: 2px 5px; border-radius: 3px;', '');"
-            "info" -> "console.info('%c[Android Native - AudioCapture]%c $escapedMessage', 'color: white; background: #17a2b8; padding: 2px 5px; border-radius: 3px;', '');"
-            else -> "console.log('%c[Android Native - AudioCapture]%c $escapedMessage', 'color: white; background: #6c757d; padding: 2px 5px; border-radius: 3px;', '');"
-        }
-
-        webView.post {
-            webView.evaluateJavascript(jsCommand, null)
-        }
-    }
-
     fun setActiveMicSide(side: String) {
         currentMicSide = side
-        val msg = "[CALL] setActiveMicSide() -> active mic side = $side"
-        Log.d(TAG, msg)
-        logToChromeConsole("log", msg)
     }
 
     @SuppressLint("MissingPermission")
     fun startCapture() {
-        val msgCall = "[CALL] startCapture()"
-        Log.d(TAG, msgCall)
-        logToChromeConsole("log", msgCall)
-
-        if (isRecording.get()) {
-            val msgWarn = "startCapture() ignored: already recording"
-            Log.w(TAG, msgWarn)
-            logToChromeConsole("warn", msgWarn)
-            return
-        }
+        if (isRecording.get()) return
 
         try {
             audioRecord = AudioRecord(
@@ -89,9 +55,7 @@ class AudioCapture(
             )
 
             if (audioRecord?.state != AudioRecord.STATE_INITIALIZED) {
-                val msgError = "AudioRecord init failed"
-                Log.e(TAG, msgError)
-                logToChromeConsole("error", msgError)
+                Log.e(TAG, "AudioRecord init failed")
                 return
             }
 
@@ -99,66 +63,33 @@ class AudioCapture(
             isRecording.set(true)
             audioRecord?.startRecording()
 
-            val msgSuccess = "Mic started successfully"
-            Log.d(TAG, msgSuccess)
-            logToChromeConsole("info", msgSuccess)
-
             recordingThread = Thread({ readAudioData() }, "AudioCapture-Thread")
             recordingThread?.start()
         } catch (e: Exception) {
-            val msgErr = "startCapture error: ${e.message}"
-            Log.e(TAG, msgErr)
-            logToChromeConsole("error", msgErr)
+            Log.e(TAG, "startCapture error: ${e.message}")
         }
     }
 
     fun stopCapture() {
-        val msgCall = "[CALL] stopCapture()"
-        Log.d(TAG, msgCall)
-        logToChromeConsole("log", msgCall)
-
-        if (!isRecording.get()) {
-            val msgWarn = "stopCapture() ignored: not recording"
-            Log.w(TAG, msgWarn)
-            logToChromeConsole("warn", msgWarn)
-            return
-        }
-
+        if (!isRecording.get()) return
         isRecording.set(false)
-
         try {
             finalizeCurrentSegment("stop")
-
             audioRecord?.stop()
             audioRecord?.release()
             audioRecord = null
-
             recordingThread?.join(1000)
             recordingThread = null
-
-            val msgSuccess = "Audio device released"
-            Log.d(TAG, msgSuccess)
-            logToChromeConsole("info", msgSuccess)
         } catch (e: Exception) {
-            val msgErr = "stopCapture error: ${e.message}"
-            Log.e(TAG, msgErr)
-            logToChromeConsole("error", msgErr)
+            Log.e(TAG, "stopCapture error: ${e.message}")
         }
     }
 
     private fun readAudioData() {
-        val msgLoop = "readAudioData() loop started"
-        Log.d(TAG, msgLoop)
-        logToChromeConsole("info", msgLoop)
-
         val audioBuffer = ShortArray(BUFFET_SIZE / 2)
-
         while (isRecording.get()) {
             val readSize = audioRecord?.read(audioBuffer, 0, audioBuffer.size) ?: 0
-            if (readSize <= 0) {
-                Log.w(TAG, "Audio read failed or frame size = 0")
-                continue
-            }
+            if (readSize <= 0) continue
 
             val frame = audioBuffer.copyOfRange(0, readSize)
             val frameMs = frameDurationMs(readSize)
@@ -170,10 +101,6 @@ class AudioCapture(
                 handleSilentFrame(frame, frameMs)
             }
         }
-
-        val msgExit = "readAudioData() loop exited"
-        Log.d(TAG, msgExit)
-        logToChromeConsole("log", msgExit)
     }
 
     private fun handleVoiceFrame(frame: ShortArray, frameMs: Long, currentTime: Long) {
@@ -191,9 +118,6 @@ class AudioCapture(
                 pendingStartBuffer.clear()
                 pendingVoiceMs = 0L
 
-                val msgVadStart = "Voice confirmed on side $currentMicSide"
-                Log.i(TAG, msgVadStart)
-                logToChromeConsole("info", msgVadStart)
                 onAudioFrameReady(frame, currentMicSide, false)
             }
             return
@@ -204,9 +128,6 @@ class AudioCapture(
 
         val speechDuration = currentTime - speechStartTime
         if (speechDuration >= HARD_CAP_MS) {
-            val msgHardCap = "Hard cap reached after ${speechDuration / 1000}s"
-            Log.w(TAG, msgHardCap)
-            logToChromeConsole("warn", msgHardCap)
             finalizeCurrentSegment("hard_cap")
         }
     }
@@ -222,9 +143,6 @@ class AudioCapture(
         silenceMs += frameMs
 
         if (silenceMs >= VAD_END_MS) {
-            val msgVadEnd = "Silence reached ${silenceMs}ms, flush segment"
-            Log.i(TAG, msgVadEnd)
-            logToChromeConsole("info", msgVadEnd)
             finalizeCurrentSegment("silence")
         }
     }
@@ -240,23 +158,10 @@ class AudioCapture(
         val dbfs = dbfs(segment)
         resetVadState()
 
-        if (durationMs < MIN_SPEECH_MS) {
-            val msg = "Skip STT: segment too short (${durationMs}ms, reason=$reason)"
-            Log.w(TAG, msg)
-            logToChromeConsole("warn", msg)
+        if (durationMs < MIN_SPEECH_MS || dbfs < MIN_FINAL_DBFS) {
             return
         }
 
-        if (dbfs < MIN_FINAL_DBFS) {
-            val msg = "Skip STT: segment too quiet (${String.format("%.1f", dbfs)} dBFS, reason=$reason)"
-            Log.w(TAG, msg)
-            logToChromeConsole("warn", msg)
-            return
-        }
-
-        val msg = "Final segment accepted (${durationMs}ms, ${String.format("%.1f", dbfs)} dBFS, reason=$reason)"
-        Log.i(TAG, msg)
-        logToChromeConsole("info", msg)
         onAudioFrameReady(segment, currentMicSide, true)
     }
 

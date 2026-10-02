@@ -1,8 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#2563EB</color>
+    <color name="colorPrimaryDark">#1D4ED8</color>
+    <color name="colorAccent">#3B82F6</color>
+
+    <color name="bg_app">#F8FAFC</color>
+    <color name="bg_card">#FFFFFF</color>
+    <color name="border_light">#E2E8F0</color>
+
+    <color name="text_primary">#0F172A</color>
+    <color name="text_secondary">#64748B</color>
+    <color name="text_muted">#94A3B8</color>
+
+    <color name="blue_primary">#2563EB</color>
+    <color name="blue_light">#EFF6FF</color>
+    <color name="blue_badge_bg">#E0F2FE</color>
+    <color name="blue_badge_text">#0284C7</color>
+
+    <color name="green_success">#16A34A</color>
+    <color name="green_bg">#DCFCE7</color>
+    <color name="green_text">#15803D</color>
+
+    <color name="orange_bg">#FEF3C7</color>
+    <color name="orange_text">#D97706</color>
+
+    <color name="red_recording">#DC2626</color>
+    <color name="red_bg">#FEE2E2</color>
+    <color name="red_text">#B91C1C</color>
+
+    <color name="chip_selected_bg">#2563EB</color>
+    <color name="chip_selected_text">#FFFFFF</color>
+    <color name="chip_unselected_bg">#F1F5F9</color>
+    <color name="chip_unselected_text">#64748B</color>
+
     <color name="voice_status_idle">#E53935</color>
     <color name="voice_status_recording">#E53935</color>
     <color name="voice_status_paused">#9E9E9E</color>

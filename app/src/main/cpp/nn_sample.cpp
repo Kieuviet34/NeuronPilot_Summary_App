@@ -272,3 +272,9 @@ Java_com_mediatek_neuropilot_jnidemo_aibox_ai_NeuroPilotLlmBridge_nativeDestroyM
     JNIEnv *env, jobject thiz, jlong model_handle) {
     Java_com_mediatek_neuropilot_jnidemo_MainActivity_destroyModel(env, thiz, model_handle);
 }
+
+extern "C" JNIEXPORT jint JNICALL
+Java_com_mediatek_neuropilot_jnidemo_aibox_ai_NeuroPilotLlmBridge_nativeCountTokens(
+    JNIEnv *env, jobject thiz, jstring text) {
+    return Java_com_mediatek_neuropilot_jnidemo_MainActivity_countTokens(env, thiz, text);
+}

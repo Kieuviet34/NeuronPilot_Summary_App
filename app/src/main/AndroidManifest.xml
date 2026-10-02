@@ -44,12 +44,22 @@
             android:exported="true"
             android:screenOrientation="landscape"
             android:windowSoftInputMode="stateVisible|adjustResize">
+        </activity>
+        <activity
+            android:name="com.bhs.meetingnotes.MeetingNotesActivity"
+            android:exported="true"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateVisible|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.bhs.meetingnotes.MeetingRecordActivity" android:screenOrientation="landscape" />
+        <activity android:name="com.bhs.meetingnotes.MeetingProcessingActivity" android:screenOrientation="landscape" />
+        <activity android:name="com.bhs.meetingnotes.MeetingResultActivity" android:screenOrientation="landscape" />
+        <activity android:name="com.bhs.meetingnotes.MeetingSettingsActivity" android:screenOrientation="landscape" />
         <activity
             android:name=".SettingsActivity"
             android:exported="false"

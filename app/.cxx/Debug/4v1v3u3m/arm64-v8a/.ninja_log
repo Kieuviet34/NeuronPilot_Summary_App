@@ -1,42 +1,8 @@
 # ninja log v5
-38	1026	8068254985480659	CMakeFiles/nn_sample.dir/NPUWareUtilsLib.cpp.o	34e95a7d9518c4b1
-26	1193	8068254987175303	CMakeFiles/nn_sample.dir/simple_model.cpp.o	36bb3b89f6f3f089
-0	14	0	clean	783ee98371267ada
-7	1501	8068254990227249	CMakeFiles/nn_sample.dir/nn_sample.cpp.o	deec2ce9e29aea52
-32	4087	8068255015881074	CMakeFiles/nn_sample.dir/utils.cpp.o	f28bac3fb0e01739
-4087	4365	8068255018771248	C:/Users/Admin/Downloads/NeuroPilotJniDemo_V _NoModel_V1/NeuroPilotJniDemo_V _NoModel_V1/app/build/intermediates/cxx/Debug/4v1v3u3m/obj/arm64-v8a/libnn_sample.so	2afcd560ef48a2e
-27	552	8068255348536913	build.ninja	c93709beb13d4027
-5	1310	8069179553963971	CMakeFiles/nn_sample.dir/simple_model.cpp.o	36bb3b89f6f3f089
-27	1494	8069179555877509	CMakeFiles/nn_sample.dir/nn_sample.cpp.o	deec2ce9e29aea52
-1495	1836	8069179559161147	C:/Users/Admin/Downloads/NeuroPilotJniDemo_V _NoModel_V1/NeuroPilotJniDemo_V _NoModel_V1/app/build/intermediates/cxx/Debug/4v1v3u3m/obj/arm64-v8a/libnn_sample.so	2afcd560ef48a2e
-48	1735	8069273101772539	CMakeFiles/nn_sample.dir/nn_sample.cpp.o	deec2ce9e29aea52
-1736	2243	8069273106747736	C:/Users/Admin/Downloads/NeuroPilotJniDemo_V _NoModel_V1/NeuroPilotJniDemo_V _NoModel_V1/app/build/intermediates/cxx/Debug/4v1v3u3m/obj/arm64-v8a/libnn_sample.so	2afcd560ef48a2e
-1	16	0	clean	783ee98371267ada
-83	2060	8086567759340211	CMakeFiles/nn_sample.dir/NPUWareUtilsLib.cpp.o	34e95a7d9518c4b1
-44	2466	8086567763400912	CMakeFiles/nn_sample.dir/simple_model.cpp.o	36bb3b89f6f3f089
-7	3133	8086567769998973	CMakeFiles/nn_sample.dir/nn_sample.cpp.o	deec2ce9e29aea52
-70	6945	8086567808076737	CMakeFiles/nn_sample.dir/utils.cpp.o	f28bac3fb0e01739
-6945	7367	8086567812370957	C:/Users/Admin/Downloads/NeuroPilotJniDemo_V _NoModel_V1/NeuroPilotJniDemo_V _NoModel_V1/app/build/intermediates/cxx/Debug/4v1v3u3m/obj/arm64-v8a/libnn_sample.so	2afcd560ef48a2e
-0	18	0	clean	783ee98371267ada
-42	1580	8086568120469156	CMakeFiles/nn_sample.dir/NPUWareUtilsLib.cpp.o	34e95a7d9518c4b1
-26	2008	8086568124867153	CMakeFiles/nn_sample.dir/simple_model.cpp.o	36bb3b89f6f3f089
-9	2414	8086568128906816	CMakeFiles/nn_sample.dir/nn_sample.cpp.o	deec2ce9e29aea52
-58	5622	8086568160668606	CMakeFiles/nn_sample.dir/utils.cpp.o	f28bac3fb0e01739
-5622	5825	8086568162902075	C:/Users/Admin/Downloads/NeuroPilotJniDemo_V _NoModel_V1/NeuroPilotJniDemo_V _NoModel_V1/app/build/intermediates/cxx/Debug/4v1v3u3m/obj/arm64-v8a/libnn_sample.so	2afcd560ef48a2e
-0	15	0	clean	783ee98371267ada
-31	1179	8089123363518775	CMakeFiles/nn_sample.dir/NPUWareUtilsLib.cpp.o	34e95a7d9518c4b1
-18	1359	8089123365290255	CMakeFiles/nn_sample.dir/simple_model.cpp.o	36bb3b89f6f3f089
-5	1646	8089123368172125	CMakeFiles/nn_sample.dir/nn_sample.cpp.o	deec2ce9e29aea52
-42	4450	8089123395994989	CMakeFiles/nn_sample.dir/utils.cpp.o	f28bac3fb0e01739
-4451	4850	8089123400097493	C:/Users/Admin/Downloads/NeuroPilotJniDemo_V _NoModel_V1/NeuroPilotJniDemo_V _NoModel_V1/app/build/intermediates/cxx/Debug/4v1v3u3m/obj/arm64-v8a/libnn_sample.so	2afcd560ef48a2e
-5	1495	8089862004269400	CMakeFiles/nn_sample.dir/nn_sample.cpp.o	deec2ce9e29aea52
-1495	1850	8089862007691528	C:/Users/Admin/Downloads/NeuroPilotJniDemo_V _NoModel_V1/NeuroPilotJniDemo_V _NoModel_V1/app/build/intermediates/cxx/Debug/4v1v3u3m/obj/arm64-v8a/libnn_sample.so	2afcd560ef48a2e
-16	2430	8092489269647911	CMakeFiles/nn_sample.dir/nn_sample.cpp.o	deec2ce9e29aea52
-2431	3006	8092489275261402	C:/Users/Admin/Downloads/NeuroPilotJniDemo_V _NoModel_V1/NeuroPilotJniDemo_V _NoModel_V1/app/build/intermediates/cxx/Debug/4v1v3u3m/obj/arm64-v8a/libnn_sample.so	2afcd560ef48a2e
-1	11	0	clean	783ee98371267ada
-54	1675	8092666697900814	CMakeFiles/nn_sample.dir/NPUWareUtilsLib.cpp.o	34e95a7d9518c4b1
-23	1965	8092666700796689	CMakeFiles/nn_sample.dir/simple_model.cpp.o	36bb3b89f6f3f089
-5	2428	8092666705404519	CMakeFiles/nn_sample.dir/nn_sample.cpp.o	deec2ce9e29aea52
-37	5341	8092666734426706	CMakeFiles/nn_sample.dir/utils.cpp.o	f28bac3fb0e01739
-5342	5553	8092666736535985	C:/Users/Admin/Downloads/NeuroPilotJniDemo_V _NoModel_V1/NeuroPilotJniDemo_V _NoModel_V1/app/build/intermediates/cxx/Debug/4v1v3u3m/obj/arm64-v8a/libnn_sample.so	2afcd560ef48a2e
-0	13	0	clean	783ee98371267ada
+5	2909	1790829153016594595	CMakeFiles/nn_sample.dir/NPUWareUtilsLib.cpp.o	17b441df4886e18
+1	4117	1790829154210601495	CMakeFiles/nn_sample.dir/simple_model.cpp.o	35d8a5a75f569e34
+0	5789	1790829155873611105	CMakeFiles/nn_sample.dir/nn_sample.cpp.o	66032fed1f364560
+3	19527	1790829169559690222	CMakeFiles/nn_sample.dir/utils.cpp.o	e0e1244a799190ce
+19528	19749	1790829169850691904	/home/kieuviet/AndroidStudioProjects/NeuroPilotJniDemo_V _NoModel_V1/NeuroPilotJniDemo_V _NoModel_V1/app/build/intermediates/cxx/Debug/4v1v3u3m/obj/arm64-v8a/libnn_sample.so	db8d7f4c8efb2248
+2	1491	1790913478262741613	CMakeFiles/nn_sample.dir/nn_sample.cpp.o	66032fed1f364560
+1491	1640	1790913478419736535	/home/kieuviet/AndroidStudioProjects/NeuroPilotJniDemo_V _NoModel_V1/NeuroPilotJniDemo_V _NoModel_V1/app/build/intermediates/cxx/Debug/4v1v3u3m/obj/arm64-v8a/libnn_sample.so	db8d7f4c8efb2248

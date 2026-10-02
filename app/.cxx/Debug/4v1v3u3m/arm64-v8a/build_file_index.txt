@@ -1,1 +1,1 @@
-C:\Users\Admin\Downloads\NeuroPilotJniDemo_V _NoModel_V1\NeuroPilotJniDemo_V _NoModel_V1\app\src\main\cpp\CMakeLists.txt
+/home/kieuviet/AndroidStudioProjects/NeuroPilotJniDemo_V _NoModel_V1/NeuroPilotJniDemo_V _NoModel_V1/app/src/main/cpp/CMakeLists.txt

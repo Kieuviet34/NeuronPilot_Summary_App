@@ -85,7 +85,7 @@ class LlmTranslationEngine(
     override suspend fun summarize(transcriptText: String): String? {
         return withContext(Dispatchers.IO) {
             try {
-                val result = bridge.summarizeBlocking(transcriptText).trim()
+                val result = bridge.summarizeBlocking(transcriptText).text.trim()
                 if (result.isBlank()) null else result
             } catch (e: Exception) {
                 Log.e(TAG, "Summarize failed", e)

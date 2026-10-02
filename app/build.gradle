@@ -6,7 +6,7 @@ android {
     namespace 'com.mediatek.neuropilot.jnidemo'
     compileSdkVersion 34
     defaultConfig {
-        applicationId "com.mediatek.neuropilot.jnidemo.mod"
+        applicationId "com.mediatek.neuropilot.jnidemo.mod2"
         minSdkVersion 28
         targetSdkVersion 34
         versionCode 1

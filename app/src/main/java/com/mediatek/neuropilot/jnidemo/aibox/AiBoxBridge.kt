@@ -97,7 +97,7 @@ class AiBoxBridge(private val context: Context) {
             }
         }
 
-        audioCapture = AudioCapture(webView) { audioData, side, isFinal ->
+        audioCapture = AudioCapture { audioData, side, isFinal ->
             val langCode = if (side == "A") "vi" else "en"
 
             if (isFinal) {
@@ -159,7 +159,7 @@ class AiBoxBridge(private val context: Context) {
                 try {
                     val bridge = NeuroPilotLlmBridge()
                     if (bridge.initDefaultModel()) {
-                        val summary = bridge.summarizeBlocking(transcriptText)
+                        val summary = bridge.summarizeBlocking(transcriptText).text
                         bridge.close()
                         summary
                     } else {
