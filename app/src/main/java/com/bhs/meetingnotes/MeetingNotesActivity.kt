@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bhs.meetingnotes.adapter.MeetingAdapter
@@ -136,7 +137,7 @@ class MeetingNotesActivity : AppCompatActivity() {
             }
         )
 
-        rvMeetings?.layoutManager = LinearLayoutManager(this)
+        rvMeetings?.layoutManager = GridLayoutManager(this, 2)
         rvMeetings?.adapter = meetingAdapter
     }
 

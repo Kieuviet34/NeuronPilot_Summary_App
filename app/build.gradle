@@ -5,6 +5,7 @@ apply plugin: 'kotlin-kapt'
 android {
     namespace 'com.mediatek.neuropilot.jnidemo'
     compileSdkVersion 34
+    ndkVersion '27.0.12077973'
     defaultConfig {
         applicationId "com.mediatek.neuropilot.jnidemo.mod2"
         minSdkVersion 28

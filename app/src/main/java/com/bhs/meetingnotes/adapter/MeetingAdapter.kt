@@ -72,19 +72,22 @@ class MeetingAdapter(
             tvLangBadge.setBackgroundResource(R.drawable.bg_badge_active_local)
             tvLangBadge.setTextColor(ContextCompat.getColor(context, R.color.blue_primary))
 
-            // Status Badge
+            // Status Badge & Card Border
             when (meeting.status) {
                 "RECORDING" -> {
-                    tvStatusBadge.text = "● Đang ghi"
+                    itemView.setBackgroundResource(R.drawable.bg_card_segment_rec)
+                    tvStatusBadge.text = "● REC"
                     tvStatusBadge.setBackgroundResource(R.drawable.bg_badge_rec)
-                    tvStatusBadge.setTextColor(ContextCompat.getColor(context, R.color.red_rec))
+                    tvStatusBadge.setTextColor(ContextCompat.getColor(context, R.color.red_text))
                 }
                 "PROCESSING" -> {
+                    itemView.setBackgroundResource(R.drawable.bg_card_settings_local)
                     tvStatusBadge.text = "Đang xử lý"
                     tvStatusBadge.setBackgroundResource(R.drawable.bg_badge_active_local)
                     tvStatusBadge.setTextColor(ContextCompat.getColor(context, R.color.blue_primary))
                 }
                 else -> {
+                    itemView.setBackgroundResource(R.drawable.bg_card_settings_local)
                     tvStatusBadge.text = "Hoàn tất"
                     tvStatusBadge.setBackgroundResource(R.drawable.bg_badge_saved)
                     tvStatusBadge.setTextColor(ContextCompat.getColor(context, R.color.green_text))
