@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:text="Đang xử lý AI"
                 android:textColor="@color/text_primary"
-                android:textSize="18sp"
+                android:textSize="22sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -51,7 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/text_secondary"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 tools:text="Họp kỹ thuật BSP • 12 phút 34 giây • Tiếng Việt" />
         </LinearLayout>
 
@@ -61,11 +61,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_badge_active_local"
-            android:paddingHorizontal="14dp"
-            android:paddingVertical="6dp"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="8dp"
             android:text="PhoWhisper + Qwen2.5 3B"
             android:textColor="@color/blue_primary"
-            android:textSize="13sp"
+            android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -106,14 +106,14 @@
 
                     <ImageView
                         android:id="@+id/iv_step1_icon"
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
                         android:src="@drawable/ic_step_check" />
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
+                        android:layout_marginStart="14dp"
                         android:layout_weight="1"
                         android:orientation="vertical">
 
@@ -127,7 +127,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="Bước 1: Giọng nói ➔ Text"
                                 android:textColor="@color/text_primary"
-                                android:textSize="14sp"
+                                android:textSize="16sp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -137,7 +137,7 @@
                                 android:layout_alignParentEnd="true"
                                 android:text="PhoWhisper"
                                 android:textColor="@color/green_success"
-                                android:textSize="11sp"
+                                android:textSize="13sp"
                                 android:textStyle="bold" />
                         </RelativeLayout>
 
@@ -145,10 +145,10 @@
                             android:id="@+id/tv_step1_desc"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
+                            android:layout_marginTop="3dp"
                             android:text="Nhận dạng giọng nói từ file âm thanh"
                             android:textColor="@color/text_secondary"
-                            android:textSize="12sp" />
+                            android:textSize="13sp" />
 
                         <ProgressBar
                             android:id="@+id/pb_step1"
@@ -166,7 +166,7 @@
                             android:layout_marginTop="2dp"
                             android:text="Hoàn tất"
                             android:textColor="@color/green_success"
-                            android:textSize="11sp" />
+                            android:textSize="12sp" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -175,7 +175,7 @@
                     android:id="@+id/line_step1_2"
                     android:layout_width="2dp"
                     android:layout_height="24dp"
-                    android:layout_marginStart="13dp"
+                    android:layout_marginStart="15dp"
                     android:background="@color/blue_primary" />
 
                 <!-- STEP 2: SỬA LỖI VĂN BẢN -->
@@ -187,14 +187,14 @@
 
                     <ImageView
                         android:id="@+id/iv_step2_icon"
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
                         android:src="@drawable/bg_circle_blue_ring" />
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
+                        android:layout_marginStart="14dp"
                         android:layout_weight="1"
                         android:orientation="vertical">
 
@@ -208,16 +208,16 @@
                                 android:layout_height="wrap_content"
                                 android:text="Bước 2: Sửa lỗi văn bản"
                                 android:textColor="@color/text_primary"
-                                android:textSize="14sp"
+                                android:textSize="16sp"
                                 android:textStyle="bold" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
-                                android:text="Qwen2.5 3B"
+                                android:text="Từ điển Alias"
                                 android:textColor="@color/blue_primary"
-                                android:textSize="11sp"
+                                android:textSize="13sp"
                                 android:textStyle="bold" />
                         </RelativeLayout>
 
@@ -225,10 +225,10 @@
                             android:id="@+id/tv_step2_desc"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
+                            android:layout_marginTop="3dp"
                             android:text="Sửa chính tả, ngữ pháp, thuật ngữ"
                             android:textColor="@color/text_secondary"
-                            android:textSize="12sp" />
+                            android:textSize="13sp" />
 
                         <ProgressBar
                             android:id="@+id/pb_step2"
@@ -246,7 +246,7 @@
                             android:layout_marginTop="2dp"
                             android:text="Đang xử lý..."
                             android:textColor="@color/blue_primary"
-                            android:textSize="11sp" />
+                            android:textSize="12sp" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -255,7 +255,7 @@
                     android:id="@+id/line_step2_3"
                     android:layout_width="2dp"
                     android:layout_height="24dp"
-                    android:layout_marginStart="13dp"
+                    android:layout_marginStart="15dp"
                     android:background="@color/border_light" />
 
                 <!-- STEP 3: TÓM TẮT NỘI DUNG -->
@@ -267,14 +267,14 @@
 
                     <ImageView
                         android:id="@+id/iv_step3_icon"
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
                         android:src="@drawable/ic_step_pending" />
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
+                        android:layout_marginStart="14dp"
                         android:layout_weight="1"
                         android:orientation="vertical">
 
@@ -288,7 +288,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="Bước 3: Tóm tắt nội dung"
                                 android:textColor="@color/text_muted"
-                                android:textSize="14sp"
+                                android:textSize="16sp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -297,17 +297,17 @@
                                 android:layout_alignParentEnd="true"
                                 android:text="Qwen2.5 3B"
                                 android:textColor="@color/text_muted"
-                                android:textSize="11sp" />
+                                android:textSize="13sp" />
                         </RelativeLayout>
 
                         <TextView
                             android:id="@+id/tv_step3_desc"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
+                            android:layout_marginTop="3dp"
                             android:text="Tóm tắt điểm chính, quyết định, vấn đề"
                             android:textColor="@color/text_muted"
-                            android:textSize="12sp" />
+                            android:textSize="13sp" />
 
                         <ProgressBar
                             android:id="@+id/pb_step3"
@@ -325,7 +325,7 @@
                             android:layout_marginTop="2dp"
                             android:text="Đang chờ bước 2 hoàn tất"
                             android:textColor="@color/text_muted"
-                            android:textSize="11sp" />
+                            android:textSize="12sp" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -334,7 +334,7 @@
                     android:id="@+id/line_step3_4"
                     android:layout_width="2dp"
                     android:layout_height="24dp"
-                    android:layout_marginStart="13dp"
+                    android:layout_marginStart="15dp"
                     android:background="@color/border_light" />
 
                 <!-- STEP 4: ĐỀ XUẤT HÀNH ĐỘNG -->
@@ -346,14 +346,14 @@
 
                     <ImageView
                         android:id="@+id/iv_step4_icon"
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
                         android:src="@drawable/ic_step_pending" />
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
+                        android:layout_marginStart="14dp"
                         android:layout_weight="1"
                         android:orientation="vertical">
 
@@ -367,7 +367,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="Bước 4: Đề xuất hành động"
                                 android:textColor="@color/text_muted"
-                                android:textSize="14sp"
+                                android:textSize="16sp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -376,17 +376,17 @@
                                 android:layout_alignParentEnd="true"
                                 android:text="Qwen2.5 3B"
                                 android:textColor="@color/text_muted"
-                                android:textSize="11sp" />
+                                android:textSize="13sp" />
                         </RelativeLayout>
 
                         <TextView
                             android:id="@+id/tv_step4_desc"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
+                            android:layout_marginTop="3dp"
                             android:text="Trích xuất việc cần làm, deadline"
                             android:textColor="@color/text_muted"
-                            android:textSize="12sp" />
+                            android:textSize="13sp" />
 
                         <ProgressBar
                             android:id="@+id/pb_step4"
@@ -404,7 +404,7 @@
                             android:layout_marginTop="2dp"
                             android:text="Đang chờ bước 3 hoàn tất"
                             android:textColor="@color/text_muted"
-                            android:textSize="11sp" />
+                            android:textSize="12sp" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -421,10 +421,10 @@
                     android:layout_marginTop="16dp"
                     android:background="@color/bg_app"
                     android:gravity="center"
-                    android:padding="8dp"
+                    android:padding="10dp"
                     android:text="Tổng thời gian ước tính: ~5 phút • Bước 1/4"
                     android:textColor="@color/text_secondary"
-                    android:textSize="13sp"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -459,7 +459,7 @@
                         android:layout_height="wrap_content"
                         android:text="TEXT GỐC (BƯỚC 1)"
                         android:textColor="@color/text_muted"
-                        android:textSize="11sp"
+                        android:textSize="13sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -468,11 +468,11 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:background="@drawable/bg_badge_saved"
-                        android:paddingHorizontal="8dp"
-                        android:paddingVertical="2dp"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="4dp"
                         android:text="HOÀN TẤT"
                         android:textColor="@color/green_text"
-                        android:textSize="10sp"
+                        android:textSize="12sp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -485,9 +485,9 @@
                         android:id="@+id/tv_step1_preview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:lineSpacingExtra="4dp"
+                        android:lineSpacingExtra="5dp"
                         android:textColor="@color/text_primary"
-                        android:textSize="13sp"
+                        android:textSize="15sp"
                         tools:text="...chao moi nguoi hom nay chung ta se ri-viu tien do sprint..." />
                 </ScrollView>
             </LinearLayout>
@@ -514,7 +514,7 @@
                         android:layout_height="wrap_content"
                         android:text="TEXT ĐÃ SỬA (BƯỚC 2)"
                         android:textColor="@color/blue_primary"
-                        android:textSize="11sp"
+                        android:textSize="13sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -523,11 +523,11 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:background="@drawable/bg_badge_active_local"
-                        android:paddingHorizontal="8dp"
-                        android:paddingVertical="2dp"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="4dp"
                         android:text="ĐANG XỬ LÝ"
                         android:textColor="@color/blue_primary"
-                        android:textSize="10sp"
+                        android:textSize="12sp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -540,9 +540,9 @@
                         android:id="@+id/tv_step2_preview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:lineSpacingExtra="4dp"
+                        android:lineSpacingExtra="5dp"
                         android:textColor="@color/text_primary"
-                        android:textSize="13sp"
+                        android:textSize="15sp"
                         tools:text="...Chào mọi người, hôm nay chúng ta sẽ review tiến độ Sprint..." />
                 </ScrollView>
             </LinearLayout>

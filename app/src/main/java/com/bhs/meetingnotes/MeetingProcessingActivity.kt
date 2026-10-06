@@ -136,10 +136,15 @@ class MeetingProcessingActivity : AppCompatActivity() {
             }
 
             if (result != null && !isFinishing) {
-                val intent = Intent(this@MeetingProcessingActivity, MeetingResultActivity::class.java)
-                intent.putExtra("MEETING_ID", meetingId)
-                startActivity(intent)
-                finish()
+                if (result.status == "COMPLETED") {
+                    val intent = Intent(this@MeetingProcessingActivity, MeetingResultActivity::class.java)
+                    intent.putExtra("MEETING_ID", meetingId)
+                    startActivity(intent)
+                    finish()
+                } else {
+                    tvTotalTimeEstimate?.text = "Lỗi xử lý AI: Không thể hoàn tất pipeline."
+                    tvTotalTimeEstimate?.setTextColor(ContextCompat.getColor(this@MeetingProcessingActivity, R.color.orange_text))
+                }
             }
         }
     }

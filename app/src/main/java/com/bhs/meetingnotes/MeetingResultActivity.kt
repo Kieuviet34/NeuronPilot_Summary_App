@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
+import com.bhs.meetingnotes.db.EditLogEntity
 import com.bhs.meetingnotes.db.MeetingDatabase
 import com.bhs.meetingnotes.db.MeetingEntity
 import com.bhs.meetingnotes.model.ActionItem
@@ -51,6 +52,14 @@ class MeetingResultActivity : AppCompatActivity() {
     private var llTabActionsContainer: LinearLayout? = null
     private var llActionsContainer: LinearLayout? = null
     private var btnReadSummary: TextView? = null
+    private var tvTranscriptTitle: TextView? = null
+    private var btnTranscriptToggle: TextView? = null
+    private var btnTranscriptEdits: TextView? = null
+
+    private var correctedText: String = ""
+    private var rawText: String = ""
+    private var showingRaw = false
+    private var edits: List<EditLogEntity> = emptyList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,6 +90,15 @@ class MeetingResultActivity : AppCompatActivity() {
         llTabActionsContainer = findViewById(R.id.ll_tab_actions_container)
         llActionsContainer = findViewById(R.id.ll_actions_container)
         btnReadSummary = findViewById(R.id.btn_read_summary)
+        tvTranscriptTitle = findViewById(R.id.tv_transcript_title)
+        btnTranscriptToggle = findViewById(R.id.btn_transcript_toggle)
+        btnTranscriptEdits = findViewById(R.id.btn_transcript_edits)
+
+        btnTranscriptToggle?.setOnClickListener {
+            showingRaw = !showingRaw
+            renderTranscript()
+        }
+        btnTranscriptEdits?.setOnClickListener { showEditsDialog() }
 
         findViewById<View>(R.id.btn_back)?.setOnClickListener {
             finish()
@@ -134,8 +152,10 @@ class MeetingResultActivity : AppCompatActivity() {
                 findViewById<TextView>(R.id.tv_models_display)?.text = "✓ ${meeting.asrModel} + ${meeting.llmModel}"
 
                 tvSummaryContent?.text = if (meeting.summary.isNotBlank()) meeting.summary else "Chưa có bản tóm tắt."
-                val transcriptText = if (meeting.correctedTranscript.isNotBlank()) meeting.correctedTranscript else meeting.rawTranscript
-                tvTranscriptContent?.text = if (transcriptText.isNotBlank()) transcriptText else "Chưa có nội dung văn bản."
+                correctedText = meeting.correctedTranscript.ifBlank { meeting.rawTranscript }
+                rawText = meeting.rawTranscript
+                edits = withContext(Dispatchers.IO) { db.editLogDao().getForMeeting(id) }
+                renderTranscript()
 
                 // Populate Actions
                 val actions = ActionItem.fromJson(meeting.actionItemsJson)
@@ -144,6 +164,49 @@ class MeetingResultActivity : AppCompatActivity() {
                 populateActionsViews(actions)
             }
         }
+    }
+
+    private fun renderTranscript() {
+        val text = if (showingRaw) rawText else correctedText
+        if (text.isBlank()) {
+            tvTranscriptContent?.text = "Chưa có nội dung văn bản."
+        } else if (rawText.isNotBlank() && correctedText.isNotBlank()) {
+            val diffResult = com.bhs.meetingnotes.util.WordDiff.diff(rawText, correctedText)
+            val tokens = if (showingRaw) diffResult.raw else diffResult.clean
+            val ssb = android.text.SpannableStringBuilder()
+            val bgCol = ContextCompat.getColor(this, if (showingRaw) R.color.diff_error_bg else R.color.diff_fix_bg)
+            val fgCol = ContextCompat.getColor(this, if (showingRaw) R.color.diff_error else R.color.ok_green)
+
+            for (token in tokens) {
+                val start = ssb.length
+                ssb.append(token.text).append(" ")
+                val end = ssb.length - 1
+                if (token.changed) {
+                    ssb.setSpan(android.text.style.BackgroundColorSpan(bgCol), start, end, android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                    ssb.setSpan(android.text.style.ForegroundColorSpan(fgCol), start, end, android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                    ssb.setSpan(android.text.style.StyleSpan(android.graphics.Typeface.BOLD), start, end, android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                }
+            }
+            tvTranscriptContent?.text = ssb
+        } else {
+            tvTranscriptContent?.text = text
+        }
+        tvTranscriptTitle?.text = if (showingRaw) "📝 Văn bản gốc (PhoWhisper ASR - Chưa sửa)" else "📝 Toàn bộ văn bản cuộc họp (Đã chuẩn hoá thuật ngữ)"
+        btnTranscriptToggle?.text = if (showingRaw) "✅ Xem bản đã sửa" else "👁 Xem bản gốc"
+        btnTranscriptEdits?.text = "✏️ ${edits.size} chỉnh sửa"
+    }
+
+    private fun showEditsDialog() {
+        if (edits.isEmpty()) {
+            Toast.makeText(this, "Không có chỉnh sửa nào trong cuộc họp này", Toast.LENGTH_SHORT).show()
+            return
+        }
+        val lines = edits.map { "“${it.beforeText}” → “${it.afterText}”  (${it.rule})" }.toTypedArray()
+        AlertDialog.Builder(this)
+            .setTitle("Danh sách chỉnh sửa (${edits.size})")
+            .setItems(lines, null)
+            .setPositiveButton("Đóng", null)
+            .show()
     }
 
     private fun populateActionsViews(actions: List<ActionItem>) {
@@ -198,15 +261,11 @@ class MeetingResultActivity : AppCompatActivity() {
     }
 
     private fun showExportDialog() {
-        val formats = arrayOf("Báo cáo đầy đủ (PDF)", "Tài liệu văn bản (DOCX)", "Chỉ Transcript (TXT)")
+        val formats = arrayOf("Báo cáo đầy đủ (PDF)", "Văn bản tóm tắt & Transcript (TXT)")
         AlertDialog.Builder(this)
             .setTitle("Chọn định dạng xuất báo cáo")
             .setItems(formats) { _, which ->
-                val format = when (which) {
-                    0 -> "PDF"
-                    1 -> "DOCX"
-                    else -> "TXT"
-                }
+                val format = if (which == 0) "PDF" else "TXT"
                 exportReport(format)
             }
             .setNegativeButton("Hủy", null)

@@ -14,6 +14,7 @@ import com.bhs.meetingnotes.adapter.SelectSegmentAdapter
 import com.bhs.meetingnotes.db.MeetingDatabase
 import com.bhs.meetingnotes.db.MeetingEntity
 import com.bhs.meetingnotes.model.SegmentItem
+import com.bhs.meetingnotes.util.ProcessingEstimator
 import com.mediatek.neuropilot.jnidemo.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -176,21 +177,14 @@ class MeetingSelectSegmentsActivity : AppCompatActivity() {
             tvSkippedStat?.text = "0 đoạn"
         }
 
-        // 2. AI Processing Estimates
-        // Giả lập ước tính xử lý theo Genio 720: ASR ~ 1/3 thời lượng audio, Clean text ~ 1-3p, Summary+Actions ~ 2p
-        val selectedMinutes = (selectedDurationMs / 60000.0).coerceAtLeast(1.0)
-        val estAsrMinutes = (selectedMinutes * 0.35).toInt().coerceAtLeast(1)
-        val estCleanMinutes = (selectedMinutes * 0.20).toInt().coerceAtLeast(1)
-        val estSummaryMinutes = 2
-        val estTotalMinutes = estAsrMinutes + estCleanMinutes + estSummaryMinutes
-
+        // 2. AI Processing Estimates via ProcessingEstimator (BA v2 standard)
+        val estimate = ProcessingEstimator.estimate(selectedDurationMs)
         val asrModelName = currentMeeting?.asrModel ?: "PhoWhisper"
-        val asrShort = if (asrModelName.contains("Whisper (EN)")) "Whisper EN" else "PhoWhisper"
 
-        tvEstStep1?.text = "~$estAsrMinutes phút"
-        tvEstStep2?.text = "~$estCleanMinutes phút"
-        tvEstStep34?.text = "~$estSummaryMinutes phút"
-        tvEstTotal?.text = "~$estTotalMinutes phút"
+        tvEstStep1?.text = "~${estimate.asrMin} phút"
+        tvEstStep2?.text = "~${estimate.fixMin} phút"
+        tvEstStep34?.text = "~${estimate.summaryMin} phút"
+        tvEstTotal?.text = "~${estimate.totalMin} phút"
 
         // 3. Header Action Button
         btnStartAiPipeline?.text = "Xử lý AI ($selectedCount đoạn)"

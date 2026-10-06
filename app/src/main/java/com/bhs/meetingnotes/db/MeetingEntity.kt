@@ -28,5 +28,7 @@ data class MeetingEntity(
     val step1TextPreview: String = "",
     val step2TextPreview: String = "",
     val currentStep: Int = 4,
-    val totalEstimatedTimeSeconds: Int = 300
+    val totalEstimatedTimeSeconds: Int = 300,
+    val isDeleted: Boolean = false,
+    val deletedAt: Long? = null
 )

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="home_subtitle">G720 AI Box · On-device AI</string>
+    <string name="home_filter_all">Tất cả</string>
+    <string name="home_filter_vi">Tiếng Việt</string>
+    <string name="home_filter_en">English</string>
+    <string name="home_record_button">Ghi âm cuộc họp</string>
+    <string name="home_title">Cuộc họp của tôi</string>
+    <string name="home_range_all">Tất cả</string>
+    <string name="home_range_today">Hôm nay</string>
+    <string name="home_range_week">Tuần này</string>
+    <string name="home_search_hint">Tìm kiếm cuộc họp…</string>
+    <string name="home_empty">Chưa có cuộc họp nào phù hợp</string>
+    <string name="home_settings_desc">Cài đặt</string>
+
+    <string name="badge_completed">Hoàn tất</string>
+    <string name="badge_recording">● Đang ghi</string>
+    <string name="badge_lang_vi">VI</string>
+    <string name="badge_lang_en">EN</string>
+    <string name="badge_processing">Đang xử lý</string>
+    <string name="badge_waiting">Chờ xử lý</string>
+    <string name="badge_error">Lỗi</string>
+
+    <string name="card_duration_vi">%1$d phút</string>
+    <string name="card_duration_en">%1$d min</string>
+    <string name="card_words_vi">%1$s từ</string>
+    <string name="card_words_en">%1$s words</string>
+    <string name="card_actions_vi">%1$d hành động</string>
+    <string name="card_actions_en">%1$d actions</string>
+    <string name="card_summary_prefix_vi">Tóm tắt:</string>
+    <string name="card_summary_prefix_en">Summary:</string>
+    <string name="card_details_vi">Xem chi tiết</string>
+    <string name="card_details_en">View details</string>
+    <string name="card_export_vi">Xuất báo cáo</string>
+    <string name="card_export_en">Export</string>
+    <string name="card_recording_time">%1$s đang ghi…</string>
+    <string name="card_no_summary">Chưa có tóm tắt</string>
+
+    <string name="new_meeting_title">Cuộc họp mới</string>
+    <string name="new_meeting_name_label">Tên cuộc họp</string>
+    <string name="new_meeting_name_hint">Nhập tên cuộc họp…</string>
+    <string name="new_meeting_name_helper"></string>
+    <string name="new_meeting_language">Ngôn ngữ chính</string>
+    <string name="new_meeting_lang_vi">Tiếng Việt</string>
+    <string name="new_meeting_lang_en">Tiếng Anh</string>
+    <string name="new_meeting_start">Bắt đầu</string>
+    <string name="common_cancel">Huỷ</string>
+    <string name="common_back">Quay lại</string>
+    <string name="perm_storage_title">Cấp quyền lưu trữ</string>
+    <string name="perm_storage_message">Cho phép truy cập tất cả tệp để lưu bản ghi vào /sdcard/MeetingNotes (giữ lại khi gỡ app). Bạn có thể bỏ qua và dùng thư mục riêng của app.</string>
+    <string name="perm_storage_allow">Cấp quyền</string>
+    <string name="perm_storage_later">Bỏ qua</string>
+</resources>

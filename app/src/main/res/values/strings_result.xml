@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="result_tab_summary">Tóm tắt</string>
+    <string name="result_tab_actions">Hành động</string>
+    <string name="result_tab_transcript">Transcript</string>
+    <string name="result_btn_read">Đọc tóm tắt</string>
+    <string name="result_btn_stop_reading">Dừng đọc</string>
+    <string name="result_btn_export">Xuất báo cáo</string>
+
+    <string name="result_meta_minutes">%1$d phút</string>
+    <string name="result_meta_words">%1$s từ</string>
+    <string name="result_meta_models_vi">Nội dung mô phỏng (chưa dùng AI thật)</string>
+    <string name="result_meta_models_en">Nội dung mô phỏng (chưa dùng AI thật)</string>
+
+    <string name="result_summary_title">Tóm tắt cuộc họp</string>
+    <string name="result_summary_empty">Chưa có bản tóm tắt cho cuộc họp này</string>
+    <string name="result_transcript_empty">Chưa có transcript cho cuộc họp này</string>
+    <string name="result_actions_title">Hành động tiếp theo (%1$d)</string>
+    <string name="result_actions_empty">Không có hành động nào được trích xuất</string>
+    <string name="result_assignee_label">Phụ trách:</string>
+    <string name="result_deadline_prefix">Deadline: %1$s</string>
+    <string name="result_unknown">Chưa xác định</string>
+
+    <string name="result_export_pdf">PDF - Báo cáo đầy đủ</string>
+    <string name="result_export_txt">TXT - Chỉ transcript</string>
+    <string name="result_export_failed">Không xuất được báo cáo. Vui lòng thử lại.</string>
+    <string name="result_export_share_title">Chia sẻ báo cáo</string>
+    <string name="result_export_no_app">Không có ứng dụng nào để chia sẻ file này</string>
+
+    <string name="result_tts_unavailable">Thiết bị chưa có engine đọc văn bản</string>
+    <string name="result_tts_language_missing">Engine đọc văn bản chưa hỗ trợ ngôn ngữ này</string>
+    <string name="result_meeting_missing">Không tìm thấy cuộc họp</string>
+</resources>
