@@ -211,6 +211,19 @@
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
+                <!-- Real-time STT Debug View -->
+                <TextView
+                    android:id="@+id/tv_realtime_stt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg_card_settings_local"
+                    android:padding="8dp"
+                    android:textColor="@color/blue_primary"
+                    android:textSize="13sp"
+                    android:visibility="gone"
+                    tools:text="[Debug VAD STT]: Realtime transcribed text..." />
+
                 <!-- 5 Control Buttons in Row With Labels -->
                 <LinearLayout
                     android:layout_width="match_parent"

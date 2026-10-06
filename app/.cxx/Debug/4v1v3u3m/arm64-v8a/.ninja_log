@@ -1,8 +1,10 @@
 # ninja log v5
+2	3667	1791268962761815281	CMakeFiles/hf_tokenizer.dir/bpe.cpp.o	5dd72bab70b6c8f8
+1	2484	1791268409566381569	CMakeFiles/nn_sample.dir/nn_sample.cpp.o	66032fed1f364560
 5	2909	1790829153016594595	CMakeFiles/nn_sample.dir/NPUWareUtilsLib.cpp.o	17b441df4886e18
-1	4117	1790829154210601495	CMakeFiles/nn_sample.dir/simple_model.cpp.o	35d8a5a75f569e34
-0	5789	1790829155873611105	CMakeFiles/nn_sample.dir/nn_sample.cpp.o	66032fed1f364560
 3	19527	1790829169559690222	CMakeFiles/nn_sample.dir/utils.cpp.o	e0e1244a799190ce
-19528	19749	1790829169850691904	/home/kieuviet/AndroidStudioProjects/NeuroPilotJniDemo_V _NoModel_V1/NeuroPilotJniDemo_V _NoModel_V1/app/build/intermediates/cxx/Debug/4v1v3u3m/obj/arm64-v8a/libnn_sample.so	db8d7f4c8efb2248
-2	1491	1790913478262741613	CMakeFiles/nn_sample.dir/nn_sample.cpp.o	66032fed1f364560
-1491	1640	1790913478419736535	/home/kieuviet/AndroidStudioProjects/NeuroPilotJniDemo_V _NoModel_V1/NeuroPilotJniDemo_V _NoModel_V1/app/build/intermediates/cxx/Debug/4v1v3u3m/obj/arm64-v8a/libnn_sample.so	db8d7f4c8efb2248
+1	112	1791269123200781455	/home/kieuviet/AndroidStudioProjects/NeuroPilotJniDemo_V _NoModel_V1/NeuroPilotJniDemo_V _NoModel_V1/app/build/intermediates/cxx/Debug/4v1v3u3m/obj/arm64-v8a/libhf-tokenizer.so	aaea452c86aa4aa6
+112	244	1791269123322780572	/home/kieuviet/AndroidStudioProjects/NeuroPilotJniDemo_V _NoModel_V1/NeuroPilotJniDemo_V _NoModel_V1/app/build/intermediates/cxx/Debug/4v1v3u3m/obj/arm64-v8a/libnn_sample.so	b8d848dae743f9cc
+1	4117	1790829154210601495	CMakeFiles/nn_sample.dir/simple_model.cpp.o	35d8a5a75f569e34
+3	2226	1791276561879994558	CMakeFiles/nn_sample.dir/nn_sample.cpp.o	66032fed1f364560
+2229	2466	1791276562133966658	/home/kieuviet/AndroidStudioProjects/NeuroPilotJniDemo_V _NoModel_V1/NeuroPilotJniDemo_V _NoModel_V1/app/build/intermediates/cxx/Debug/4v1v3u3m/obj/arm64-v8a/libnn_sample.so	db8d7f4c8efb2248

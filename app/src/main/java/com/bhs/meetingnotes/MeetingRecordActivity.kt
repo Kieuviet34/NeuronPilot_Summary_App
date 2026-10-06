@@ -30,6 +30,9 @@ import com.bhs.meetingnotes.model.SegmentItem
 import com.bhs.meetingnotes.util.FormatUtils
 import com.bhs.meetingnotes.util.WaveformView
 import com.mediatek.neuropilot.jnidemo.R
+import com.mediatek.neuropilot.jnidemo.aibox.ai.WhisperServerClient
+import com.mediatek.neuropilot.jnidemo.aibox.ai.WhisperServerSTTEngine
+import android.util.Log
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -41,6 +44,11 @@ import java.io.File
  * cảnh báo thoát tránh mất dữ liệu, và điều hướng trạng thái chuẩn xác.
  */
 class MeetingRecordActivity : AppCompatActivity() {
+
+    private val TAG = "MeetingRecordActivity"
+    private val DEBUG_MODE = true
+    private var tvRealtimeStt: TextView? = null
+    private val transcriptBuilder = StringBuilder()
 
     private lateinit var audioRecorder: I2SAudioRecorder
     private lateinit var appSettings: AppSettings
@@ -133,6 +141,14 @@ class MeetingRecordActivity : AppCompatActivity() {
         tvRecordStatus = findViewById(R.id.tv_record_status)
         vRecordingIndicator = findViewById(R.id.v_recording_indicator)
         vWaveform = findViewById(R.id.v_waveform)
+        tvRealtimeStt = findViewById(R.id.tv_realtime_stt)
+
+        if (DEBUG_MODE) {
+            tvRealtimeStt?.visibility = View.VISIBLE
+            tvRealtimeStt?.text = "[Debug VAD STT]: (Đang chờ nhận dạng giọng nói...)"
+        } else {
+            tvRealtimeStt?.visibility = View.GONE
+        }
 
         llPauseCircle = findViewById(R.id.ll_pause_circle)
         ivPauseIcon = findViewById(R.id.iv_pause_icon)
@@ -387,6 +403,29 @@ class MeetingRecordActivity : AppCompatActivity() {
 
         audioRecorder.onAudioLevelListener = { _: Double, normalizedLevel: Int ->
             vWaveform?.updateAudioLevel(normalizedLevel)
+        }
+
+        if (DEBUG_MODE) {
+            val port = getSharedPreferences("meeting_notes_prefs", MODE_PRIVATE).getInt("whisper_server_port", 8080)
+            val sttEngine = WhisperServerSTTEngine(WhisperServerClient("http://127.0.0.1:$port"))
+
+            audioRecorder.onSpeechSegmentListener = { segment ->
+                lifecycleScope.launch(Dispatchers.IO) {
+                    try {
+                        val text = sttEngine.transcribe(segment, audioRecorder.sampleRate)
+                        if (text.isNotBlank()) {
+                            withContext(Dispatchers.Main) {
+                                if (transcriptBuilder.isNotEmpty()) transcriptBuilder.append(" ")
+                                transcriptBuilder.append(text.trim())
+                                tvRealtimeStt?.text = "[Debug VAD STT]:\n$transcriptBuilder"
+                                Log.d(TAG, "Debug VAD Transcribed: $text")
+                            }
+                        }
+                    } catch (e: Exception) {
+                        Log.e(TAG, "Debug VAD STT error", e)
+                    }
+                }
+            }
         }
     }
 

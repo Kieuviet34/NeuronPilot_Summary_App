@@ -15,8 +15,6 @@ class NeuroPilotLlmBridge {
             return false
         }
 
-        setupNpuPermissions()
-
         val candidate = selectModelConfig()
         if (candidate == null) {
             Log.w(TAG, "No complete NeuroPilot Qwen 2.5 file set found")
@@ -36,18 +34,6 @@ class NeuroPilotLlmBridge {
             Log.e(TAG, "initDefaultModel failed", t)
             modelHandle = 0L
             false
-        }
-    }
-
-    private fun setupNpuPermissions() {
-        try {
-            Runtime.getRuntime().exec(arrayOf(
-                "su", "-c",
-                "chmod 666 /dev/apusys /dev/apuext /dev/apusys_apummu /dev/dma_heap/*; setenforce 0; setprop vendor.debug.mtk_llm.loglevel 0"
-            )).waitFor()
-            Log.d(TAG, "NPU permissions configured via su")
-        } catch (t: Throwable) {
-            Log.w(TAG, "setupNpuPermissions note: ${t.message}")
         }
     }
 
@@ -73,7 +59,7 @@ class NeuroPilotLlmBridge {
         val handle = modelHandle
         if (handle == 0L) return LlmResult("", "")
 
-        val systemPrompt = "Bạn là trợ lý sửa lỗi văn bản tiếng Việt. Hãy sửa lỗi chính tả, ngữ pháp, thêm dấu câu đúng, sửa tên riêng và thuật ngữ kỹ thuật. Giữ nguyên nội dung và ý nghĩa, không thêm bớt thông tin. Trả về văn bản đã sửa."
+        val systemPrompt = "Sửa lỗi chính tả và dấu câu cho đoạn hội thoại sau. Chỉ trả về văn bản đã sửa, không giải thích."
         val formattedPrompt = buildString {
             append(QWEN_SYS_OPEN)
             append(systemPrompt)
@@ -117,7 +103,7 @@ class NeuroPilotLlmBridge {
         val handle = modelHandle
         if (handle == 0L) return LlmResult("", "")
 
-        val systemPrompt = "Bạn là trợ lý trích xuất hành động từ cuộc họp. Từ nội dung cuộc họp bên dưới, hãy liệt kê tất cả các hành động cần thực hiện sau cuộc họp. Định dạng kết quả thành JSON array chứa các object có key: 'id', 'task', 'assignee', 'deadline'. Chỉ trả về JSON array hợp lệ, không giải thích."
+        val systemPrompt = "Trích xuất danh sách các hành động (action items) cần làm sau cuộc họp. Định dạng kết quả thành JSON array chứa các object có key: 'task', 'assignee', 'deadline'."
         val formattedPrompt = buildString {
             append(QWEN_SYS_OPEN)
             append(systemPrompt)
@@ -191,7 +177,9 @@ class NeuroPilotLlmBridge {
     }
 
     private fun buildSummaryPrompt(transcriptText: String): String {
-        val systemPrompt = "Bạn là trợ lý tóm tắt cuộc họp. Từ nội dung cuộc họp bên dưới, hãy tóm tắt các điểm chính bao gồm: (1) Các nội dung đã thảo luận, (2) Các quyết định đã đưa ra, (3) Các vấn đề kỹ thuật được đề cập. Viết ngắn gọn, rõ ràng, có đánh số."
+        val systemPrompt = "Bạn là trợ lý tóm tắt cuộc họp. Dựa vào đoạn hội thoại " +
+                "được cung cấp, hãy tóm tắt lại nội dung chính bằng tiếng Việt, viết đúng " +
+                "5 câu. Không thêm lời dẫn, không đánh số, không dùng markdown hay ký hiệu đặc biệt."
 
         return buildString {
             append(QWEN_SYS_OPEN)
@@ -303,7 +291,6 @@ class NeuroPilotLlmBridge {
 
         private fun loadNativeLibraries(): Boolean {
             val libs = listOf(
-                "c++_shared",
                 "c++",
                 "base",
                 "dmabufheap",
