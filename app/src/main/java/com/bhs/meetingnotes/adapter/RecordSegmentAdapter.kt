@@ -62,7 +62,8 @@ class RecordSegmentAdapter(
             tvFilename.text = item.fileName
 
             val pauseText = if (item.pauseCount > 0) " • Pause ${item.pauseCount} lần" else ""
-            tvDetails.text = "${item.durationFormatted} • ${item.sizeFormatted}$pauseText"
+            val bookmarkText = if (item.bookmarkCount > 0) " • 🔖 ${item.bookmarkCount} mốc" else ""
+            tvDetails.text = "${item.durationFormatted} • ${item.sizeFormatted}$pauseText$bookmarkText"
 
             if (item.status == "RECORDING") {
                 rootLayout.setBackgroundResource(R.drawable.bg_card_segment_rec)

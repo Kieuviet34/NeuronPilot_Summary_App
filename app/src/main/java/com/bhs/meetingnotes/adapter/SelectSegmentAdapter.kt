@@ -56,7 +56,8 @@ class SelectSegmentAdapter(
             tvFilename.text = item.fileName
 
             val pauseText = if (item.pauseCount > 0) " • Pause ${item.pauseCount} lần" else ""
-            tvDetails.text = "${item.durationFormatted} • ${item.sizeFormatted}$pauseText"
+            val bookmarkText = if (item.bookmarkCount > 0) " • 🔖 ${item.bookmarkCount} mốc" else ""
+            tvDetails.text = "${item.durationFormatted} • ${item.sizeFormatted}$pauseText$bookmarkText"
 
             // Set checkbox without triggering old listener
             cbSelect.setOnCheckedChangeListener(null)

@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="32dp"
-            android:text="Meeting Notes"
+            android:text="BHS"
             android:textColor="@color/text_primary"
             android:textSize="26sp"
             android:textStyle="bold"
@@ -35,31 +35,35 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="4dp"
+            android:visibility="gone"
             android:text="G720 AI Box"
             android:textColor="@color/text_secondary"
             android:textSize="15sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_app_title" />
 
-        <!-- Filters -->
+        <!-- Filters: Thư mục phân cấp và Thùng rác -->
         <LinearLayout
             android:id="@+id/ll_sidebar_filters"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="20dp"
             android:orientation="vertical"
-            android:paddingHorizontal="16dp"
+            android:paddingHorizontal="14dp"
             app:layout_constraintTop_toBottomOf="@id/tv_app_subtitle">
 
-            <!-- Tat ca -->
+            <!-- 1. Cấp gốc: Tất cả cuộc họp (Folder chính) -->
             <LinearLayout
                 android:id="@+id/nav_all"
                 android:layout_width="match_parent"
-                android:layout_height="58dp"
+                android:layout_height="52dp"
                 android:background="@drawable/bg_circle_blue_ring"
+                android:contentDescription="@string/home_filter_all"
+                android:clickable="true"
+                android:focusable="true"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:paddingHorizontal="18dp">
+                android:paddingHorizontal="14dp">
 
                 <ImageView
                     android:layout_width="26dp"
@@ -71,10 +75,10 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_marginStart="16dp"
+                    android:layout_marginStart="14dp"
                     android:text="Tất cả"
                     android:textColor="@color/blue_primary"
-                    android:textSize="19sp"
+                    android:textSize="17sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -82,101 +86,113 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_circle_blue"
-                    android:paddingHorizontal="12dp"
-                    android:paddingVertical="4dp"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="3dp"
                     android:text="0"
                     android:textColor="@color/bg_card"
-                    android:textSize="14sp"
+                    android:textSize="13sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
-            <!-- Tieng Viet -->
+            <!-- 2. Nhánh phân cấp thư mục ngôn ngữ (Sub-folders thụt lề 20dp, icon cờ, không chữ) -->
             <LinearLayout
-                android:id="@+id/nav_vi"
                 android:layout_width="match_parent"
-                android:layout_height="58dp"
-                android:layout_marginTop="10dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingHorizontal="18dp">
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="6dp"
+                android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="26dp"
-                    android:layout_height="26dp"
-                    android:src="@drawable/ic_folder"
-                    app:tint="@color/text_secondary" />
+                <!-- Phân cấp: Tiếng Việt (Cờ VN + Badge số lượng, không text) -->
+                <LinearLayout
+                    android:id="@+id/nav_vi"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="4dp"
+                    android:contentDescription="@string/home_filter_vi"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="12dp">
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginStart="16dp"
-                    android:text="Tiếng Việt"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="19sp"
-                    android:textStyle="bold" />
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_flag_vn" />
 
-                <TextView
-                    android:id="@+id/tv_count_vi"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_circle_gray"
-                    android:paddingHorizontal="12dp"
-                    android:paddingVertical="4dp"
-                    android:text="0"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/tv_count_vi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_circle_gray"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="3dp"
+                        android:text="0"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!-- Phân cấp: English (Cờ Anh + Badge số lượng, không text) -->
+                <LinearLayout
+                    android:id="@+id/nav_en"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="4dp"
+                    android:contentDescription="@string/home_filter_en"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="12dp">
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_flag_en" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/tv_count_en"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_circle_gray"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="3dp"
+                        android:text="0"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
             </LinearLayout>
 
-            <!-- English -->
-            <LinearLayout
-                android:id="@+id/nav_en"
+            <!-- Đường phân cách nhẹ giữa thư mục và thùng rác -->
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="58dp"
-                android:layout_marginTop="10dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingHorizontal="18dp">
+                android:layout_height="1dp"
+                android:layout_marginVertical="10dp"
+                android:background="@color/border_light" />
 
-                <ImageView
-                    android:layout_width="26dp"
-                    android:layout_height="26dp"
-                    android:src="@drawable/ic_folder"
-                    app:tint="@color/text_secondary" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginStart="16dp"
-                    android:text="English"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="19sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/tv_count_en"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_circle_gray"
-                    android:paddingHorizontal="12dp"
-                    android:paddingVertical="4dp"
-                    android:text="0"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <!-- Thung rac -->
+            <!-- 3. Thùng rác ở bên ngoài phân cấp (Chỉ icon Thùng rác + Badge số lượng, không text) -->
             <LinearLayout
                 android:id="@+id/nav_trash"
                 android:layout_width="match_parent"
-                android:layout_height="58dp"
-                android:layout_marginTop="10dp"
+                android:layout_height="52dp"
+                android:contentDescription="@string/home_filter_trash"
+                android:clickable="true"
+                android:focusable="true"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:paddingHorizontal="18dp">
+                android:paddingHorizontal="14dp">
 
                 <ImageView
                     android:id="@+id/iv_nav_trash"
@@ -185,27 +201,21 @@
                     android:src="@drawable/ic_delete"
                     app:tint="@color/text_secondary" />
 
-                <TextView
-                    android:id="@+id/tv_nav_trash_label"
+                <View
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginStart="16dp"
-                    android:text="Thùng rác"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="19sp"
-                    android:textStyle="bold" />
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
 
                 <TextView
                     android:id="@+id/tv_count_trash"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_circle_gray"
-                    android:paddingHorizontal="12dp"
-                    android:paddingVertical="4dp"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="3dp"
                     android:text="0"
                     android:textColor="@color/text_secondary"
-                    android:textSize="14sp"
+                    android:textSize="13sp"
                     android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>

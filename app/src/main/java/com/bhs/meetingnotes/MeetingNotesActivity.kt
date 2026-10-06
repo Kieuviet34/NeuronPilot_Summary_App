@@ -331,16 +331,15 @@ class MeetingNotesActivity : AppCompatActivity() {
         if (filter == "TRASH") {
             meetingAdapter.isTrashMode = true
             tvHeaderTitle?.text = "Thùng rác"
-            tvHeaderSubtitle?.text = "Các cuộc họp đã xóa tạm thời. Bạn có thể khôi phục hoặc xóa vĩnh viễn."
         } else {
             meetingAdapter.isTrashMode = false
             tvHeaderTitle?.text = when (filter) {
-                "vi" -> "Cuộc họp Tiếng Việt"
-                "en" -> "English Meetings"
+                "vi" -> "Tiếng Việt"
+                "en" -> "English"
                 else -> "Tất cả cuộc họp"
             }
-            tvHeaderSubtitle?.text = "Danh sách bản ghi âm và tóm tắt thông minh"
         }
+        tvHeaderSubtitle?.visibility = View.GONE
 
         applyFilters()
     }

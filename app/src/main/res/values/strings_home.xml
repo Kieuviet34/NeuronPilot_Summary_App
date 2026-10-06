@@ -12,6 +12,8 @@
     <string name="home_search_hint">Tìm kiếm cuộc họp…</string>
     <string name="home_empty">Chưa có cuộc họp nào phù hợp</string>
     <string name="home_settings_desc">Cài đặt</string>
+    <string name="home_filter_trash">Thùng rác</string>
+    <string name="home_clear_search">Xóa tìm kiếm</string>
 
     <string name="badge_completed">Hoàn tất</string>
     <string name="badge_recording">● Đang ghi</string>
