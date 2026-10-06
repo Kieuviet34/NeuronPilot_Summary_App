@@ -61,6 +61,8 @@ class GlossaryRepository(private val db: MeetingDatabase) {
         return result
     }
 
+    suspend fun clearLog(meetingId: Long) = editLogDao.clearForMeeting(meetingId)
+
     suspend fun termCount() = glossaryDao.termCount()
     suspend fun aliasCount() = glossaryDao.aliasCount()
 

@@ -178,8 +178,9 @@ class MeetingResultActivity : AppCompatActivity() {
 
             for (token in tokens) {
                 val start = ssb.length
-                ssb.append(token.text).append(" ")
-                val end = ssb.length - 1
+                ssb.append(token.text)
+                val end = ssb.length
+                ssb.append(token.trailing)
                 if (token.changed) {
                     ssb.setSpan(android.text.style.BackgroundColorSpan(bgCol), start, end, android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
                     ssb.setSpan(android.text.style.ForegroundColorSpan(fgCol), start, end, android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)

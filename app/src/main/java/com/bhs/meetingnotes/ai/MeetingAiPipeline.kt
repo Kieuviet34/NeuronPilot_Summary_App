@@ -42,19 +42,28 @@ class MeetingAiPipeline(private val context: Context, private val whisperPort: I
         }
 
         try {
-            // STEP 1: ASR (whisper-server nếu có) -> raw transcript, luôn được lưu (C10)
+            // STEP 1: ASR luôn chạy lại trên các đoạn đang chọn (không dùng lại transcript cũ), kết quả luôn được lưu (C10)
             val segments = db.segmentDao().getSelectedSegmentsForMeeting(meetingId)
-            var rawTranscript = meeting.rawTranscript
-            if (rawTranscript.isBlank() && segments.isNotEmpty()) {
-                rawTranscript = transcribeSegments(segments, onProgress) ?: placeholderTranscript(segments)
-                meeting = meeting.copy(rawTranscript = rawTranscript, wordCount = countWords(rawTranscript))
-                db.meetingDao().updateMeeting(meeting)
-            }
+            val asr = resolveRawTranscript(meeting, segments, allowSample = false, onProgress)
+            val rawTranscript = asr.text
+            meeting = meeting.copy(
+                rawTranscript = rawTranscript,
+                correctedTranscript = "",
+                wordCount = countWords(rawTranscript),
+                step1Progress = 100
+            )
+            db.meetingDao().updateMeeting(meeting)
+            Log.i(TAG, "ASR done: meeting=$meetingId segments=${segments.size} realSpeech=${asr.hasRealSpeech} chars=${rawTranscript.length}")
             onProgress(1, 100, rawTranscript)
 
-            // STEP 2: luật + alias (không LLM)
+            // STEP 2: luật + alias (không LLM); không sửa thông báo hệ thống
             onProgress(2, 0, "")
-            val corrected = glossary.correctAndLog(meetingId, rawTranscript)
+            val corrected = if (asr.hasRealSpeech) {
+                glossary.correctAndLog(meetingId, rawTranscript)
+            } else {
+                glossary.clearLog(meetingId)
+                CorrectionResult(rawTranscript, emptyList())
+            }
             meeting = meeting.copy(
                 correctedTranscript = corrected.text,
                 wordCount = countWords(corrected.text),
@@ -62,6 +71,14 @@ class MeetingAiPipeline(private val context: Context, private val whisperPort: I
             )
             db.meetingDao().updateMeeting(meeting)
             onProgress(2, 100, corrected.text + ruleNote(corrected))
+
+            if (!asr.hasRealSpeech) {
+                meeting = meeting.copy(summary = NO_SPEECH_SUMMARY, actionItemsJson = "[]", step3Progress = 100, step4Progress = 100, status = "COMPLETED")
+                db.meetingDao().updateMeeting(meeting)
+                onProgress(3, 100, NO_SPEECH_SUMMARY)
+                onProgress(4, 100, "Không có nội dung để trích xuất hành động")
+                return@withContext meeting
+            }
 
             delay(500)
 
@@ -113,20 +130,14 @@ class MeetingAiPipeline(private val context: Context, private val whisperPort: I
         // STEP 1
         val segments = db.segmentDao().getSelectedSegmentsForMeeting(meetingId)
         onProgress(1, 10, "Đang nhận dạng giọng nói...")
-        val asrText = if (meeting.rawTranscript.isBlank()) transcribeSegments(segments, onProgress) else meeting.rawTranscript
-        
-        // Kiểm tra xem có giọng nói hợp lệ hay toàn bộ là khoảng lặng/hallucination
-        val hasRealSpeech = !asrText.isNullOrBlank() && asrText.any { it.isLetterOrDigit() }
-        val isSampleData = !hasRealSpeech && segments.isEmpty()
-        
-        val rawTranscript = when {
-            hasRealSpeech -> asrText!!
-            segments.isNotEmpty() -> "[Không phát hiện giọng nói trong các đoạn ghi âm đã chọn. Toàn bộ phân đoạn ở trạng thái im lặng hoặc âm lượng quá nhỏ]."
-            else -> SAMPLE_RAW_TRANSCRIPT
-        }
-        
-        meeting = meeting.copy(rawTranscript = rawTranscript, wordCount = countWords(rawTranscript), step1Progress = 100)
+        val asr = resolveRawTranscript(meeting, segments, allowSample = true, onProgress)
+        val hasRealSpeech = asr.hasRealSpeech
+        val isSampleData = asr.isSample
+        val rawTranscript = asr.text
+
+        meeting = meeting.copy(rawTranscript = rawTranscript, correctedTranscript = "", wordCount = countWords(rawTranscript), step1Progress = 100)
         db.meetingDao().updateMeeting(meeting)
+        Log.i(TAG, "ASR done (Plan B): meeting=$meetingId segments=${segments.size} realSpeech=$hasRealSpeech chars=${rawTranscript.length}")
         val sampleTag = if (isSampleData) "\n\n[Plan B: không có whisper-server, dùng văn bản mẫu]" else ""
         onProgress(1, 100, rawTranscript + sampleTag)
         delay(400)
@@ -136,6 +147,7 @@ class MeetingAiPipeline(private val context: Context, private val whisperPort: I
         val corrected = if (hasRealSpeech) {
             glossary.correctAndLog(meetingId, rawTranscript)
         } else {
+            glossary.clearLog(meetingId)
             CorrectionResult(rawTranscript, emptyList())
         }
         meeting = meeting.copy(
@@ -149,7 +161,7 @@ class MeetingAiPipeline(private val context: Context, private val whisperPort: I
 
         // STEP 3 + 4 (không có LLM)
         val summary = when {
-            !hasRealSpeech && segments.isNotEmpty() -> "Không thể tạo tóm tắt do cuộc họp không có nội dung giọng nói nào được ghi nhận."
+            !hasRealSpeech && segments.isNotEmpty() -> NO_SPEECH_SUMMARY
             isSampleData -> SAMPLE_SUMMARY
             else -> NO_LLM_SUMMARY
         }
@@ -169,6 +181,28 @@ class MeetingAiPipeline(private val context: Context, private val whisperPort: I
         onProgress(4, 100, if (isSampleData) "Dữ liệu mẫu Plan B: 3 hành động" else "Đã hoàn tất xử lý cuộc họp")
 
         return meeting
+    }
+
+    private class AsrOutcome(val text: String, val hasRealSpeech: Boolean, val isSample: Boolean)
+
+    /**
+     * Luôn nhận dạng lại từ các đoạn đang được chọn để transcript khớp lần chạy hiện tại.
+     * Chỉ dùng `rawTranscript` đã lưu khi không có đoạn âm thanh nào (vd nhập văn bản trực tiếp).
+     * Thông báo "không có giọng nói"/văn bản mẫu KHÔNG bị coi là lời nói thật.
+     */
+    private fun resolveRawTranscript(
+        meeting: MeetingEntity,
+        segments: List<SegmentEntity>,
+        allowSample: Boolean,
+        onProgress: (step: Int, progress: Int, currentText: String) -> Unit
+    ): AsrOutcome {
+        val asrText = if (segments.isNotEmpty()) transcribeSegments(segments, onProgress) else meeting.rawTranscript.ifBlank { null }
+        if (!asrText.isNullOrBlank() && asrText.any { it.isLetterOrDigit() }) return AsrOutcome(asrText, true, false)
+        return when {
+            segments.isNotEmpty() -> AsrOutcome(NO_SPEECH_TRANSCRIPT, false, false)
+            allowSample -> AsrOutcome(SAMPLE_RAW_TRANSCRIPT, false, true)
+            else -> AsrOutcome(NO_SPEECH_TRANSCRIPT, false, false)
+        }
     }
 
     /**
@@ -225,11 +259,6 @@ class MeetingAiPipeline(private val context: Context, private val whisperPort: I
         return parts.joinToString(SEGMENT_SEPARATOR).ifBlank { null }
     }
 
-    private fun placeholderTranscript(segments: List<SegmentEntity>): String =
-        segments.joinToString(SEGMENT_SEPARATOR) {
-            "...Nội dung ghi âm đoạn ${it.segmentIndex} (${it.fileName}) qua I2S MIC..."
-        }
-
     private fun ruleNote(result: CorrectionResult): String =
         "\n\n[Luật xác định: ${result.edits.size} chỉnh sửa thuật ngữ, có thể xem/hoàn tác ở tab Transcript]"
 
@@ -241,6 +270,12 @@ class MeetingAiPipeline(private val context: Context, private val whisperPort: I
     }
 
     private companion object {
+        const val NO_SPEECH_TRANSCRIPT =
+            "[Không phát hiện giọng nói trong các đoạn ghi âm đã chọn. Toàn bộ phân đoạn ở trạng thái im lặng hoặc âm lượng quá nhỏ]."
+
+        const val NO_SPEECH_SUMMARY =
+            "Không thể tạo tóm tắt do cuộc họp không có nội dung giọng nói nào được ghi nhận."
+
         const val SEGMENT_SEPARATOR = "\n---\n"
 
         const val NO_LLM_SUMMARY =

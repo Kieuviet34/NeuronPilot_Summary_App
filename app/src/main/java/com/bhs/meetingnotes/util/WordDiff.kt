@@ -10,9 +10,11 @@ object WordDiff {
 
     private const val MAX_CELLS = 1_000_000
 
+    /** `trailing` là khoảng trắng gốc sau từ (giữ xuống dòng/dấu phân đoạn khi hiển thị). */
     data class Token(
         val text: String,
-        val changed: Boolean
+        val changed: Boolean,
+        val trailing: String = " "
     )
 
     data class Result(
@@ -21,8 +23,10 @@ object WordDiff {
     )
 
     fun diff(raw: String?, clean: String?): Result {
-        val a = split(raw)
-        val b = split(clean)
+        val aSplit = split(raw)
+        val bSplit = split(clean)
+        val a = aSplit.map { it.first }
+        val b = bSplit.map { it.first }
         val aMatched = BooleanArray(a.size)
         val bMatched = BooleanArray(b.size)
 
@@ -32,7 +36,7 @@ object WordDiff {
         } else {
             markLcs(a, b, aMatched, bMatched)
         }
-        return Result(toTokens(a, aMatched), toTokens(b, bMatched))
+        return Result(toTokens(aSplit, aMatched), toTokens(bSplit, bMatched))
     }
 
     private fun markLcs(
@@ -73,15 +77,21 @@ object WordDiff {
         }
     }
 
-    private fun toTokens(words: List<String>, matched: BooleanArray): List<Token> {
-        return words.mapIndexed { index, word ->
-            Token(word, !matched[index])
+    private fun toTokens(words: List<Pair<String, String>>, matched: BooleanArray): List<Token> {
+        return words.mapIndexed { index, (word, trailing) ->
+            Token(word, !matched[index], trailing)
         }
     }
 
-    private fun split(text: String?): List<String> {
+    /** Tách từ, giữ khoảng trắng sau mỗi từ (chứa xuống dòng thì giữ nguyên, ngược lại 1 dấu cách). */
+    private fun split(text: String?): List<Pair<String, String>> {
         if (text.isNullOrBlank()) return emptyList()
-        return text.trim().split("\\s+".toRegex()).filter { it.isNotEmpty() }
+        val matches = Regex("\\S+").findAll(text).toList()
+        return matches.mapIndexed { i, m ->
+            val gapEnd = if (i + 1 < matches.size) matches[i + 1].range.first else text.length
+            val gap = text.substring(m.range.last + 1, gapEnd)
+            m.value to (if (gap.contains('\n')) gap else " ")
+        }
     }
 
     private fun normalize(word: String): String {
