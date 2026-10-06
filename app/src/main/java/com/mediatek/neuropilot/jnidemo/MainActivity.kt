@@ -1158,7 +1158,7 @@ class MainActivity : AppCompatActivity() {
 
         init {
             Log.d(LOG_TAG, "StaticBlock: Loading native library dependencies...")
-            val libs = arrayOf("c++", "base", "dmabufheap", "cutils", "apu_mdw", "apu_mdw_batch",
+            val libs = arrayOf("c++_shared", "c++", "base", "dmabufheap", "cutils", "apu_mdw", "apu_mdw_batch",
                              "neuron_adapter", "neuron_runtime", "common", "mtk_llm", "nn_sample")
             for (lib in libs) {
                 try {

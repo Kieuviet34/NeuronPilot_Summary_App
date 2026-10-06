@@ -66,7 +66,6 @@ class MeetingResultActivity : AppCompatActivity() {
         setContentView(R.layout.activity_meeting_result)
 
         db = MeetingDatabase.getInstance(this)
-        ttsManager = TtsManager(this)
 
         initViews()
 
@@ -292,6 +291,5 @@ class MeetingResultActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        ttsManager?.shutdown()
     }
 }

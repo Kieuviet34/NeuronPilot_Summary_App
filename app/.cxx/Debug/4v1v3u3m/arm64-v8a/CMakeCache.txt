@@ -233,8 +233,8 @@ CMAKE_SYSTEM_NAME:UNINITIALIZED=Android
 //No help, variable specified on the command line.
 CMAKE_SYSTEM_VERSION:UNINITIALIZED=28
 
-//The CMake toolchain file
-CMAKE_TOOLCHAIN_FILE:FILEPATH=/home/kieuviet/Android/Sdk/ndk/25.1.8937393/build/cmake/android.toolchain.cmake
+//No help, variable specified on the command line.
+CMAKE_TOOLCHAIN_FILE:UNINITIALIZED=/home/kieuviet/Android/Sdk/ndk/25.1.8937393/build/cmake/android.toolchain.cmake
 
 //If this value is on, makefiles will be generated without the
 // .SILENT directive, and all commands will be echoed to the console
@@ -250,6 +250,9 @@ Project_IS_TOP_LEVEL:STATIC=ON
 
 //Value Computed by CMake
 Project_SOURCE_DIR:STATIC=/home/kieuviet/AndroidStudioProjects/NeuroPilotJniDemo_V _NoModel_V1/NeuroPilotJniDemo_V _NoModel_V1/app/src/main/cpp
+
+//Dependencies for the target
+hf_tokenizer_LIB_DEPENDS:STATIC=general;re2;general;log;general;-Wl,--no-as-needed;general;-lc++_shared;general;-Wl,--as-needed;
 
 //Dependencies for the target
 nn_sample_LIB_DEPENDS:STATIC=general;android;general;log;general;mtk_llm;general;mtk_common;general;mtk_tokenizer;general;yaml-cpp;general;sentencepiece;general;hf_tokenizer;general;re2;general;neuron_runtime;general;neuron_adapter;
