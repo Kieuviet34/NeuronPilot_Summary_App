@@ -269,12 +269,12 @@ class MeetingRecordActivity : AppCompatActivity() {
     private fun showStopMeetingConfirmationDialog() {
         val totalSegs = segmentsList.size + if (isRecordingSegment) 1 else 0
         AlertDialog.Builder(this)
-            .setTitle("Dừng hẳn cuộc họp?")
-            .setMessage("Bạn có chắc chắn muốn dừng hẳn cuộc họp này không?\n\nToàn bộ dữ liệu ghi âm ($totalSegs đoạn) sẽ được lưu lại an toàn và chuyển sang bước chọn đoạn để phân tích AI.")
-            .setPositiveButton("Xác nhận dừng & Xử lý AI") { _, _ ->
+            .setTitle("Dừng cuộc họp?")
+            .setMessage("Lưu toàn bộ $totalSegs đoạn ghi âm và chuyển sang chọn đoạn phân tích AI.")
+            .setPositiveButton("Dừng & Xử lý AI") { _, _ ->
                 completeRecordingAndProceed()
             }
-            .setNegativeButton("Hủy (Tiếp tục ghi)", null)
+            .setNegativeButton("Tiếp tục ghi", null)
             .show()
     }
 
@@ -293,28 +293,28 @@ class MeetingRecordActivity : AppCompatActivity() {
     private fun handleUserExitRequest() {
         if (isRecordingSegment || isPausedSegment) {
             AlertDialog.Builder(this)
-                .setTitle("Đang trong phiên ghi âm")
-                .setMessage("Cuộc họp đang ghi âm. Bạn muốn tạm dừng ghi âm và quay lại danh sách cuộc họp không?\n\n(Đoạn âm thanh hiện tại sẽ được lưu an toàn vào máy).")
-                .setPositiveButton("Tạm dừng & Quay lại") { _, _ ->
+                .setTitle("Rời phiên ghi âm?")
+                .setMessage("Đoạn hiện tại sẽ được lưu an toàn trước khi thoát.")
+                .setPositiveButton("Lưu & Quay lại") { _, _ ->
                     stopCurrentSegment()
                     AudioRecordingService.stopService(this)
                     finish()
                 }
-                .setNeutralButton("Dừng hẳn & Xử lý AI") { _, _ ->
+                .setNeutralButton("Dừng & Xử lý AI") { _, _ ->
                     completeRecordingAndProceed()
                 }
                 .setNegativeButton("Tiếp tục ghi", null)
                 .show()
         } else if (segmentsList.isNotEmpty()) {
             AlertDialog.Builder(this)
-                .setTitle("Rời khỏi phiên ghi âm")
-                .setMessage("Cuộc họp có ${segmentsList.size} đoạn đã lưu. Bạn muốn hoàn tất để xử lý AI hay quay lại danh sách?")
-                .setPositiveButton("Hoàn tất & Xử lý AI") { _, _ ->
+                .setTitle("Rời phiên ghi âm?")
+                .setMessage("Đã lưu ${segmentsList.size} đoạn. Bạn muốn xử lý AI hay quay lại?")
+                .setPositiveButton("Xử lý AI") { _, _ ->
                     completeRecordingAndProceed()
                 }
-                .setNegativeButton("Quay lại danh sách") { _, _ ->
+                .setNegativeButton("Quay lại", { _, _ ->
                     finish()
-                }
+                })
                 .setNeutralButton("Ở lại", null)
                 .show()
         } else {
