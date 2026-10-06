@@ -303,6 +303,7 @@ class NeuroPilotLlmBridge {
 
         private fun loadNativeLibraries(): Boolean {
             val libs = listOf(
+                "c++_shared",
                 "c++",
                 "base",
                 "dmabufheap",

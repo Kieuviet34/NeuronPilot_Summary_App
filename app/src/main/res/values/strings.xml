@@ -5,6 +5,4 @@
     <string name="input1">Input1: </string>
     <string name="input2">Input2: </string>
     <string name="none">None</string>
-    <string name="home_filter_trash">Thùng rác</string>
-    <string name="home_clear_search">Xóa tìm kiếm</string>
 </resources>
