@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="seg_title">Chọn đoạn ghi âm để xử lý</string>
+    <string name="seg_subtitle">%1$s • %2$d đoạn • %3$s</string>
+    <string name="seg_list_header">Tất cả các đoạn (%1$d)</string>
+    <string name="seg_toggle_all">Chọn tất cả / Bỏ chọn</string>
+    <string name="seg_process_button">Xử lý AI (%1$d đoạn)</string>
+    <string name="seg_process_none">Xử lý AI</string>
+    <string name="seg_empty">Cuộc họp này chưa có đoạn ghi âm nào</string>
+    <string name="seg_play_desc">Nghe lại đoạn này</string>
+    <string name="seg_play_simulated">Phát thử %1$s (giả lập ở giai đoạn 1)</string>
+    <string name="seg_note_pause">Pause %1$d lần</string>
+    <string name="seg_note_skipped">%1$s - Bỏ chọn</string>
+    <string name="seg_skipped_default">Bỏ chọn</string>
+
+    <string name="seg_panel_title">Thông tin xử lý</string>
+    <string name="seg_box_selected">ĐOẠN ĐÃ CHỌN</string>
+    <string name="seg_row_count">Số đoạn</string>
+    <string name="seg_row_duration">Tổng thời lượng</string>
+    <string name="seg_row_size">Dung lượng</string>
+    <string name="seg_row_skipped">Đã bỏ qua</string>
+    <string name="seg_count_value">%1$d / %2$d đoạn</string>
+    <string name="seg_skipped_value">%1$d đoạn (%2$s)</string>
+    <string name="seg_skipped_none">Không có</string>
+
+    <string name="seg_box_estimate">ƯỚC TÍNH XỬ LÝ</string>
+    <string name="seg_est_asr">Bước 1: ASR (%1$s)</string>
+    <string name="seg_est_fix">Bước 2: Sửa lỗi (Qwen2.5)</string>
+    <string name="seg_est_summary">Bước 3+4: Tóm tắt + Actions</string>
+    <string name="seg_est_total">Tổng ước tính</string>
+    <string name="seg_est_minutes">~%1$d phút</string>
+    <string name="seg_asr_vi">PhoWhisper</string>
+    <string name="seg_asr_en">Whisper</string>
+    <string name="seg_tip">Bỏ chọn những đoạn không liên quan (giải lao, nói chuyện riêng) để giảm thời gian xử lý và tăng chất lượng tóm tắt.</string>
+</resources>

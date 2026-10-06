@@ -15,6 +15,8 @@ class NeuroPilotLlmBridge {
             return false
         }
 
+        setupNpuPermissions()
+
         val candidate = selectModelConfig()
         if (candidate == null) {
             Log.w(TAG, "No complete NeuroPilot Qwen 2.5 file set found")
@@ -34,6 +36,18 @@ class NeuroPilotLlmBridge {
             Log.e(TAG, "initDefaultModel failed", t)
             modelHandle = 0L
             false
+        }
+    }
+
+    private fun setupNpuPermissions() {
+        try {
+            Runtime.getRuntime().exec(arrayOf(
+                "su", "-c",
+                "chmod 666 /dev/apusys /dev/apuext /dev/apusys_apummu /dev/dma_heap/*; setenforce 0; setprop vendor.debug.mtk_llm.loglevel 0"
+            )).waitFor()
+            Log.d(TAG, "NPU permissions configured via su")
+        } catch (t: Throwable) {
+            Log.w(TAG, "setupNpuPermissions note: ${t.message}")
         }
     }
 
@@ -103,7 +117,7 @@ class NeuroPilotLlmBridge {
         val handle = modelHandle
         if (handle == 0L) return LlmResult("", "")
 
-        val systemPrompt = "Bạn là trợ lý trích xuất hành động từ cuộc họp. Từ nội dung cuộc họp bên dưới, hãy liệt kê tất cả các hành động cần thực hiện sau cuộc họp. Mỗi hành động gồm: (1) Mô tả việc cần làm, (2) Người phụ trách (nếu được đề cập), (3) Deadline (nếu có). Trả về dạng danh sách đánh số."
+        val systemPrompt = "Bạn là trợ lý trích xuất hành động từ cuộc họp. Từ nội dung cuộc họp bên dưới, hãy liệt kê tất cả các hành động cần thực hiện sau cuộc họp. Định dạng kết quả thành JSON array chứa các object có key: 'id', 'task', 'assignee', 'deadline'. Chỉ trả về JSON array hợp lệ, không giải thích."
         val formattedPrompt = buildString {
             append(QWEN_SYS_OPEN)
             append(systemPrompt)

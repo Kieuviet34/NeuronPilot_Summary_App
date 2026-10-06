@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings_title">Cài đặt</string>
+
+    <string name="settings_menu_asr">Ngôn ngữ &amp; ASR</string>
+    <string name="settings_menu_llm">Model LLM</string>
+    <string name="settings_menu_audio">Âm thanh</string>
+    <string name="settings_menu_storage">Lưu trữ</string>
+    <string name="settings_menu_export">Xuất báo cáo</string>
+
+    <string name="settings_asr_title">Ngôn ngữ &amp; Model ASR</string>
+    <string name="settings_lang_vi_name">Tiếng Việt</string>
+    <string name="settings_lang_vi_sub">PhoWhisper (custom trained)</string>
+    <string name="settings_lang_en_name">English</string>
+    <string name="settings_lang_en_sub">Whisper (AI Hub MediaTek)</string>
+    <string name="settings_selected_desc">Đã chọn</string>
+
+    <string name="settings_row_model_in_use">Model đang dùng</string>
+    <string name="settings_row_size">Kích thước</string>
+    <string name="settings_row_status">Trạng thái</string>
+    <string name="settings_row_source">Nguồn</string>
+    <string name="settings_asr_vi_model">PhoWhisper</string>
+    <string name="settings_asr_vi_size">245 MB</string>
+    <string name="settings_asr_vi_source">Huấn luyện riêng, tích hợp sẵn</string>
+    <string name="settings_asr_en_model">Whisper</string>
+    <string name="settings_asr_en_size">Theo phiên bản AI Hub</string>
+    <string name="settings_asr_en_source">AI Hub MediaTek</string>
+    <string name="settings_status_installed">Đã cài</string>
+    <string name="settings_status_missing">Chưa có file model</string>
+
+    <string name="settings_llm_title">Model LLM</string>
+    <string name="settings_llm_model_name">Qwen2.5 3B (Q4_K_M)</string>
+    <string name="settings_llm_size">~1,8 GB</string>
+    <string name="settings_llm_threads">CPU Threads</string>
+    <string name="settings_llm_temperature">Temperature</string>
+    <string name="settings_glossary_title">Từ điển thuật ngữ</string>
+    <string name="settings_glossary_helper">Tên riêng và thuật ngữ dự án sẽ được giữ nguyên khi sửa lỗi văn bản.</string>
+    <string name="settings_glossary_hint">Thêm tên hoặc thuật ngữ</string>
+    <string name="settings_glossary_add">Thêm</string>
+    <string name="settings_glossary_remove">Xoá thuật ngữ</string>
+    <string name="settings_glossary_empty">Chưa có thuật ngữ nào</string>
+
+    <string name="settings_audio_title">Âm thanh (I2S MIC)</string>
+    <string name="settings_audio_sample_rate">Sample Rate</string>
+    <string name="settings_audio_sample_rate_value">16.000 Hz</string>
+    <string name="settings_audio_bit_depth">Bit Depth</string>
+    <string name="settings_audio_bit_depth_value">16-bit</string>
+    <string name="settings_audio_channels">Channels</string>
+    <string name="settings_audio_channels_value">Mono</string>
+    <string name="settings_audio_format">Format</string>
+    <string name="settings_audio_format_value">WAV (PCM)</string>
+    <string name="settings_audio_silence">Tự động cắt im lặng</string>
+    <string name="settings_audio_silence_hint">Bỏ các đoạn không có giọng nói trước khi nhận dạng</string>
+
+    <string name="settings_storage_title">Lưu trữ</string>
+    <string name="settings_storage_models">Models (%1$s)</string>
+    <string name="settings_storage_audio">Audio (%1$s)</string>
+    <string name="settings_storage_text">Text (%1$s)</string>
+    <string name="settings_storage_free">Trống (%1$s)</string>
+
+    <string name="settings_export_title">Xuất báo cáo</string>
+    <string name="settings_export_default">Định dạng mặc định</string>
+    <string name="settings_export_pdf">PDF</string>
+    <string name="settings_export_txt">TXT</string>
+    <string name="settings_export_tts">Tự động đọc tóm tắt qua loa (TTS)</string>
+
+    <string name="settings_storage_path">Thư mục lưu: %1$s</string>
+    <string name="settings_storage_grant_hint">Chưa được cấp quyền truy cập bộ nhớ nên đang dùng thư mục riêng của app (sẽ mất khi gỡ app).</string>
+    <string name="settings_storage_grant">Cấp quyền lưu vào /sdcard/MeetingNotes</string>
+    <string name="settings_seed_samples">Nạp dữ liệu mẫu</string>
+    <string name="settings_seed_done">Đã nạp %1$d cuộc họp mẫu</string>
+    <string name="settings_share_log">Chia sẻ nhật ký</string>
+    <string name="settings_share_log_failed">Không xuất được nhật ký</string>
+    <string name="settings_storage_grant_failed">Không mở được màn hình cấp quyền. Hãy vào Cài đặt hệ thống > Ứng dụng > Meeting Notes.</string>
+</resources>

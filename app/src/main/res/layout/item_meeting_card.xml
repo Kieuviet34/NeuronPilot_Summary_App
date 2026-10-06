@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:minHeight="230dp"
     android:layout_margin="8dp"
     android:background="@drawable/bg_card_settings_local"
     android:elevation="2dp"
@@ -15,7 +16,7 @@
         android:layout_marginEnd="16dp"
         android:text="Họp Review Sprint Q2"
         android:textColor="@color/text_primary"
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/ll_badges"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,7 +29,7 @@
         android:layout_marginTop="4dp"
         android:text="10/04/2026 - 14:30"
         android:textColor="@color/text_secondary"
-        android:textSize="14sp"
+        android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
@@ -45,11 +46,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_badge_active_local"
-            android:paddingHorizontal="12dp"
-            android:paddingVertical="4dp"
+            android:paddingHorizontal="14dp"
+            android:paddingVertical="5dp"
             android:text="Hoàn tất"
             android:textColor="@color/green_text"
-            android:textSize="12sp"
+            android:textSize="13sp"
             android:textStyle="bold" />
 
         <TextView
@@ -58,11 +59,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:background="@drawable/bg_badge_active_local"
-            android:paddingHorizontal="12dp"
-            android:paddingVertical="4dp"
+            android:paddingHorizontal="14dp"
+            android:paddingVertical="5dp"
             android:text="VI"
             android:textColor="@color/blue_primary"
-            android:textSize="12sp"
+            android:textSize="13sp"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -77,96 +78,145 @@
         app:layout_constraintTop_toBottomOf="@id/tv_datetime">
 
         <ImageView
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:src="@android:drawable/ic_menu_recent_history"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@drawable/ic_clock"
             app:tint="@color/text_muted" />
 
         <TextView
             android:id="@+id/tv_duration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
+            android:layout_marginStart="6dp"
             android:text="45 phút"
             android:textColor="@color/text_secondary"
-            android:textSize="14sp" />
+            android:textSize="15sp" />
 
         <ImageView
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:layout_marginStart="16dp"
-            android:src="@android:drawable/ic_menu_edit"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/ic_doc"
             app:tint="@color/text_muted" />
 
         <TextView
             android:id="@+id/tv_word_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
+            android:layout_marginStart="6dp"
             android:text="2,847 từ"
             android:textColor="@color/text_secondary"
-            android:textSize="14sp" />
+            android:textSize="15sp" />
 
         <ImageView
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:layout_marginStart="16dp"
-            android:src="@android:drawable/ic_menu_agenda"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/ic_checklist"
             app:tint="@color/text_muted" />
 
         <TextView
             android:id="@+id/tv_action_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
+            android:layout_marginStart="6dp"
             android:text="5 hành động"
             android:textColor="@color/text_secondary"
-            android:textSize="14sp" />
+            android:textSize="15sp" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/tv_summary_preview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="14dp"
         android:background="@drawable/bg_stt_box"
-        android:padding="12dp"
+        android:padding="14dp"
+        android:lineSpacingExtra="3dp"
+        android:minLines="3"
+        android:maxLines="3"
+        android:ellipsize="end"
         android:text="Tóm tắt: Nhóm đã review tiến độ Sprint Q2, xác nhận hoàn thành 8/10 user stories..."
         android:textColor="@color/text_secondary"
-        android:textSize="14sp"
+        android:textSize="15sp"
         app:layout_constraintTop_toBottomOf="@id/ll_stats" />
 
     <LinearLayout
+        android:id="@+id/ll_actions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/tv_summary_preview">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_summary_preview"
+        app:layout_constraintVertical_bias="1.0">
 
         <TextView
             android:id="@+id/btn_view_details"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_badge_active_local"
-            android:paddingHorizontal="16dp"
-            android:paddingVertical="8dp"
+            android:layout_height="44dp"
+            android:background="@drawable/bg_btn_card_detail"
+            android:gravity="center"
+            android:paddingHorizontal="18dp"
             android:text="📄 Xem chi tiết"
             android:textColor="@color/blue_primary"
-            android:textSize="14sp"
+            android:textSize="15sp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/btn_export"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="44dp"
             android:layout_marginStart="12dp"
-            android:background="@drawable/bg_badge_active_local"
-            android:paddingHorizontal="16dp"
-            android:paddingVertical="8dp"
+            android:background="@drawable/bg_btn_card_export"
+            android:gravity="center"
+            android:paddingHorizontal="18dp"
             android:text="📥 Xuất báo cáo"
-            android:textColor="@color/blue_primary"
-            android:textSize="14sp"
+            android:textColor="@color/text_primary"
+            android:textSize="15sp"
             android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/btn_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
+            android:layout_marginStart="12dp"
+            android:background="@drawable/bg_btn_card_delete"
+            android:gravity="center"
+            android:paddingHorizontal="16dp"
+            android:text="🗑️ Xóa"
+            android:textColor="@color/red_text"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/btn_restore"
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
+            android:layout_marginStart="12dp"
+            android:background="@drawable/bg_badge_restore"
+            android:gravity="center"
+            android:paddingHorizontal="16dp"
+            android:text="♻️ Khôi phục"
+            android:textColor="@color/green_text"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/btn_delete_permanent"
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
+            android:layout_marginStart="12dp"
+            android:background="@drawable/bg_btn_card_delete"
+            android:gravity="center"
+            android:paddingHorizontal="16dp"
+            android:text="🗑️ Xóa vĩnh viễn"
+            android:textColor="@color/red_text"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

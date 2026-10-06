@@ -42,6 +42,9 @@ class I2SAudioRecorder(private val context: Context) {
     var currentFileSize: Long = 0L
         private set
 
+    var pauseCount: Int = 0
+        private set
+
     private var startTimeMs: Long = 0L
     private var pausedDurationMs: Long = 0L
     private var pauseStartTimeMs: Long = 0L
@@ -75,7 +78,6 @@ class I2SAudioRecorder(private val context: Context) {
 
     private val DEBUG_MODE = true
 
-
     private var isSpeaking = false
     private var speechStartTime = 0L
     private var pendingVoiceMs = 0L
@@ -84,7 +86,7 @@ class I2SAudioRecorder(private val context: Context) {
     private val currentSegmentBuffer = ArrayList<Short>()
 
     @SuppressLint("MissingPermission")
-    fun startRecording(customTitle: String? = null): String {
+    fun startRecording(customFileName: String? = null): String {
         if (isRecording.get()) return currentFilePath
 
         val dir = File(context.getExternalFilesDir(null), "MeetingNotes")
@@ -93,8 +95,16 @@ class I2SAudioRecorder(private val context: Context) {
         }
 
         val timestamp = System.currentTimeMillis()
-        val file = File(dir, "$timestamp.wav")
+        val safeFileName = if (!customFileName.isNullOrBlank()) {
+            val sanitized = customFileName.replace("[\\\\/:*?\"<>|]".toRegex(), "_")
+            if (sanitized.endsWith(".wav")) sanitized else "$sanitized.wav"
+        } else {
+            "$timestamp.wav"
+        }
+        val file = File(dir, safeFileName)
+        file.parentFile?.mkdirs()
         currentFilePath = file.absolutePath
+        pauseCount = 0
 
         try {
             audioRecord = AudioRecord(
@@ -137,9 +147,10 @@ class I2SAudioRecorder(private val context: Context) {
     fun pauseRecording() {
         if (isRecording.get() && !isPaused.get()) {
             isPaused.set(true)
+            pauseCount++
             pauseStartTimeMs = System.currentTimeMillis()
             onStateChangedListener?.invoke(true, true)
-            Log.i(TAG, "Recording paused")
+            Log.i(TAG, "Recording paused (count: $pauseCount)")
         }
     }
 
@@ -197,6 +208,7 @@ class I2SAudioRecorder(private val context: Context) {
     }
 
     private fun recordLoop(file: File) {
+        android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_URGENT_AUDIO)
         val fos = FileOutputStream(file, true)
         val buffer = ShortArray(bufferSize / 2)
         val byteBuffer = ByteBuffer.allocate(bufferSize).order(ByteOrder.LITTLE_ENDIAN)
@@ -321,6 +333,7 @@ class I2SAudioRecorder(private val context: Context) {
     }
 
     private fun writeWavHeaderPlaceholder(file: File) {
+        file.parentFile?.mkdirs()
         val fos = FileOutputStream(file)
         val header = ByteArray(44)
         fos.write(header)

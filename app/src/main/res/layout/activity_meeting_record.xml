@@ -8,19 +8,20 @@
     android:orientation="vertical"
     tools:context="com.bhs.meetingnotes.MeetingRecordActivity">
 
-    <!-- Header -->
+    <!-- Top App Bar / Header -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="72dp"
+        android:layout_height="64dp"
         android:background="@color/bg_card"
-        android:elevation="4dp"
-        android:paddingHorizontal="24dp">
+        android:elevation="3dp"
+        android:paddingHorizontal="20dp">
 
         <ImageView
             android:id="@+id/btn_back"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:padding="12dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="10dp"
             android:src="@drawable/ic_arrow_left"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -28,371 +29,577 @@
             app:tint="@color/text_primary" />
 
         <TextView
-            android:id="@+id/tv_header_title"
+            android:id="@+id/tv_header_meeting_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="Đang ghi âm cuộc họp"
+            android:layout_marginStart="12dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Họp kỹ thuật BSP"
             android:textColor="@color/text_primary"
-            android:textSize="20sp"
+            android:textSize="22sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/btn_back"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tv_header_badge"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_badge_active_local"
-            android:paddingHorizontal="16dp"
-            android:paddingVertical="8dp"
-            android:text="Tiếng Việt • PhoWhisper"
-            android:textColor="@color/blue_primary"
-            android:textSize="14sp"
-            android:textStyle="bold"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <!-- Segment Badge (e.g. Đoạn 3/3) -->
+            <TextView
+                android:id="@+id/tv_header_segment_badge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/bg_badge_orange"
+                android:paddingHorizontal="14dp"
+                android:paddingVertical="7dp"
+                android:text="Đoạn 1/1"
+                android:textColor="@color/orange_text"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <!-- Language & ASR Badge -->
+            <TextView
+                android:id="@+id/tv_header_lang_badge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/bg_badge_active_local"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="7dp"
+                android:text="Tiếng Việt"
+                android:textColor="@color/blue_primary"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <!-- Finish Button (Primary CTA) -->
+            <TextView
+                android:id="@+id/btn_finish_top"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_btn_primary_large"
+                android:elevation="3dp"
+                android:gravity="center"
+                android:paddingHorizontal="22dp"
+                android:text="Hoàn tất"
+                android:textColor="@color/bg_card"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- Main Content -->
+    <!-- Main Content: Left & Right Split Layout (Tối ưu 1024x600 Tablet) -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:baselineAligned="false"
         android:orientation="horizontal"
-        android:padding="24dp">
+        android:padding="16dp">
 
-        <!-- Left: Timer & Controls -->
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <!-- ==================== LEFT PANEL: ĐIỀU KHIỂN GHI ÂM (Bọc ScrollView chống tràn 1024x600) ==================== -->
+        <ScrollView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginEnd="12dp"
+            android:layout_marginEnd="8dp"
             android:layout_weight="1"
-            android:background="@color/bg_card"
-            android:elevation="2dp">
-
-            <FrameLayout
-                android:id="@+id/fl_timer_circle"
-                android:layout_width="240dp"
-                android:layout_height="240dp"
-                android:background="@drawable/bg_circle_red_ring_livestream"
-                app:layout_constraintBottom_toTopOf="@id/ll_controls"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <View
-                        android:id="@+id/v_recording_indicator"
-                        android:layout_width="12dp"
-                        android:layout_height="12dp"
-                        android:background="@drawable/bg_circle_red" />
-
-                    <TextView
-                        android:id="@+id/tv_timer"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="12:34"
-                        android:textColor="@color/text_primary"
-                        android:textSize="48sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tv_record_status"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Đang ghi âm..."
-                        android:textColor="@color/text_secondary"
-                        android:textSize="16sp" />
-                </LinearLayout>
-            </FrameLayout>
+            android:fillViewport="true">
 
             <LinearLayout
-                android:id="@+id/ll_controls"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="32dp"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
+                android:background="@drawable/bg_card_settings_local"
+                android:elevation="2dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="16dp">
 
+                <!-- Segment Info Header -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ĐANG GHI ĐOẠN"
+                    android:textColor="@color/text_muted"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_current_segment_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:textColor="@color/text_primary"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    tools:text="Hop_BSP_01" />
+
+                <!-- Ring Timer Display -->
+                <FrameLayout
+                    android:id="@+id/fl_timer_circle"
+                    android:layout_width="180dp"
+                    android:layout_height="180dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/bg_circle_red_ring_livestream">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <View
+                            android:id="@+id/v_recording_indicator"
+                            android:layout_width="12dp"
+                            android:layout_height="12dp"
+                            android:background="@drawable/bg_circle_red" />
+
+                        <TextView
+                            android:id="@+id/tv_timer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="00:00"
+                            android:textColor="@color/text_primary"
+                            android:textSize="40sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_record_status"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Đang ghi âm..."
+                            android:textColor="@color/text_secondary"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </FrameLayout>
+
+                <!-- Studio Waveform Container -->
                 <LinearLayout
-                    android:id="@+id/btn_pause"
-                    android:layout_width="72dp"
-                    android:layout_height="72dp"
-                    android:background="@drawable/bg_circle_gray"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/bg_waveform_container"
                     android:gravity="center"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:paddingHorizontal="14dp"
+                    android:paddingVertical="8dp">
 
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@android:drawable/ic_media_pause"
-                        app:tint="@color/text_primary" />
+                    <com.bhs.meetingnotes.util.WaveformView
+                        android:id="@+id/v_waveform"
+                        android:layout_width="match_parent"
+                        android:layout_height="58dp"
+                        android:background="#00000000" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/btn_stop"
-                    android:layout_width="72dp"
-                    android:layout_height="72dp"
-                    android:layout_marginStart="24dp"
-                    android:background="@drawable/bg_circle_red"
-                    android:gravity="center"
-                    android:orientation="vertical">
+                <TextView
+                    android:id="@+id/tv_mic_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="● I2S MIC Active • 16kHz/16bit/Mono"
+                    android:textColor="@color/green_success"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
 
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@android:drawable/ic_media_ff"
-                        app:tint="@color/bg_card" />
+                <!-- 5 Control Buttons in Row With Labels -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <!-- Button 1: Tạm dừng / Tiếp tục / Bắt đầu ghi -->
+                    <LinearLayout
+                        android:id="@+id/btn_pause"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:id="@+id/ll_pause_circle"
+                            android:layout_width="54dp"
+                            android:layout_height="54dp"
+                            android:background="@drawable/bg_circle_gray"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:id="@+id/iv_pause_icon"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:src="@drawable/ic_pause"
+                                app:tint="@color/text_primary" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tv_btn_pause"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:text="Tạm dừng"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <!-- Button 2: Dừng đoạn (Lưu segment hiện tại, chuyển sang chờ) -->
+                    <LinearLayout
+                        android:id="@+id/btn_stop_segment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:id="@+id/ll_stop_circle"
+                            android:layout_width="54dp"
+                            android:layout_height="54dp"
+                            android:background="@drawable/bg_circle_amber"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:id="@+id/iv_stop_icon"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:src="@drawable/ic_save_segment"
+                                app:tint="@color/bg_card" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tv_btn_stop"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:text="Dừng đoạn"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <!-- Button 3: Thêm đoạn mới (Chốt đoạn cũ và ghi tiếp đoạn mới ngay) -->
+                    <LinearLayout
+                        android:id="@+id/btn_new_segment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:id="@+id/ll_new_circle"
+                            android:layout_width="54dp"
+                            android:layout_height="54dp"
+                            android:background="@drawable/bg_circle_blue"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:id="@+id/iv_new_icon"
+                                android:layout_width="26dp"
+                                android:layout_height="26dp"
+                                android:src="@drawable/ic_add"
+                                app:tint="@color/bg_card" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tv_btn_new"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:text="Đoạn mới"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <!-- Button 4: Dừng hẳn cuộc họp (Dừng toàn bộ, hiện dialog xác nhận) -->
+                    <LinearLayout
+                        android:id="@+id/btn_stop_meeting"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:id="@+id/ll_stop_meeting_circle"
+                            android:layout_width="54dp"
+                            android:layout_height="54dp"
+                            android:background="@drawable/bg_circle_red"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:id="@+id/iv_stop_meeting_icon"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:src="@drawable/ic_stop"
+                                app:tint="@color/bg_card" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tv_btn_stop_meeting"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:text="Dừng hẳn"
+                            android:textColor="@color/rec_red"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <!-- Button 5: Đánh dấu (Bookmark) -->
+                    <LinearLayout
+                        android:id="@+id/btn_bookmark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:id="@+id/ll_bookmark_circle"
+                            android:layout_width="54dp"
+                            android:layout_height="54dp"
+                            android:background="@drawable/bg_circle_gray"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:id="@+id/iv_bookmark_icon"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:src="@drawable/ic_bookmark"
+                                app:tint="@color/blue_primary" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tv_btn_bookmark"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:text="Đánh dấu"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/btn_bookmark"
-                    android:layout_width="72dp"
-                    android:layout_height="72dp"
-                    android:layout_marginStart="24dp"
-                    android:background="@drawable/bg_circle_gray"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@android:drawable/ic_input_add"
-                        app:tint="@color/blue_primary" />
-                </LinearLayout>
             </LinearLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
 
-        <!-- Right: Info -->
+        <!-- ==================== RIGHT PANEL: DANH SÁCH ĐOẠN ĐÃ GHI ==================== -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginStart="12dp"
-            android:layout_weight="1.5"
-            android:orientation="vertical">
+            android:layout_marginStart="8dp"
+            android:layout_weight="1.3"
+            android:background="@drawable/bg_card_settings_local"
+            android:elevation="2dp"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-            <!-- Info Cuoc Hop -->
-            <LinearLayout
+            <!-- Panel Header -->
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_card_settings_local"
-                android:orientation="vertical"
-                android:padding="20dp">
+                android:layout_marginBottom="10dp">
 
                 <TextView
+                    android:id="@+id/tv_segments_header_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="THÔNG TIN CUỘC HỌP"
-                    android:textColor="@color/text_muted"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/tv_meeting_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Họp kỹ thuật BSP"
+                    android:text="Các đoạn đã ghi"
                     android:textColor="@color/text_primary"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
-            </LinearLayout>
 
-            <!-- Audio Input -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/bg_card_settings_local"
-                android:orientation="vertical"
-                android:padding="20dp">
+                <TextView
+                    android:id="@+id/tv_segments_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:layout_toEndOf="@id/tv_segments_header_title"
+                    android:textColor="@color/blue_primary"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    tools:text="(1)" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="AUDIO INPUT (I2S MIC)"
+                    android:layout_alignParentEnd="true"
+                    android:text="Thông tin"
                     android:textColor="@color/text_muted"
                     android:textSize="12sp"
                     android:textStyle="bold" />
+            </RelativeLayout>
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:text="Trạng thái"
-                        android:textColor="@color/text_secondary"
-                        android:textSize="16sp" />
-                    <TextView
-                        android:id="@+id/tv_mic_status"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:text="I2S MIC Active"
-                        android:textColor="@color/green_success"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:text="Sample Rate"
-                        android:textColor="@color/text_secondary"
-                        android:textSize="16sp" />
-                    <TextView
-                        android:id="@+id/tv_sample_rate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:text="16kHz / 16bit / Mono"
-                        android:textColor="@color/text_primary"
-                        android:textSize="16sp" />
-                </RelativeLayout>
-
-                <com.bhs.meetingnotes.util.WaveformView
-                    android:id="@+id/v_waveform"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:layout_marginTop="24dp"
-                    android:background="@color/bg_app" />
-            </LinearLayout>
-
-            <!-- File Info -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/bg_card_settings_local"
-                android:orientation="vertical"
-                android:padding="20dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="THÔNG TIN FILE"
-                    android:textColor="@color/text_muted"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:text="Kích thước"
-                        android:textColor="@color/text_secondary"
-                        android:textSize="16sp" />
-                    <TextView
-                        android:id="@+id/tv_file_size"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:text="0.0 MB"
-                        android:textColor="@color/text_primary"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:text="Model ASR"
-                        android:textColor="@color/text_secondary"
-                        android:textSize="16sp" />
-                    <TextView
-                        android:id="@+id/tv_model_asr"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:text="PhoWhisper (VI)"
-                        android:textColor="@color/text_primary"
-                        android:textSize="16sp" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:text="Model LLM"
-                        android:textColor="@color/text_secondary"
-                        android:textSize="16sp" />
-                    <TextView
-                        android:id="@+id/tv_model_llm"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:text="Qwen2.5 3B (Q4)"
-                        android:textColor="@color/text_primary"
-                        android:textSize="16sp" />
-                </RelativeLayout>
-
-            </LinearLayout>
-
-            <!-- Real-time STT Preview -->
-            <LinearLayout
+            <!-- Segments RecyclerView -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_segments"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/bg_card_settings_local"
+                android:clipToPadding="false"
+                android:scrollbars="vertical" />
+
+            <!-- Summary Statistics Card (Grid 2x2) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@color/bg_app"
                 android:orientation="vertical"
-                android:padding="20dp">
+                android:padding="12dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="NỘI DUNG GHI ÂM (REAL-TIME)"
-                    android:textColor="@color/blue_primary"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
-
-                <ScrollView
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="8dp">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/tv_realtime_stt"
-                        android:layout_width="match_parent"
+                    <!-- Col 1: Tổng thời lượng -->
+                    <LinearLayout
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="Đang lắng nghe..."
-                        android:textColor="@color/text_primary"
-                        android:textSize="16sp"
-                        android:lineSpacingExtra="4dp" />
-                </ScrollView>
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="TỔNG THỜI LƯỢNG"
+                            android:textColor="@color/text_muted"
+                            android:textSize="11sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_total_duration"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:textColor="@color/text_primary"
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            tools:text="00:00" />
+                    </LinearLayout>
+
+                    <!-- Col 2: Tổng dung lượng -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="TỔNG DUNG LƯỢNG"
+                            android:textColor="@color/text_muted"
+                            android:textSize="11sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_total_size"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:textColor="@color/text_primary"
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            tools:text="0.0 MB" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal">
+
+                    <!-- Col 3: Audio Format -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="AUDIO FORMAT"
+                            android:textColor="@color/text_muted"
+                            android:textSize="11sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="16kHz / 16bit / Mono"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+
+                    <!-- Col 4: Model ASR -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="MODEL ASR"
+                            android:textColor="@color/text_muted"
+                            android:textSize="11sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_model_asr_info"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="13sp"
+                            tools:text="PhoWhisper (VI)" />
+                    </LinearLayout>
+                </LinearLayout>
+
             </LinearLayout>
+
+            <!-- Bottom CTA Button: Hoàn tất & Chuyển sang Chọn đoạn -->
+            <TextView
+                android:id="@+id/btn_complete_and_select"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_send_button_local"
+                android:gravity="center"
+                android:text="Hoàn tất &amp; Chọn đoạn xử lý AI →"
+                android:textColor="@color/bg_card"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
