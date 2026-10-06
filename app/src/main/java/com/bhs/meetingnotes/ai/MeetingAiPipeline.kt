@@ -21,7 +21,7 @@ import java.io.File
  *
  * Plan A/C: NeuroPilot NPU. Plan B (C13): máy không có NPU (vd LDPlayer) vẫn chạy trọn luồng UI.
  */
-class MeetingAiPipeline(private val context: Context) {
+class MeetingAiPipeline(private val context: Context, private val whisperPort: Int = 8080) {
     private val TAG = "MeetingAiPipeline"
     private val db = MeetingDatabase.getInstance(context)
     private val glossary = GlossaryRepository(db)

@@ -31,14 +31,28 @@ import android.view.LayoutInflater
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
+import android.net.Uri
+import android.util.Log
+import androidx.activity.result.contract.ActivityResultContracts
+import com.bhs.meetingnotes.model.AppSettings
+import com.bhs.meetingnotes.util.FormatUtils
+import java.io.File
+
 /**
  * Màn hình 1: Danh sách cuộc họp (Screen 1 theo chuẩn BA v2).
  * Hỗ trợ bộ lọc Ngôn ngữ, Bộ lọc Ngày, Tìm kiếm tức thì, Thùng rác (Soft Delete) và Khôi phục.
  */
 class MeetingNotesActivity : AppCompatActivity() {
 
+    private val TAG = "MeetingNotesActivity"
+    private val DEBUG_MODE = true
+    private lateinit var appSettings: AppSettings
     private lateinit var db: MeetingDatabase
     private lateinit var meetingAdapter: MeetingAdapter
+
+    private val pickAudioLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+        uri?.let { handleSelectedAudio(it) }
+    }
 
     private var activeMeetings: List<MeetingEntity> = emptyList()
     private var trashMeetings: List<MeetingEntity> = emptyList()
@@ -72,6 +86,18 @@ class MeetingNotesActivity : AppCompatActivity() {
         setContentView(R.layout.activity_meeting_list)
 
         db = MeetingDatabase.getInstance(this)
+        appSettings = AppSettings.getInstance(this)
+
+        val btnUpload = findViewById<View>(R.id.btn_upload_audio)
+        if (DEBUG_MODE) {
+            btnUpload?.visibility = View.VISIBLE
+            btnUpload?.setOnClickListener {
+                showUploadModelSelectionDialog()
+            }
+        } else {
+            btnUpload?.visibility = View.GONE
+        }
+
         initViews()
         setupRecyclerView()
         observeMeetings()
@@ -666,6 +692,8 @@ class MeetingNotesActivity : AppCompatActivity() {
             .show()
     }
 
+
+
     private fun startServerAndProceed(language: String) {
         val port = if (language == "vi") 8080 else 8082
         Log.d(TAG, "Selected language $language, using Whisper server port $port")
@@ -714,4 +742,6 @@ class MeetingNotesActivity : AppCompatActivity() {
             }
         }
     }
+
+
 }
