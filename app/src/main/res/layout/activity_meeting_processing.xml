@@ -315,7 +315,6 @@
                         android:id="@+id/tv_step1_preview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="...chao moi nguoi hom nay chung ta se ri-viu tien do sprint co-hai em vinh cap nhat giup anh phan bee-es-pee..."
                         android:textColor="@color/text_primary"
                         android:textSize="14sp"
                         android:lineSpacingExtra="4dp" />
@@ -365,7 +364,6 @@
                         android:id="@+id/tv_step2_preview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="...Chào mọi người, hôm nay chúng ta sẽ review tiến độ Sprint Q2. Em Vinh cập nhật giúp anh phần BSP..."
                         android:textColor="@color/text_primary"
                         android:textSize="14sp"
                         android:lineSpacingExtra="4dp" />

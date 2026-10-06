@@ -55,7 +55,9 @@ class MeetingRecordActivity : AppCompatActivity() {
         appSettings = AppSettings.getInstance(this)
         db = MeetingDatabase.getInstance(this)
         audioRecorder = I2SAudioRecorder(this)
-        sttEngine = WhisperServerSTTEngine()
+        
+        val port = getSharedPreferences("meeting_notes_prefs", MODE_PRIVATE).getInt("whisper_server_port", 8080)
+        sttEngine = WhisperServerSTTEngine(com.mediatek.neuropilot.jnidemo.aibox.ai.WhisperServerClient("http://127.0.0.1:$port"))
 
         initViews()
         checkPermissionsAndStart()

@@ -5,11 +5,13 @@ import android.util.Log
 import com.bhs.meetingnotes.db.MeetingDatabase
 import com.bhs.meetingnotes.db.MeetingEntity
 import com.mediatek.neuropilot.jnidemo.aibox.ai.NeuroPilotLlmBridge
+import com.mediatek.neuropilot.jnidemo.aibox.ai.WhisperServerClient
+import java.io.File
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 
-class MeetingAiPipeline(private val context: Context) {
+class MeetingAiPipeline(private val context: Context, private val whisperPort: Int = 8080) {
     private val TAG = "MeetingAiPipeline"
     private val db = MeetingDatabase.getInstance(context)
     private val DEBUG_MODE = true
@@ -32,12 +34,27 @@ class MeetingAiPipeline(private val context: Context) {
         }
 
         try {
-            // STEP 1: Show original transcript
-            onProgress(1, 100, meeting.rawTranscript)
+            // STEP 1: ASR / Transcribe audio file if rawTranscript is blank
+            var rawTranscript = meeting.rawTranscript
+            if (rawTranscript.isBlank() && meeting.audioFilePath.isNotBlank()) {
+                val file = File(meeting.audioFilePath)
+                if (file.exists()) {
+                    onProgress(1, 10, "Đang nhận dạng giọng nói từ file âm thanh...")
+                    val client = WhisperServerClient("http://127.0.0.1:$whisperPort")
+                    try {
+                        rawTranscript = client.transcribeFile(file)
+                        meeting = meeting.copy(rawTranscript = rawTranscript)
+                        db.meetingDao().updateMeeting(meeting)
+                    } catch (e: Exception) {
+                        Log.e(TAG, "Transcribe audio file failed", e)
+                        rawTranscript = "Lỗi nhận dạng file âm thanh: ${e.message}"
+                    }
+                }
+            }
+            onProgress(1, 100, rawTranscript)
 
             // STEP 2: Correction
             onProgress(2, 0, "")
-            val rawTranscript = meeting.rawTranscript
             
             if (DEBUG_MODE) {
                 Log.d(TAG, "Debug: Raw Transcript = $rawTranscript")
@@ -97,10 +114,6 @@ class MeetingAiPipeline(private val context: Context) {
     }
 
     private fun formatActionsAsJson(rawOutput: String): String {
-        val cleaned = rawOutput.trim().removePrefix("```json").removePrefix("```").removeSuffix("```").trim()
-        if (cleaned.startsWith("[")) {
-            return cleaned
-        }
-        return "[]"
+        return rawOutput.trim()
     }
 }

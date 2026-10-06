@@ -28,6 +28,9 @@ class MeetingProcessingActivity : AppCompatActivity() {
         pbStep2 = findViewById(R.id.pb_step2)
         tvTotalTimeEstimate = findViewById(R.id.tv_total_time_estimate)
 
+        tvStep1Preview?.text = ""
+        tvStep2Preview?.text = ""
+
         findViewById<View>(R.id.btn_back)?.setOnClickListener {
             finish()
         }
@@ -42,7 +45,8 @@ class MeetingProcessingActivity : AppCompatActivity() {
     }
 
     private fun startPipeline(meetingId: Long) {
-        val pipeline = MeetingAiPipeline(this)
+        val port = getSharedPreferences("meeting_notes_prefs", MODE_PRIVATE).getInt("whisper_server_port", 8080)
+        val pipeline = MeetingAiPipeline(this, port)
         lifecycleScope.launch {
             val result = pipeline.runPipeline(meetingId) { step, progress, currentText ->
                 lifecycleScope.launch(Dispatchers.Main) {

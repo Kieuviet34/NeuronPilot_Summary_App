@@ -59,7 +59,7 @@ class NeuroPilotLlmBridge {
         val handle = modelHandle
         if (handle == 0L) return LlmResult("", "")
 
-        val systemPrompt = "Sửa lỗi chính tả và dấu câu cho đoạn hội thoại sau. Chỉ trả về văn bản đã sửa, không giải thích."
+        val systemPrompt = "Bạn là trợ lý sửa lỗi văn bản tiếng Việt. Hãy sửa lỗi chính tả, ngữ pháp, thêm dấu câu đúng, sửa tên riêng và thuật ngữ kỹ thuật. Giữ nguyên nội dung và ý nghĩa, không thêm bớt thông tin. Trả về văn bản đã sửa."
         val formattedPrompt = buildString {
             append(QWEN_SYS_OPEN)
             append(systemPrompt)
@@ -103,7 +103,7 @@ class NeuroPilotLlmBridge {
         val handle = modelHandle
         if (handle == 0L) return LlmResult("", "")
 
-        val systemPrompt = "Trích xuất danh sách các hành động (action items) cần làm sau cuộc họp. Định dạng kết quả thành JSON array chứa các object có key: 'task', 'assignee', 'deadline'."
+        val systemPrompt = "Bạn là trợ lý trích xuất hành động từ cuộc họp. Từ nội dung cuộc họp bên dưới, hãy liệt kê tất cả các hành động cần thực hiện sau cuộc họp. Mỗi hành động gồm: (1) Mô tả việc cần làm, (2) Người phụ trách (nếu được đề cập), (3) Deadline (nếu có). Trả về dạng danh sách đánh số."
         val formattedPrompt = buildString {
             append(QWEN_SYS_OPEN)
             append(systemPrompt)
@@ -177,9 +177,7 @@ class NeuroPilotLlmBridge {
     }
 
     private fun buildSummaryPrompt(transcriptText: String): String {
-        val systemPrompt = "Bạn là trợ lý tóm tắt cuộc họp. Dựa vào đoạn hội thoại " +
-                "được cung cấp, hãy tóm tắt lại nội dung chính bằng tiếng Việt, viết đúng " +
-                "5 câu. Không thêm lời dẫn, không đánh số, không dùng markdown hay ký hiệu đặc biệt."
+        val systemPrompt = "Bạn là trợ lý tóm tắt cuộc họp. Từ nội dung cuộc họp bên dưới, hãy tóm tắt các điểm chính bao gồm: (1) Các nội dung đã thảo luận, (2) Các quyết định đã đưa ra, (3) Các vấn đề kỹ thuật được đề cập. Viết ngắn gọn, rõ ràng, có đánh số."
 
         return buildString {
             append(QWEN_SYS_OPEN)

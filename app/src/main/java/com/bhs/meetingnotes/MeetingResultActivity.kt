@@ -19,7 +19,6 @@ import kotlinx.coroutines.withContext
 class MeetingResultActivity : AppCompatActivity() {
 
     private lateinit var db: MeetingDatabase
-    private var ttsManager: TtsManager? = null
     private var summaryText: String = ""
     private var meetingLang: String = "vi"
 
@@ -28,19 +27,17 @@ class MeetingResultActivity : AppCompatActivity() {
         setContentView(R.layout.activity_meeting_result)
         
         db = MeetingDatabase.getInstance(this)
-        ttsManager = TtsManager(this)
 
         findViewById<View>(R.id.btn_back)?.setOnClickListener {
             finish()
         }
         
+        // Hide TTS button as TTS is disabled
+        findViewById<View>(R.id.btn_read_summary)?.visibility = View.GONE
+        
         val meetingId = intent.getLongExtra("MEETING_ID", -1)
         if (meetingId != -1L) {
             loadMeetingData(meetingId)
-        }
-        
-        findViewById<View>(R.id.btn_read_summary)?.setOnClickListener {
-            ttsManager?.speak(summaryText, meetingLang)
         }
         
         findViewById<View>(R.id.btn_export)?.setOnClickListener {
@@ -93,6 +90,5 @@ class MeetingResultActivity : AppCompatActivity() {
     
     override fun onDestroy() {
         super.onDestroy()
-        ttsManager?.shutdown()
     }
 }
