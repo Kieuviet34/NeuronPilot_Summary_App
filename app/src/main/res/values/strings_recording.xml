@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="rec_state_recording">ĐANG GHI ĐOẠN</string>
+    <string name="rec_state_paused">TẠM DỪNG ĐOẠN</string>
+    <string name="rec_state_saved">ĐÃ LƯU ĐOẠN</string>
+    <string name="rec_timer_recording">Đang ghi…</string>
+    <string name="rec_timer_paused">Tạm dừng</string>
+    <string name="rec_timer_saved">Đã lưu</string>
+
+    <string name="rec_btn_pause">Tạm dừng</string>
+    <string name="rec_btn_resume">Tiếp tục</string>
+    <string name="rec_btn_stop">Dừng đoạn</string>
+    <string name="rec_btn_new">Đoạn mới</string>
+    <string name="rec_btn_bookmark">Đánh dấu</string>
+    <string name="rec_btn_record_more">Ghi đoạn mới</string>
+    <string name="rec_btn_process">Xử lý AI</string>
+
+    <string name="rec_audio_level">Audio level • I2S MIC Active</string>
+    <string name="rec_segment_badge">Đoạn %1$d/%2$d</string>
+    <string name="rec_tab_segments">Các đoạn đã ghi (%1$d)</string>
+    <string name="rec_tab_info">Thông tin</string>
+
+    <string name="rec_badge_rec">REC</string>
+    <string name="rec_badge_paused">Tạm dừng</string>
+    <string name="rec_badge_saved">Đã lưu</string>
+    <string name="rec_segment_sub_recording">%1$s đang ghi… • %2$s</string>
+    <string name="rec_segment_sub_saved">%1$s • %2$s</string>
+    <string name="rec_segment_pause_count">Pause %1$d lần</string>
+
+    <string name="rec_stat_total_duration">TỔNG THỜI LƯỢNG</string>
+    <string name="rec_stat_total_size">TỔNG DUNG LƯỢNG</string>
+    <string name="rec_stat_format">AUDIO FORMAT</string>
+    <string name="rec_stat_model">MODEL ASR</string>
+    <string name="rec_format_value">16kHz / 16bit / Mono</string>
+    <string name="rec_model_vi">PhoWhisper (VI)</string>
+    <string name="rec_model_en">Whisper (EN)</string>
+
+    <string name="rec_info_title">Tên cuộc họp</string>
+    <string name="rec_info_language">Ngôn ngữ</string>
+    <string name="rec_info_source">Nguồn âm thanh</string>
+    <string name="rec_info_folder">Thư mục lưu</string>
+    <string name="rec_info_count">Số đoạn</string>
+    <string name="rec_info_bookmarks">Dấu mốc đã đánh</string>
+    <string name="rec_info_source_value">I2S MIC · 16kHz / 16-bit / Mono · WAV PCM</string>
+    <string name="rec_lang_vi">Tiếng Việt · PhoWhisper</string>
+    <string name="rec_lang_en">English · Whisper</string>
+
+    <string name="rec_bookmark_added">Đã đánh dấu tại %1$s</string>
+    <string name="rec_bookmark_unavailable">Chỉ đánh dấu được khi đang ghi hoặc tạm dừng</string>
+    <string name="rec_exit_title">Dừng ghi âm?</string>
+    <string name="rec_exit_message">Đoạn đang ghi sẽ được lưu lại trước khi thoát.</string>
+    <string name="rec_exit_confirm">Dừng và thoát</string>
+    <string name="rec_exit_continue">Tiếp tục ghi</string>
+
+    <string name="rec_notif_channel">Ghi âm cuộc họp</string>
+    <string name="rec_notif_channel_desc">Hiển thị khi app đang ghi âm để hệ thống không dừng việc ghi</string>
+    <string name="rec_notif_title_recording">Đang ghi âm</string>
+    <string name="rec_notif_title_paused">Tạm dừng ghi âm</string>
+    <string name="rec_notif_starting">Đang chuẩn bị ghi âm…</string>
+    <string name="rec_notif_text">%1$s • %2$s</string>
+
+    <string name="rec_permission_denied">Cần quyền Micro để ghi âm. Hãy cấp quyền cho app trong Cài đặt hệ thống rồi thử lại.</string>
+    <string name="rec_other_meeting_active">Đang ghi âm một cuộc họp khác, đã mở lại phiên đó</string>
+    <string name="rec_permission_open_settings">Mở Cài đặt</string>
+    <string name="rec_permission_close">Đóng</string>
+</resources>

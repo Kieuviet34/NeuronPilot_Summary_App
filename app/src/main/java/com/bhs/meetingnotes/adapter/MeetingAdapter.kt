@@ -21,8 +21,17 @@ import java.util.Locale
  */
 class MeetingAdapter(
     private val onItemClick: (MeetingEntity) -> Unit,
-    private val onExportClick: (MeetingEntity) -> Unit
+    private val onExportClick: (MeetingEntity) -> Unit,
+    private val onDeleteClick: (MeetingEntity) -> Unit,
+    private val onRestoreClick: (MeetingEntity) -> Unit,
+    private val onDeletePermanentClick: (MeetingEntity) -> Unit
 ) : ListAdapter<MeetingEntity, MeetingAdapter.MeetingViewHolder>(MeetingDiffCallback()) {
+
+    var isTrashMode: Boolean = false
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
     private val dateFormat = SimpleDateFormat("dd/MM/yyyy - HH:mm", Locale.getDefault())
 
@@ -46,6 +55,9 @@ class MeetingAdapter(
         private val tvSummaryPreview: TextView = itemView.findViewById(R.id.tv_summary_preview)
         private val btnViewDetails: TextView = itemView.findViewById(R.id.btn_view_details)
         private val btnExport: TextView = itemView.findViewById(R.id.btn_export)
+        private val btnDelete: TextView = itemView.findViewById(R.id.btn_delete)
+        private val btnRestore: TextView = itemView.findViewById(R.id.btn_restore)
+        private val btnDeletePermanent: TextView = itemView.findViewById(R.id.btn_delete_permanent)
 
         fun bind(meeting: MeetingEntity) {
             val context = itemView.context
@@ -73,24 +85,31 @@ class MeetingAdapter(
             tvLangBadge.setTextColor(ContextCompat.getColor(context, R.color.blue_primary))
 
             // Status Badge & Card Border
-            when (meeting.status) {
-                "RECORDING" -> {
-                    itemView.setBackgroundResource(R.drawable.bg_card_segment_rec)
-                    tvStatusBadge.text = "● REC"
-                    tvStatusBadge.setBackgroundResource(R.drawable.bg_badge_rec)
-                    tvStatusBadge.setTextColor(ContextCompat.getColor(context, R.color.red_text))
-                }
-                "PROCESSING" -> {
-                    itemView.setBackgroundResource(R.drawable.bg_card_settings_local)
-                    tvStatusBadge.text = "Đang xử lý"
-                    tvStatusBadge.setBackgroundResource(R.drawable.bg_badge_active_local)
-                    tvStatusBadge.setTextColor(ContextCompat.getColor(context, R.color.blue_primary))
-                }
-                else -> {
-                    itemView.setBackgroundResource(R.drawable.bg_card_settings_local)
-                    tvStatusBadge.text = "Hoàn tất"
-                    tvStatusBadge.setBackgroundResource(R.drawable.bg_badge_saved)
-                    tvStatusBadge.setTextColor(ContextCompat.getColor(context, R.color.green_text))
+            if (meeting.isDeleted) {
+                itemView.setBackgroundResource(R.drawable.bg_card_settings_local)
+                tvStatusBadge.text = "Trong thùng rác"
+                tvStatusBadge.setBackgroundResource(R.drawable.bg_badge_delete)
+                tvStatusBadge.setTextColor(ContextCompat.getColor(context, R.color.red_text))
+            } else {
+                when (meeting.status) {
+                    "RECORDING" -> {
+                        itemView.setBackgroundResource(R.drawable.bg_card_segment_rec)
+                        tvStatusBadge.text = "● REC"
+                        tvStatusBadge.setBackgroundResource(R.drawable.bg_badge_rec)
+                        tvStatusBadge.setTextColor(ContextCompat.getColor(context, R.color.red_text))
+                    }
+                    "PROCESSING" -> {
+                        itemView.setBackgroundResource(R.drawable.bg_card_settings_local)
+                        tvStatusBadge.text = "Đang xử lý"
+                        tvStatusBadge.setBackgroundResource(R.drawable.bg_badge_active_local)
+                        tvStatusBadge.setTextColor(ContextCompat.getColor(context, R.color.blue_primary))
+                    }
+                    else -> {
+                        itemView.setBackgroundResource(R.drawable.bg_card_settings_local)
+                        tvStatusBadge.text = "Hoàn tất"
+                        tvStatusBadge.setBackgroundResource(R.drawable.bg_badge_saved)
+                        tvStatusBadge.setTextColor(ContextCompat.getColor(context, R.color.green_text))
+                    }
                 }
             }
 
@@ -109,10 +128,28 @@ class MeetingAdapter(
                 tvSummaryPreview.visibility = View.VISIBLE
             }
 
+            // Button visibility based on mode
+            if (isTrashMode) {
+                btnViewDetails.visibility = View.VISIBLE
+                btnExport.visibility = View.GONE
+                btnDelete.visibility = View.GONE
+                btnRestore.visibility = View.VISIBLE
+                btnDeletePermanent.visibility = View.VISIBLE
+            } else {
+                btnViewDetails.visibility = View.VISIBLE
+                btnExport.visibility = View.VISIBLE
+                btnDelete.visibility = View.VISIBLE
+                btnRestore.visibility = View.GONE
+                btnDeletePermanent.visibility = View.GONE
+            }
+
             // Click listeners
             itemView.setOnClickListener { onItemClick(meeting) }
             btnViewDetails.setOnClickListener { onItemClick(meeting) }
             btnExport.setOnClickListener { onExportClick(meeting) }
+            btnDelete.setOnClickListener { onDeleteClick(meeting) }
+            btnRestore.setOnClickListener { onRestoreClick(meeting) }
+            btnDeletePermanent.setOnClickListener { onDeletePermanentClick(meeting) }
         }
     }
 

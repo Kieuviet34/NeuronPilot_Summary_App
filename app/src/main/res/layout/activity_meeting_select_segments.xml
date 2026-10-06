@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:text="Chọn đoạn ghi âm để xử lý"
                 android:textColor="@color/text_primary"
-                android:textSize="18sp"
+                android:textSize="22sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -51,7 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/text_secondary"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 tools:text="Họp kỹ thuật BSP • 4 đoạn • Tiếng Việt" />
         </LinearLayout>
 
@@ -59,13 +59,14 @@
         <TextView
             android:id="@+id/btn_start_ai_pipeline"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:background="@drawable/bg_send_button_local"
+            android:layout_height="48dp"
+            android:background="@drawable/bg_btn_primary_large"
+            android:elevation="3dp"
             android:gravity="center"
             android:paddingHorizontal="24dp"
             android:text="Xử lý AI (0 đoạn)"
             android:textColor="@color/bg_card"
-            android:textSize="15sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -104,7 +105,7 @@
                     android:layout_height="wrap_content"
                     android:text="Tất cả các đoạn"
                     android:textColor="@color/text_primary"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -114,7 +115,7 @@
                     android:layout_marginStart="4dp"
                     android:layout_toEndOf="@id/tv_all_segments_title"
                     android:textColor="@color/text_muted"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     android:textStyle="bold"
                     tools:text="(4)" />
 
@@ -124,11 +125,11 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:background="?attr/selectableItemBackground"
-                    android:paddingHorizontal="8dp"
-                    android:paddingVertical="4dp"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="5dp"
                     android:text="Bỏ chọn tất cả"
                     android:textColor="@color/blue_primary"
-                    android:textSize="13sp"
+                    android:textSize="14sp"
                     android:textStyle="bold" />
             </RelativeLayout>
 
@@ -166,7 +167,7 @@
                     android:layout_height="wrap_content"
                     android:text="ĐOẠN ĐÃ CHỌN"
                     android:textColor="@color/text_muted"
-                    android:textSize="11sp"
+                    android:textSize="13sp"
                     android:textStyle="bold" />
 
                 <!-- Row 1: Số đoạn -->
@@ -180,7 +181,7 @@
                         android:layout_height="wrap_content"
                         android:text="Số đoạn"
                         android:textColor="@color/text_secondary"
-                        android:textSize="14sp" />
+                        android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/tv_selected_count_stat"
@@ -188,7 +189,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:textColor="@color/text_primary"
-                        android:textSize="14sp"
+                        android:textSize="15sp"
                         android:textStyle="bold"
                         tools:text="3 / 4 đoạn" />
                 </RelativeLayout>
@@ -204,7 +205,7 @@
                         android:layout_height="wrap_content"
                         android:text="Tổng thời lượng"
                         android:textColor="@color/text_secondary"
-                        android:textSize="14sp" />
+                        android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/tv_selected_duration_stat"
@@ -212,7 +213,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:textColor="@color/text_primary"
-                        android:textSize="14sp"
+                        android:textSize="15sp"
                         android:textStyle="bold"
                         tools:text="1h 16 phút" />
                 </RelativeLayout>
@@ -228,7 +229,7 @@
                         android:layout_height="wrap_content"
                         android:text="Tổng dung lượng"
                         android:textColor="@color/text_secondary"
-                        android:textSize="14sp" />
+                        android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/tv_selected_size_stat"
@@ -236,7 +237,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:textColor="@color/text_primary"
-                        android:textSize="14sp"
+                        android:textSize="15sp"
                         android:textStyle="bold"
                         tools:text="72.8 MB" />
                 </RelativeLayout>
@@ -252,7 +253,7 @@
                         android:layout_height="wrap_content"
                         android:text="Đã bỏ qua"
                         android:textColor="@color/text_secondary"
-                        android:textSize="14sp" />
+                        android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/tv_skipped_stat"
@@ -260,7 +261,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:textColor="@color/orange_text"
-                        android:textSize="14sp"
+                        android:textSize="15sp"
                         android:textStyle="bold"
                         tools:text="1 đoạn (15:20)" />
                 </RelativeLayout>

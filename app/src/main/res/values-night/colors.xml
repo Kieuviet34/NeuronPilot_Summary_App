@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Semantic dark palette -->
+    <color name="background">#111827</color>
+    <color name="surface">#1F2937</color>
+    <color name="surface_variant">#374151</color>
+    <color name="on_surface">#F3F4F6</color>
+    <color name="on_surface_variant">#CBD5E1</color>
+    <color name="primary">#93C5FD</color>
+    <color name="primary_variant">#BFDBFE</color>
+    <color name="on_primary">#0B1F44</color>
+    <color name="primary_container">#1E3A5F</color>
+    <color name="success">#86EFAC</color>
+    <color name="success_container">#14532D</color>
+    <color name="warning">#FCD34D</color>
+    <color name="warning_container">#78350F</color>
+    <color name="error">#FCA5A5</color>
+    <color name="error_container">#7F1D1D</color>
+    <color name="info">#7DD3FC</color>
+    <color name="divider">#475569</color>
+    <color name="disabled">#94A3B8</color>
+    <color name="absolute_white">#FFFFFF</color>
+
+    <!-- Waveform palette -->
+    <color name="audio_wave_indigo">#818CF8</color>
+    <color name="audio_wave_blue">#60A5FA</color>
+    <color name="audio_wave_cyan">#22D3EE</color>
+    <color name="audio_wave_green">#34D399</color>
+
+    <!-- Compatibility names retained for existing layouts and drawables -->
+    <color name="colorPrimary">@color/primary</color>
+    <color name="colorPrimaryDark">@color/primary_variant</color>
+    <color name="colorAccent">@color/primary</color>
+    <color name="bg_app">@color/background</color>
+    <color name="bg_card">@color/surface</color>
+    <color name="border_light">@color/divider</color>
+    <color name="text_primary">@color/on_surface</color>
+    <color name="text_secondary">@color/on_surface_variant</color>
+    <color name="text_muted">@color/on_surface_variant</color>
+    <color name="blue_primary">@color/primary</color>
+    <color name="blue_light">@color/primary_container</color>
+    <color name="blue_badge_bg">@color/primary_container</color>
+    <color name="blue_badge_text">@color/primary</color>
+    <color name="green_success">@color/success</color>
+    <color name="green_bg">@color/success_container</color>
+    <color name="green_text">@color/success</color>
+    <color name="orange_bg">@color/warning_container</color>
+    <color name="orange_text">@color/warning</color>
+    <color name="red_recording">@color/error</color>
+    <color name="red_bg">@color/error_container</color>
+    <color name="red_text">@color/error</color>
+    <color name="chip_selected_bg">@color/primary</color>
+    <color name="chip_selected_text">@color/on_primary</color>
+    <color name="chip_unselected_bg">@color/surface_variant</color>
+    <color name="chip_unselected_text">@color/on_surface_variant</color>
+    <color name="voice_status_idle">@color/error</color>
+    <color name="voice_status_recording">@color/error</color>
+    <color name="voice_status_paused">@color/on_surface_variant</color>
+    <color name="rec_red">@color/error</color>
+    <color name="rec_red_container">@color/error_container</color>
+    <color name="warn_orange">@color/warning</color>
+    <color name="warn_container">@color/warning_container</color>
+    <color name="ok_green">@color/success</color>
+    <color name="ok_container">@color/success_container</color>
+    <color name="tip_yellow">@color/warning_container</color>
+    <color name="box_grey">@color/surface_variant</color>
+    <color name="chip_grey">@color/surface_variant</color>
+    <color name="white">@color/absolute_white</color>
+    <color name="diff_error">@color/error</color>
+    <color name="diff_error_bg">@color/error_container</color>
+    <color name="diff_fix_bg">@color/success_container</color>
+    <color name="storage_models">@color/info</color>
+</resources>

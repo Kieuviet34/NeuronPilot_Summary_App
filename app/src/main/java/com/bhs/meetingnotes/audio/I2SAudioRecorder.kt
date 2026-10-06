@@ -95,12 +95,14 @@ class I2SAudioRecorder(private val context: Context) {
         }
 
         val timestamp = System.currentTimeMillis()
-        val fileName = if (!customFileName.isNullOrBlank()) {
-            if (customFileName.endsWith(".wav")) customFileName else "$customFileName.wav"
+        val safeFileName = if (!customFileName.isNullOrBlank()) {
+            val sanitized = customFileName.replace("[\\\\/:*?\"<>|]".toRegex(), "_")
+            if (sanitized.endsWith(".wav")) sanitized else "$sanitized.wav"
         } else {
             "$timestamp.wav"
         }
-        val file = File(dir, fileName)
+        val file = File(dir, safeFileName)
+        file.parentFile?.mkdirs()
         currentFilePath = file.absolutePath
         pauseCount = 0
 
@@ -206,6 +208,7 @@ class I2SAudioRecorder(private val context: Context) {
     }
 
     private fun recordLoop(file: File) {
+        android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_URGENT_AUDIO)
         val fos = FileOutputStream(file, true)
         val buffer = ShortArray(bufferSize / 2)
         val byteBuffer = ByteBuffer.allocate(bufferSize).order(ByteOrder.LITTLE_ENDIAN)
@@ -330,6 +333,7 @@ class I2SAudioRecorder(private val context: Context) {
     }
 
     private fun writeWavHeaderPlaceholder(file: File) {
+        file.parentFile?.mkdirs()
         val fos = FileOutputStream(file)
         val header = ByteArray(44)
         fos.write(header)

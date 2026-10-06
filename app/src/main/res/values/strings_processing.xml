@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="proc_title">Đang xử lý AI</string>
+    <string name="proc_subtitle">%1$s • %2$s • %3$s</string>
+
+    <string name="proc_step1_title">Bước 1: Giọng nói → Text</string>
+    <string name="proc_step1_sub">Nhận dạng giọng nói từ file âm thanh</string>
+    <string name="proc_step2_title">Bước 2: Sửa lỗi văn bản</string>
+    <string name="proc_step2_sub">Sửa chính tả, ngữ pháp, dấu câu</string>
+    <string name="proc_step3_title">Bước 3: Tóm tắt nội dung</string>
+    <string name="proc_step3_sub">Tóm tắt các điểm chính của cuộc họp</string>
+    <string name="proc_step4_title">Bước 4: Đề xuất hành động</string>
+    <string name="proc_step4_sub">Trích xuất action items</string>
+
+    <string name="proc_model_pho">PhoWhisper</string>
+    <string name="proc_model_whisper">Whisper</string>
+    <string name="proc_model_qwen">Qwen2.5</string>
+
+    <string name="proc_status_waiting">Chờ bước %1$d…</string>
+    <string name="proc_status_running">%1$d%% - Đang xử lý…</string>
+    <string name="proc_status_done">Hoàn tất</string>
+    <string name="proc_status_done_words">Hoàn tất • %1$s từ</string>
+
+    <string name="proc_raw_header">TEXT GỐC (BƯỚC 1)</string>
+    <string name="proc_clean_header">TEXT ĐÃ SỬA (BƯỚC 2)</string>
+    <string name="proc_badge_done">HOÀN TẤT</string>
+    <string name="proc_badge_running">ĐANG XỬ LÝ %1$d%%</string>
+    <string name="proc_badge_waiting">CHỜ BƯỚC %1$d</string>
+    <string name="proc_preview_empty">Đang chờ kết quả…</string>
+
+    <string name="proc_footer_eta">Mô phỏng (chưa dùng AI thật) • ước tính ~%1$d phút • Bước %2$d/4</string>
+    <string name="proc_footer_done">Mô phỏng hoàn tất • đang mở kết quả…</string>
+</resources>

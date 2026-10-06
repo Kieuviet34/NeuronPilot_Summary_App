@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_app"
+    android:orientation="horizontal"
+    tools:context="com.bhs.meetingnotes.MeetingNotesActivity">
+
+    <!-- Labeled navigation rail for the wide profile -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="@dimen/sidebar_width"
+        android:layout_height="match_parent"
+        android:background="@color/bg_card"
+        android:elevation="4dp">
+
+        <TextView
+            android:id="@+id/tv_app_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_l"
+            android:layout_marginTop="@dimen/space_xl"
+            android:text="Meeting Notes"
+            android:textColor="@color/text_primary"
+            android:textSize="@dimen/text_title"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_app_subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_l"
+            android:layout_marginTop="@dimen/space_xs"
+            android:text="G720 AI Box"
+            android:textColor="@color/text_secondary"
+            android:textSize="@dimen/text_body"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_app_title" />
+
+        <!-- Filters -->
+        <LinearLayout
+            android:id="@+id/ll_sidebar_filters"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_xl"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/space_l"
+            app:layout_constraintTop_toBottomOf="@id/tv_app_subtitle">
+
+            <!-- Tat ca -->
+            <LinearLayout
+                android:id="@+id/nav_all"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/touch_primary"
+                android:background="@drawable/bg_circle_blue_ring"
+                android:contentDescription="@string/home_filter_all"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/space_m">
+
+                <ImageView
+                    android:layout_width="@dimen/icon_l"
+                    android:layout_height="@dimen/icon_l"
+                    android:src="@drawable/ic_folder"
+                    app:tint="@color/blue_primary" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="16dp"
+                    android:text="Tất cả"
+                    android:textColor="@color/blue_primary"
+                    android:textSize="@dimen/text_section"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_count_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_circle_blue"
+                    android:paddingHorizontal="12dp"
+                    android:paddingVertical="4dp"
+                    android:text="0"
+                    android:textColor="@color/bg_card"
+                    android:textSize="@dimen/text_caption"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- Tieng Viet -->
+            <LinearLayout
+                android:id="@+id/nav_vi"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/touch_primary"
+                android:layout_marginTop="@dimen/space_s"
+                android:contentDescription="@string/home_filter_vi"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/space_m">
+
+                <ImageView
+                    android:layout_width="@dimen/icon_l"
+                    android:layout_height="@dimen/icon_l"
+                    android:src="@drawable/ic_folder"
+                    app:tint="@color/text_secondary" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="16dp"
+                    android:text="Tiếng Việt"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="@dimen/text_section"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_count_vi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_circle_gray"
+                    android:paddingHorizontal="12dp"
+                    android:paddingVertical="4dp"
+                    android:text="0"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="@dimen/text_caption"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- English -->
+            <LinearLayout
+                android:id="@+id/nav_en"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/touch_primary"
+                android:layout_marginTop="@dimen/space_s"
+                android:contentDescription="@string/home_filter_en"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/space_m">
+
+                <ImageView
+                    android:layout_width="@dimen/icon_l"
+                    android:layout_height="@dimen/icon_l"
+                    android:src="@drawable/ic_folder"
+                    app:tint="@color/text_secondary" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="16dp"
+                    android:text="English"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="@dimen/text_section"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_count_en"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_circle_gray"
+                    android:paddingHorizontal="12dp"
+                    android:paddingVertical="4dp"
+                    android:text="0"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="@dimen/text_caption"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- Thung rac -->
+            <LinearLayout
+                android:id="@+id/nav_trash"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/touch_primary"
+                android:layout_marginTop="@dimen/space_s"
+                android:contentDescription="@string/home_filter_trash"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/space_m">
+
+                <ImageView
+                    android:id="@+id/iv_nav_trash"
+                    android:layout_width="@dimen/icon_l"
+                    android:layout_height="@dimen/icon_l"
+                    android:src="@drawable/ic_delete"
+                    app:tint="@color/text_secondary" />
+
+                <TextView
+                    android:id="@+id/tv_nav_trash_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="16dp"
+                    android:text="Thùng rác"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="@dimen/text_section"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_count_trash"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_circle_gray"
+                    android:paddingHorizontal="12dp"
+                    android:paddingVertical="4dp"
+                    android:text="0"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="@dimen/text_caption"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Big Animated Mic Button (No text, pulsing rings) -->
+        <FrameLayout
+            android:id="@+id/fl_mic_container"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginBottom="@dimen/space_l"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <!-- Outer pulsing ring -->
+            <View
+                android:id="@+id/v_mic_pulse_outer"
+                android:layout_width="114dp"
+                android:layout_height="114dp"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_mic_pulse_ring" />
+
+            <!-- Inner pulsing ring -->
+            <View
+                android:id="@+id/v_mic_pulse_inner"
+                android:layout_width="94dp"
+                android:layout_height="94dp"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_mic_pulse_ring" />
+
+            <!-- Core Mic Button -->
+            <FrameLayout
+                android:id="@+id/btn_record"
+                android:layout_width="78dp"
+                android:layout_height="78dp"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_mic_button_glow"
+                android:clickable="true"
+                android:contentDescription="@string/home_record_button"
+                android:elevation="8dp"
+                android:focusable="true">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_mic"
+                    app:tint="@color/bg_card" />
+            </FrameLayout>
+        </FrameLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/border_light" />
+
+    <!-- Main Content Area -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:id="@+id/ll_main_header"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/list_header_height"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="@dimen/screen_padding"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_header_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/home_title"
+                    android:textColor="@color/text_primary"
+                    android:textSize="@dimen/text_title"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_header_subtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/home_subtitle"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="@dimen/text_caption" />
+            </LinearLayout>
+
+            <!-- Dropdown Date Filter (Tất cả / Hôm nay / Tuần này / Tháng này) -->
+            <LinearLayout
+                android:id="@+id/btn_filter_dropdown"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/touch_min"
+                android:layout_marginStart="@dimen/space_s"
+                android:background="@drawable/bg_dropdown_filter"
+                android:clickable="true"
+                android:elevation="1dp"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/space_s">
+
+                <ImageView
+                    android:layout_width="@dimen/icon_s"
+                    android:layout_height="@dimen/icon_s"
+                    android:src="@drawable/ic_clock"
+                    app:tint="@color/blue_primary" />
+
+                <TextView
+                    android:id="@+id/tv_selected_date_filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="Tất cả"
+                    android:textColor="@color/text_primary"
+                    android:textSize="@dimen/text_button"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="@dimen/icon_s"
+                    android:layout_height="@dimen/icon_s"
+                    android:layout_marginStart="@dimen/space_xs"
+                    android:src="@drawable/ic_arrow_down"
+                    app:tint="@color/text_secondary" />
+            </LinearLayout>
+
+            <!-- Search Bar with Search Icon and Clear Action -->
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="@dimen/touch_min"
+                android:layout_marginStart="@dimen/space_s"
+                android:layout_weight="1"
+                android:minWidth="96dp"
+                android:background="@drawable/bg_input_local">
+
+                <ImageView
+                    android:id="@+id/iv_search_icon"
+                    android:layout_width="@dimen/icon_m"
+                    android:layout_height="@dimen/icon_m"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="14dp"
+                    android:src="@drawable/ic_search"
+                    app:tint="@color/text_muted" />
+
+                <EditText
+                    android:id="@+id/et_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toEndOf="@id/iv_search_icon"
+                    android:layout_toStartOf="@+id/btn_search_clear"
+                    android:background="@null"
+                    android:hint="@string/home_search_hint"
+                    android:imeOptions="actionSearch"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:paddingHorizontal="8dp"
+                    android:textColor="@color/text_primary"
+                    android:textColorHint="@color/text_muted"
+                    android:textSize="@dimen/text_body" />
+
+                <ImageView
+                    android:id="@+id/btn_search_clear"
+                    android:layout_width="@dimen/touch_min"
+                    android:layout_height="@dimen/touch_min"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="6dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:contentDescription="@string/home_clear_search"
+                    android:focusable="true"
+                    android:padding="6dp"
+                    android:src="@drawable/ic_close"
+                    android:visibility="gone"
+                    app:tint="@color/text_muted" />
+            </RelativeLayout>
+
+            <!-- Settings Button -->
+            <ImageView
+                android:id="@+id/btn_settings"
+                android:layout_width="@dimen/touch_min"
+                android:layout_height="@dimen/touch_min"
+                android:layout_marginStart="@dimen/space_s"
+                android:background="@drawable/bg_btn_header_action"
+                android:clickable="true"
+                android:contentDescription="@string/home_settings_desc"
+                android:focusable="true"
+                android:padding="10dp"
+                android:src="@drawable/ic_settings"
+                app:tint="@color/text_secondary" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_meetings"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:clipToPadding="false"
+            android:paddingHorizontal="@dimen/space_s"
+            android:paddingTop="@dimen/space_s"
+            android:paddingBottom="@dimen/space_s"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ll_main_header" />
+
+        <LinearLayout
+            android:id="@+id/ll_empty_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ll_main_header">
+
+            <ImageView
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@drawable/ic_folder"
+                app:tint="@color/text_muted" />
+
+            <TextView
+                android:id="@+id/tv_empty_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Chưa có cuộc họp nào"
+                android:textColor="@color/text_primary"
+                android:textSize="@dimen/text_section"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_empty_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Nhấn nút 'Cuộc họp mới' hoặc nút Mic để bắt đầu."
+                android:textColor="@color/text_secondary"
+                android:textSize="@dimen/text_body" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>
