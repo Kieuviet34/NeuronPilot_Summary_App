@@ -118,8 +118,14 @@ class MeetingSelectSegmentsActivity : AppCompatActivity() {
             withContext(Dispatchers.IO) {
                 currentMeeting = db.meetingDao().getMeetingById(meetingId)
                 val entities = db.segmentDao().getSegmentsForMeeting(meetingId)
+                val bookmarks = db.bookmarkDao().getBookmarksForMeeting(meetingId)
+                val bookmarkCountMap = bookmarks.groupingBy { it.segmentIndex }.eachCount()
+
                 segmentsList.clear()
-                segmentsList.addAll(entities.map { SegmentItem.fromEntity(it) })
+                segmentsList.addAll(entities.map { entity ->
+                    val count = bookmarkCountMap[entity.segmentIndex] ?: 0
+                    SegmentItem.fromEntity(entity).copy(bookmarkCount = count)
+                })
             }
 
             val meeting = currentMeeting

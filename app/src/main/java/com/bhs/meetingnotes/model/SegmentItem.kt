@@ -14,6 +14,7 @@ data class SegmentItem(
     val durationMs: Long = 0L,
     val fileSizeBytes: Long = 0L,
     val pauseCount: Int = 0,
+    val bookmarkCount: Int = 0,
     var status: String = "SAVED", // "RECORDING", "SAVED"
     var isSelected: Boolean = true,
     var note: String = ""
