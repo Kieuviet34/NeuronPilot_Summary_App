@@ -46,6 +46,8 @@
     <string name="rec_lang_en">English · Whisper</string>
 
     <string name="rec_bookmark_added">Đã đánh dấu tại %1$s</string>
+    <string name="rec_bookmark_success">🔖 Đã đánh dấu mốc %1$d tại %2$s (Đoạn %3$d)</string>
+    <string name="rec_bookmark_count_badge">🔖 %1$d mốc</string>
     <string name="rec_bookmark_unavailable">Chỉ đánh dấu được khi đang ghi hoặc tạm dừng</string>
     <string name="rec_exit_title">Dừng ghi âm?</string>
     <string name="rec_exit_message">Đoạn đang ghi sẽ được lưu lại trước khi thoát.</string>

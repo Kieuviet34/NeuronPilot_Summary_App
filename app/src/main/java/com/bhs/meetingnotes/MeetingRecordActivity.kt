@@ -213,25 +213,45 @@ class MeetingRecordActivity : AppCompatActivity() {
             showStopMeetingConfirmationDialog()
         }
 
-        // Nút 5: Đánh dấu Bookmark
+        // Nút 5: Đánh dấu Bookmark (Hỗ trợ cả khi Đang ghi và Tạm dừng phân đoạn)
         findViewById<View>(R.id.btn_bookmark)?.setOnClickListener {
-            if (!isRecordingSegment || isPausedSegment) {
-                Toast.makeText(this, "Chỉ có thể đánh dấu khi đang ghi âm", Toast.LENGTH_SHORT).show()
+            if (!isRecordingSegment) {
+                Toast.makeText(this, getString(R.string.rec_bookmark_unavailable), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             val durationMs = audioRecorder.durationMs
             val formattedTime = FormatUtils.formatTimer(durationMs)
+            
+            // Cập nhật ngay bookmark count trên giao diện danh sách phân đoạn
+            val activeIndex = segmentsList.indexOfFirst { it.segmentIndex == currentSegmentIndex }
+            var currentBookmarks = 1
+            if (activeIndex != -1) {
+                val currentItem = segmentsList[activeIndex]
+                currentBookmarks = currentItem.bookmarkCount + 1
+                segmentsList[activeIndex] = currentItem.copy(bookmarkCount = currentBookmarks)
+                segmentAdapter.updateList(segmentsList.toList())
+            }
+
+            // Hiệu ứng nhấp nháy xác nhận trên nút Bookmark
+            llBookmarkCircle?.animate()?.scaleX(1.25f)?.scaleY(1.25f)?.setDuration(130)?.withEndAction {
+                llBookmarkCircle?.animate()?.scaleX(1.0f)?.scaleY(1.0f)?.setDuration(130)?.start()
+            }?.start()
+
             lifecycleScope.launch(Dispatchers.IO) {
                 val bookmark = BookmarkEntity(
                     meetingId = meetingId,
                     segmentIndex = currentSegmentIndex,
                     timestampMs = durationMs,
                     formattedTime = formattedTime,
-                    note = "Đánh dấu tại $formattedTime"
+                    note = "Đánh dấu mốc $currentBookmarks tại $formattedTime"
                 )
                 db.bookmarkDao().insertBookmark(bookmark)
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(this@MeetingRecordActivity, "Đã lưu mốc $formattedTime (Đoạn $currentSegmentIndex)", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this@MeetingRecordActivity,
+                        getString(R.string.rec_bookmark_success, currentBookmarks, formattedTime, currentSegmentIndex),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         }
@@ -497,6 +517,8 @@ class MeetingRecordActivity : AppCompatActivity() {
                 tvBtnStopMeeting?.text = "Dừng hẳn"
 
                 findViewById<View>(R.id.btn_bookmark)?.isEnabled = true
+                llBookmarkCircle?.setBackgroundResource(R.drawable.bg_circle_bookmark)
+                ivBookmarkIcon?.setColorFilter(ContextCompat.getColor(this, R.color.bg_card))
                 llBookmarkCircle?.alpha = 1.0f
 
                 tvRecordStatus?.text = "Đang ghi âm..."
@@ -526,8 +548,11 @@ class MeetingRecordActivity : AppCompatActivity() {
                 ivStopMeetingIcon?.setColorFilter(ContextCompat.getColor(this, R.color.bg_card))
                 tvBtnStopMeeting?.text = "Dừng hẳn"
 
-                findViewById<View>(R.id.btn_bookmark)?.isEnabled = false
-                llBookmarkCircle?.alpha = 0.5f
+                // Vẫn cho phép đánh dấu mốc khi tạm dừng
+                findViewById<View>(R.id.btn_bookmark)?.isEnabled = true
+                llBookmarkCircle?.setBackgroundResource(R.drawable.bg_circle_bookmark)
+                ivBookmarkIcon?.setColorFilter(ContextCompat.getColor(this, R.color.bg_card))
+                llBookmarkCircle?.alpha = 0.85f
 
                 tvRecordStatus?.text = "Tạm dừng"
                 vRecordingIndicator?.setBackgroundResource(R.drawable.bg_circle_gray)
@@ -558,7 +583,9 @@ class MeetingRecordActivity : AppCompatActivity() {
                 tvBtnStopMeeting?.text = "Dừng hẳn"
 
                 findViewById<View>(R.id.btn_bookmark)?.isEnabled = false
-                llBookmarkCircle?.alpha = 0.5f
+                llBookmarkCircle?.setBackgroundResource(R.drawable.bg_circle_gray)
+                ivBookmarkIcon?.setColorFilter(ContextCompat.getColor(this, R.color.text_secondary))
+                llBookmarkCircle?.alpha = 0.45f
 
                 tvRecordStatus?.text = "Đã lưu đoạn (Sẵn sàng)"
                 vRecordingIndicator?.setBackgroundResource(R.drawable.bg_circle_gray)
