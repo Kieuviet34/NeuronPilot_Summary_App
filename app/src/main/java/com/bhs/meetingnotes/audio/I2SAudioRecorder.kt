@@ -117,6 +117,7 @@ class I2SAudioRecorder(private val context: Context) {
 
             if (audioRecord?.state != AudioRecord.STATE_INITIALIZED) {
                 Log.e(TAG, "AudioRecord init failed")
+                releaseAudioRecordQuietly()
                 return ""
             }
 
@@ -139,9 +140,20 @@ class I2SAudioRecorder(private val context: Context) {
         } catch (e: Exception) {
             Log.e(TAG, "Failed to start recording", e)
             isRecording.set(false)
+            handler.removeCallbacks(timerRunnable)
+            releaseAudioRecordQuietly()
         }
 
         return currentFilePath
+    }
+
+    private fun releaseAudioRecordQuietly() {
+        try {
+            audioRecord?.release()
+        } catch (e: Exception) {
+            Log.w(TAG, "AudioRecord release failed", e)
+        }
+        audioRecord = null
     }
 
     fun pauseRecording() {
@@ -178,7 +190,13 @@ class I2SAudioRecorder(private val context: Context) {
             audioRecord?.release()
             audioRecord = null
 
-            recordingThread?.join(1000)
+            recordingThread?.let { thread ->
+                thread.join(1000)
+                if (thread.isAlive) {
+                    Log.w(TAG, "Recorder thread did not exit in time, interrupting")
+                    thread.interrupt()
+                }
+            }
             recordingThread = null
 
             val file = File(currentFilePath)

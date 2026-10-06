@@ -127,7 +127,7 @@ class MeetingProcessingActivity : AppCompatActivity() {
     }
 
     private fun startPipeline(meetingId: Long) {
-        val pipeline = MeetingAiPipeline(this)
+        val pipeline = MeetingAiPipeline(applicationContext)
         lifecycleScope.launch {
             val result = pipeline.runPipeline(meetingId) { step, progress, currentText ->
                 lifecycleScope.launch(Dispatchers.Main) {

@@ -45,6 +45,7 @@ class MeetingNotesActivity : AppCompatActivity() {
     private var selectedLanguageFilter: String = "ALL" // "ALL", "vi", "en", "TRASH"
     private var selectedDateFilter: String = "ALL" // "ALL", "TODAY", "WEEK"
     private var currentSearchQuery: String = ""
+    private var micPulseAnimator: AnimatorSet? = null
 
     // Views
     private var navAll: LinearLayout? = null
@@ -194,6 +195,13 @@ class MeetingNotesActivity : AppCompatActivity() {
         val animSet = AnimatorSet()
         animSet.playTogether(scaleOuterX, scaleOuterY, alphaOuter, scaleInnerX, scaleInnerY, alphaInner)
         animSet.start()
+        micPulseAnimator = animSet
+    }
+
+    override fun onDestroy() {
+        micPulseAnimator?.cancel()
+        micPulseAnimator = null
+        super.onDestroy()
     }
 
     private fun setupRecyclerView() {
