@@ -596,9 +596,9 @@
                 android:layout_marginTop="10dp"
                 android:background="@drawable/bg_send_button_local"
                 android:gravity="center"
-                android:text="Hoàn tất &amp; Chọn đoạn xử lý AI →"
-                android:textColor="@color/bg_card"
-                android:textSize="16sp"
+                android:text="Hoàn tất &amp; Chọn đoạn xử lý AI"
+                android:textColor="@color/absolute_white"
+                android:textSize="17sp"
                 android:textStyle="bold" />
 
         </LinearLayout>

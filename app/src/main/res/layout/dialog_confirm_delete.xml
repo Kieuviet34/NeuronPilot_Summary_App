@@ -65,26 +65,26 @@
         <TextView
             android:id="@+id/btn_dialog_cancel"
             android:layout_width="wrap_content"
-            android:layout_height="46dp"
+            android:layout_height="50dp"
             android:background="@drawable/bg_circle_gray"
             android:gravity="center"
-            android:paddingHorizontal="20dp"
-            android:text="Hủy bỏ"
+            android:paddingHorizontal="22dp"
+            android:text="Hủy"
             android:textColor="@color/text_secondary"
-            android:textSize="15sp"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/btn_dialog_confirm"
             android:layout_width="wrap_content"
-            android:layout_height="46dp"
+            android:layout_height="50dp"
             android:layout_marginStart="14dp"
-            android:background="@drawable/bg_badge_delete"
+            android:background="@drawable/bg_btn_confirm_danger"
             android:gravity="center"
-            android:paddingHorizontal="22dp"
-            android:text="Chuyển vào thùng rác"
-            android:textColor="@color/red_text"
-            android:textSize="15sp"
+            android:paddingHorizontal="24dp"
+            android:text="Xóa"
+            android:textColor="@color/absolute_white"
+            android:textSize="16sp"
             android:textStyle="bold" />
     </LinearLayout>
 

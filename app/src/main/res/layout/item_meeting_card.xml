@@ -158,9 +158,9 @@
             android:layout_height="44dp"
             android:background="@drawable/bg_btn_card_detail"
             android:gravity="center"
-            android:paddingHorizontal="18dp"
-            android:text="📄 Xem chi tiết"
-            android:textColor="@color/blue_primary"
+            android:paddingHorizontal="20dp"
+            android:text="Chi tiết"
+            android:textColor="@color/absolute_white"
             android:textSize="15sp"
             android:textStyle="bold" />
 
@@ -172,7 +172,7 @@
             android:background="@drawable/bg_btn_card_export"
             android:gravity="center"
             android:paddingHorizontal="18dp"
-            android:text="📥 Xuất báo cáo"
+            android:text="Xuất file"
             android:textColor="@color/text_primary"
             android:textSize="15sp"
             android:textStyle="bold" />
@@ -185,7 +185,7 @@
             android:background="@drawable/bg_btn_card_delete"
             android:gravity="center"
             android:paddingHorizontal="16dp"
-            android:text="🗑️ Xóa"
+            android:text="Xóa"
             android:textColor="@color/red_text"
             android:textSize="15sp"
             android:textStyle="bold" />

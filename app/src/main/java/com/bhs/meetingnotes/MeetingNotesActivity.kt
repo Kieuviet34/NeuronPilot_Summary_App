@@ -479,12 +479,12 @@ class MeetingNotesActivity : AppCompatActivity() {
         val btnConfirm = dialogView.findViewById<TextView>(R.id.btn_dialog_confirm)
 
         if (isPermanent) {
-            tvTitle.text = "Xóa vĩnh viễn cuộc họp?"
-            tvMessage.text = "Bạn có chắc chắn muốn xóa vĩnh viễn cuộc họp \"${meeting.title}\"?\nToàn bộ dữ liệu văn bản và các tệp âm thanh liên quan sẽ bị xóa hoàn toàn khỏi thiết bị và không thể khôi phục."
+            tvTitle.text = "Xóa vĩnh viễn?"
+            tvMessage.text = "Xóa hoàn toàn \"${meeting.title}\" và các file âm thanh liên quan. Thao tác này không thể hoàn tác."
             btnConfirm.text = "Xóa vĩnh viễn"
         } else {
             tvTitle.text = "Chuyển vào thùng rác?"
-            tvMessage.text = "Cuộc họp \"${meeting.title}\" sẽ được chuyển vào thùng rác.\nBạn có thể khôi phục lại bất kỳ lúc nào từ mục Thùng rác."
+            tvMessage.text = "Chuyển \"${meeting.title}\" vào thùng rác. Bạn có thể khôi phục bất cứ lúc nào."
             btnConfirm.text = "Chuyển vào thùng rác"
         }
 
