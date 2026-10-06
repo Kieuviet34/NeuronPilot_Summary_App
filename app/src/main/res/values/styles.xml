@@ -15,6 +15,7 @@
         <item name="chipStyle">@style/Widget.MeetingNotes.Chip</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowNoTitle">true</item>
+        <item name="alertDialogTheme">@style/Theme.MeetingNotes.Dialog.Alert</item>
     </style>
 
     <style name="TextAppearance.MeetingNotes" parent="TextAppearance.MaterialComponents.Body1" />
@@ -77,5 +78,43 @@
         <item name="chipBackgroundColor">@color/surface_variant</item>
         <item name="chipCornerRadius">@dimen/radius_pill</item>
         <item name="chipMinHeight">@dimen/touch_min</item>
+    </style>
+
+    <!-- Material Dialog Theme for large, prominent buttons and clean text -->
+    <style name="Theme.MeetingNotes.Dialog.Alert" parent="Theme.MaterialComponents.DayNight.Dialog.Alert">
+        <item name="colorPrimary">@color/blue_primary</item>
+        <item name="colorAccent">@color/blue_primary</item>
+        <item name="android:background">@color/bg_card</item>
+        <item name="buttonBarPositiveButtonStyle">@style/Widget.MeetingNotes.Dialog.Button.Positive</item>
+        <item name="buttonBarNegativeButtonStyle">@style/Widget.MeetingNotes.Dialog.Button.Negative</item>
+        <item name="buttonBarNeutralButtonStyle">@style/Widget.MeetingNotes.Dialog.Button.Neutral</item>
+    </style>
+
+    <!-- Prominent Primary Dialog Action Button: Bold, large touch target, blue background -->
+    <style name="Widget.MeetingNotes.Dialog.Button.Positive" parent="Widget.MaterialComponents.Button">
+        <item name="android:textColor">@color/absolute_white</item>
+        <item name="backgroundTint">@color/blue_primary</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:minHeight">50dp</item>
+        <item name="android:paddingHorizontal">20dp</item>
+        <item name="cornerRadius">10dp</item>
+    </style>
+
+    <!-- Secondary / Cancel Dialog Button -->
+    <style name="Widget.MeetingNotes.Dialog.Button.Negative" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:minHeight">50dp</item>
+        <item name="android:paddingHorizontal">16dp</item>
+    </style>
+
+    <style name="Widget.MeetingNotes.Dialog.Button.Neutral" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:minHeight">50dp</item>
+        <item name="android:paddingHorizontal">16dp</item>
     </style>
 </resources>

@@ -31,9 +31,9 @@
     <string name="card_actions_en">%1$d actions</string>
     <string name="card_summary_prefix_vi">Tóm tắt:</string>
     <string name="card_summary_prefix_en">Summary:</string>
-    <string name="card_details_vi">Xem chi tiết</string>
-    <string name="card_details_en">View details</string>
-    <string name="card_export_vi">Xuất báo cáo</string>
+    <string name="card_details_vi">Chi tiết</string>
+    <string name="card_details_en">Details</string>
+    <string name="card_export_vi">Xuất file</string>
     <string name="card_export_en">Export</string>
     <string name="card_recording_time">%1$s đang ghi…</string>
     <string name="card_no_summary">Chưa có tóm tắt</string>
